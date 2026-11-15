@@ -1,0 +1,477 @@
+{
+  "questions": [
+    {
+      "id": "p1m1-q20",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "An AI-powered ticket-routing tool sends urgent security reports to the wrong queue. The manager responds: \"The model made that call, so it's on the vendor, not us.\" Which responsible AI principle does this attitude most directly conflict with?",
+      "options": ["Accountability", "Transparency", "Inclusiveness", "Privacy and security"],
+      "answer": 0,
+      "explain": "Accountability says people should be accountable for AI systems. Companies that deploy AI must take responsibility for how it operates and keep monitoring and mitigating its risks, so blaming the model or the vendor shifts responsibility away from people. Transparency is about making the system understandable, not about who answers for it.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q21",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A bank's platform team is rolling out an internal AI assistant. Which practice most directly puts the accountability principle into action?",
+      "options": [
+        "Assign owners who continuously monitor it and act to mitigate its risks",
+        "Publish documentation explaining the design choices and known limitations",
+        "Test the assistant's outputs using demographically balanced sample data",
+        "Encrypt all prompts in transit and at rest using keys stored in a vault"
+      ],
+      "answer": 0,
+      "explain": "The Learn module says AI creators are responsible for how their systems operate and need to continuously monitor performance and mitigate risks. Documenting design choices and limitations is transparency, balanced test data is fairness, and encryption is privacy and security.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q22",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A team is adding an AI feature that suggests replies to support tickets. A product manager also wants to log each customer's full browsing history \"in case it's useful later.\" Which practice from the privacy and security principle should the team apply?",
+      "options": [
+        "Collect only data the feature needs and drop sensitive data once used",
+        "Log the history but show it to the model only when customers complain",
+        "Log the history but encrypt it so the collection itself carries no risk",
+        "Log everything now and publish a transparency note describing the logs"
+      ],
+      "answer": 0,
+      "explain": "The module's privacy guidance says to collect only the data needed for the AI to work, avoid gathering extra information, and remove sensitive data once the AI is in use. Encryption protects data you hold, but it doesn't justify collecting data you don't need.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q23",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "To protect the training data behind an internal AI model, a team keeps encryption keys in hardware security modules, rotates the keys regularly, limits which employees can access the model, and runs regular security audits. Which responsible AI principle are they mainly applying?",
+      "options": ["Privacy and security", "Reliability and safety", "Accountability", "Transparency"],
+      "answer": 0,
+      "explain": "The module lists these as privacy and security practices: secure key storage (HSMs, secure vaults, envelope encryption), regular key rotation, limited employee access to sensitive models and data, and regular security audits. Reliability and safety is about consistent, safe behavior, not data protection.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q24",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A startup is designing an AI feature that uses customer data. Which two practices match the privacy and security principle as the Responsible AI with GitHub Copilot module describes it? (Choose two.)",
+      "options": [
+        "Ask users for consent and clearly explain how the AI uses their data",
+        "Collect extra fields now in case future models can make use of them",
+        "Pseudonymize or aggregate personal data so individuals can't be identified",
+        "Keep raw personal data indefinitely so that every decision can be audited",
+        "Share model keys widely across the team so that no one is ever blocked"
+      ],
+      "answer": [0, 2],
+      "explain": "The module says to get users' permission and explain how their data is used, and to anonymize personal data with methods like pseudonymization and aggregation. It also says to collect only the data needed, remove sensitive data once the AI is in use, and control who can access keys, which rules out the other three options.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q25",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "While debugging a failing database connection, a developer is about to paste the full production connection string, including the password, into Copilot Chat. Which action best reflects the privacy and security principle?",
+      "options": [
+        "Replace the password with a placeholder and share only what's needed",
+        "Paste it, since encryption in transit makes sharing secrets risk-free",
+        "Paste it, then delete the chat thread as soon as the issue is resolved",
+        "Paste it into a new chat thread so it doesn't mix with other context"
+      ],
+      "answer": 0,
+      "explain": "Privacy and security means sharing only the data a task actually needs. Copilot can debug a connection problem without the real password, so a placeholder is enough. Encrypting data in transit protects it on the way to the service, but it doesn't make it safe to share secrets you don't need to share, and deleting the thread afterwards doesn't undo the exposure.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q26",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A team uses Copilot to help build a model that ranks job applicants. Testing shows that candidates with similar qualifications get different scores depending on their age group. Which mitigation does the fairness principle call for?",
+      "options": [
+        "Monitor results by segment and add controls to override unfair scores",
+        "Publish a notice explaining that the scores are generated by an AI model",
+        "Encrypt the applicant data and restrict who can access the scoring model",
+        "Retrain only on the most recent hires so the model reflects current needs"
+      ],
+      "answer": 0,
+      "explain": "The fairness techniques in the module include reviewing training data, testing with balanced demographic samples, adversarial debiasing, monitoring model performance across user segments, and adding controls to override unfair model scores. A notice is transparency and encryption is privacy. Retraining on a narrow set of recent hires can make the bias worse.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q27",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A company building an AI coding tutor invites developers from different countries, language backgrounds and disability communities to help shape its design, so it works with screen readers and in their languages. Which principle does this mainly reflect?",
+      "options": ["Inclusiveness", "Fairness", "Transparency", "Accountability"],
+      "answer": 0,
+      "explain": "Microsoft's inclusiveness standard says AI should be accessible regardless of ability or language (for example, supporting screen readers and other languages), and that people from different backgrounds and communities should provide input into development. Fairness is about consistent outcomes for similarly situated people in decisions such as loans, treatment or hiring.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q28",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Developers distrust a new AI tool that blocks merges, because they can't tell why it flags some changes. Which action best applies the transparency principle?",
+      "options": [
+        "Document how it works and its limits, and log decisions for audit",
+        "Retrain it on a larger dataset so that it flags fewer changes overall",
+        "Run it only on repositories owned by teams that volunteer to use it",
+        "Have it flag changes for review instead of blocking the merge outright"
+      ],
+      "answer": 0,
+      "explain": "Transparency means AI systems should be understandable. Creators should explain how the system operates, be honest about its capabilities and limitations, and support logging and auditing. Retraining or softening the tool might change its behavior, but it still wouldn't explain that behavior.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q29",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A company's AI policy says: (1) named people stay answerable for every AI-assisted outcome, and (2) users must be able to understand how the system reaches its outputs and what its limitations are. Which two responsible AI principles does the policy express? (Choose two.)",
+      "options": ["Accountability", "Transparency", "Fairness", "Inclusiveness", "Reliability and safety"],
+      "answer": [0, 1],
+      "explain": "\"People should be accountable for AI systems\" is accountability. \"AI systems should be understandable\", including honesty about limitations, is transparency. Neither statement is about equal treatment (fairness), accessibility (inclusiveness), or consistent, safe behavior (reliability and safety).",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q30",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A review finds that an AI budgeting assistant sometimes gives different answers to the same question, and that some of its advice could lead users into costly financial mistakes. Which principle covers both concerns?",
+      "options": ["Reliability and safety", "Fairness", "Transparency", "Privacy and security"],
+      "answer": 0,
+      "explain": "In the module, reliability means performing consistently, without unwanted variability. Safety means minimizing unintended harm, including financial harm. Inconsistent answers and harmful advice therefore both fall under reliability and safety.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-q31",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A developer asks Copilot to generate sample user profiles for a demo. Every generated \"engineer\" is male and every \"nurse\" is female. What explains this, and what should the developer do?",
+      "options": [
+        "Training data biases can carry through; review and correct the output",
+        "The public code filter removed balanced examples; turn the filter off",
+        "Content exclusion hid the team's own data files; ask an admin to remove it",
+        "Copilot copies the most recent repository it indexed; reindex the project"
+      ],
+      "answer": 0,
+      "explain": "GitHub lists potential biases as a limitation: Copilot's training data may contain biases and errors that the tool can perpetuate. Generated output therefore needs human review. The public code filter only blocks or annotates matches with public code. It doesn't shape demographics in generated data.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-q32",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A library released a new major version last month. Copilot keeps suggesting a function that the new version removed. What is the most likely reason, and what is the best response?",
+      "options": [
+        "Its training data may predate the release; check the current docs",
+        "The public code filter is hiding the new API; disable the filter",
+        "Copilot only suggests long-term-support versions; pin the old one",
+        "Content exclusion is blocking the library's files; ask an admin"
+      ],
+      "answer": 0,
+      "explain": "Copilot's suggestions come from models trained on existing code, so very recent changes may be missing or underrepresented. That's why GitHub notes that web search (when enabled) can help with queries about recent events and new technologies. Either way, generated code must be reviewed and tested; the public code filter and content exclusion don't hide new APIs.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-q33",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Copilot suggests a login query that builds SQL by concatenating the username straight from the request. The code works in a quick manual test. What should the developer do?",
+      "options": [
+        "Rewrite it to use parameterized queries, then review and test it",
+        "Accept it; Copilot's content filters remove insecure code patterns",
+        "Accept it; a working quick test shows that the query is safe to use",
+        "Accept it, and enable the public code filter to block bad patterns"
+      ],
+      "answer": 0,
+      "explain": "GitHub warns that generated code can be syntactically correct but still insecure. It tells developers to follow secure coding practices, such as avoiding SQL injection, and to review all generated code. Content filters reduce harmful or insecure output but don't guarantee it is secure, and the public code filter only deals with matches to public code.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/inline-suggestions"
+    },
+    {
+      "id": "p1m1-q34",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Copilot Chat in VS Code says a suggestion matches public code and links to a repository under a copyleft license. The team's product is closed source. Who must decide whether the license terms apply?",
+      "options": [
+        "The team using it; they must check and comply with any license",
+        "GitHub, which handles license compliance for all Copilot output",
+        "No one, since AI-generated code is exempt from license terms",
+        "The original author, who must file a claim before terms apply"
+      ],
+      "answer": 0,
+      "explain": "GitHub's terms say output may be subject to third-party copyrights or open source licenses, and that you are responsible for deciding whether your use needs a license and for complying with it. Code referencing shows the match and its license details to help you make that decision. It doesn't make the decision for you.",
+      "source": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#j-ai-features-training-and-your-data"
+    },
+    {
+      "id": "p1m1-q35",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A startup's lawyer asks whether GitHub claims ownership of the code Copilot generates for the company's developers. What do GitHub's terms say?",
+      "options": [
+        "GitHub claims no ownership; users are responsible for how they use it",
+        "GitHub owns it but grants users a perpetual license to use and modify it",
+        "It is public domain because it was produced by an AI model, not a person",
+        "GitHub co-owns it until a developer has edited it substantially by hand"
+      ],
+      "answer": 0,
+      "explain": "GitHub's terms state that GitHub does not claim ownership of your input or output. The same terms make you responsible for your use of the output, including legal compliance and not infringing third-party rights. Nothing in the terms makes output public domain or co-owned by GitHub.",
+      "source": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#j-ai-features-training-and-your-data"
+    },
+    {
+      "id": "p1m1-q36",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A team lead is preparing a briefing on the limitations that GitHub documents for Copilot. Which two belong on the list? (Choose two.)",
+      "options": [
+        "Suggestions can reproduce biases and errors found in training data",
+        "Generated code can look valid but be semantically or logically wrong",
+        "Inline suggestions are applied to files automatically after a pause",
+        "Suggestions are guaranteed original when the public code filter is on",
+        "Chat answers are equally good in every natural language it accepts"
+      ],
+      "answer": [0, 1],
+      "explain": "GitHub lists potential biases and inaccurate code (valid-looking but incorrect) as limitations. Inline suggestions are only applied when you explicitly accept them. Agents can still produce public-code matches when the filter is set to Block. Chat is optimized primarily for English.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/inline-suggestions"
+    },
+    {
+      "id": "p1m1-q37",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "After a team adopts Copilot, its defect rate rises. Reviews show developers accepted incorrect suggestions that looked plausible. GitHub calls this overreliance. What does its guidance give as the main reason overreliance happens?",
+      "options": [
+        "Mistakes in AI output can be hard for users to detect",
+        "AI tools produce output faster than users can type it",
+        "Users lack permission to edit the AI tool's suggestions",
+        "AI output is accepted automatically by default settings"
+      ],
+      "answer": 0,
+      "explain": "GitHub defines overreliance as users accepting incorrect or incomplete AI output, \"mainly because mistakes in AI outputs may be hard to detect.\" Copilot suggestions are never accepted automatically. You can always edit them or reject them.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-q38",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Copilot code review comments that a function can throw a null reference error. However, the value is validated two lines earlier and can never be null. How should the author treat the comment?",
+      "options": [
+        "As a possible false positive: verify it, then resolve it if it's wrong",
+        "As a required fix, since Copilot review comments must all be resolved",
+        "As proof that the validation code is broken and should be rewritten",
+        "As a sign to stop using Copilot review until the model is replaced"
+      ],
+      "answer": 0,
+      "explain": "GitHub warns that Copilot code review can hallucinate, flagging problems that don't exist or that come from misreading the code. Its comments should be carefully reviewed before acting on them. Copilot review supplements human judgment. It doesn't replace it.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/agents"
+    },
+    {
+      "id": "p1m1-q39",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A developer writes Copilot Chat prompts in Portuguese and gets weaker answers than a colleague who writes prompts in English. What is the documented explanation?",
+      "options": [
+        "Copilot Chat is optimized primarily for English",
+        "Non-English prompts are routed to a smaller model",
+        "Prompts are machine-translated before processing",
+        "Their organization's policy limits other languages"
+      ],
+      "answer": 0,
+      "explain": "GitHub states that English is the primary supported language for Copilot Chat, which has been optimized mainly for English, so prompts in other languages may perform differently. There's no documented routing to a smaller model or forced translation.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-q40",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A team expects inline suggestions to catch design problems that span several services, such as two services duplicating the same responsibility. Why is this unrealistic?",
+      "options": [
+        "They're based on the code being written, not the overall architecture",
+        "Inline suggestions are disabled in repositories with multiple services",
+        "Design analysis is only available after an admin enables it as policy",
+        "Inline suggestions only work on files that were committed in the past day"
+      ],
+      "answer": 0,
+      "explain": "GitHub notes that inline suggestions can only suggest code based on the context of the code being written, so they may miss larger design or architectural issues. Architectural review remains a human responsibility.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/inline-suggestions"
+    },
+    {
+      "id": "p1m1-q41",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Copilot generates a unit test suite for a new pricing function, and every test passes. A teammate says this proves the function is correct. What is the best response?",
+      "options": [
+        "Review the tests and add cases, since they may miss scenarios",
+        "Agree, because Copilot derives the tests from the requirements",
+        "Agree, as long as the tests were generated using agent mode",
+        "Regenerate the tests twice and merge if all three runs pass"
+      ],
+      "answer": 0,
+      "explain": "GitHub says generated test cases may not cover all possible scenarios, so manual testing and code review are still necessary. Copilot builds tests from the code it can see, not from your business requirements. If the code is wrong, tests built from it can pass anyway.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-q42",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A developer generated a Copilot pull request summary, then pushed three more commits that change the approach. What should they do before asking for review?",
+      "options": [
+        "Request and review a new summary; it doesn't update on its own",
+        "Nothing; the summary refreshes automatically on each new commit",
+        "Nothing; reviewers are expected to ignore AI-written summaries",
+        "Delete the summary, because summaries can't be regenerated"
+      ],
+      "answer": 0,
+      "explain": "PR summaries are only created on request and aren't refreshed when the pull request changes. You can request a new one, but you should review it carefully because it carries the same risk of inaccuracy. GitHub says summaries supplement your own context and don't replace it.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-q43",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Copilot cloud agent (formerly coding agent) opens a pull request that changes payment logic. Which two actions are appropriate before merging? (Choose two.)",
+      "options": [
+        "Review every change as you would code that you didn't write yourself",
+        "Run the tests and security checks, and confirm it meets requirements",
+        "Merge it, because the agent's own CodeQL scan already cleared it",
+        "Merge it, because \"Verified\" commits prove the code is correct",
+        "Skip review, since the agent ran in a firewalled environment"
+      ],
+      "answer": [0, 1],
+      "explain": "GitHub says to review and test agent output thoroughly before merging, with the same precautions as any code you didn't write. The agent's built-in scanning is an extra layer, not a sign-off. A Verified signature only shows the commit came from the agent and wasn't altered, and the firewall limits data exfiltration. Neither one shows the code is correct.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/agents"
+    },
+    {
+      "id": "p1m1-q44",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A team wants an automated layer of checks on Copilot-generated code, in addition to human review. Which approach matches GitHub's best practices?",
+      "options": [
+        "Run linting, code scanning, and IP scanning in the pipeline",
+        "Ask Copilot to grade its own output before each suggestion",
+        "Rely on Copilot's content filters to block any insecure code",
+        "Enable the public code filter and skip any further scanning"
+      ],
+      "answer": 0,
+      "explain": "GitHub's best practices say to use automated tests and tooling, such as linting, code scanning, and IP scanning, to add another layer of security and accuracy checks. Content filters and the public code filter are useful safeguards, but they don't replace validation.",
+      "source": "https://docs.github.com/en/copilot/get-started/best-practices"
+    },
+    {
+      "id": "p1m1-q45",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "Copilot suggests a complex regular expression to validate email input. The developer doesn't fully understand it. What does GitHub recommend before using it?",
+      "options": [
+        "Ask Copilot Chat to explain it, then verify it with tests",
+        "Accept it, since regexes are one of Copilot's strengths",
+        "Accept it if no public code match is reported for it",
+        "Replace it with whatever the next suggestion offers"
+      ],
+      "answer": 0,
+      "explain": "GitHub says to understand suggested code before implementing it, for example by asking Copilot Chat to explain it, and then to check it with tests and tooling. Generating regular expressions is listed as one of Copilot's strengths, but the output still needs to be validated.",
+      "source": "https://docs.github.com/en/copilot/get-started/best-practices"
+    },
+    {
+      "id": "p1m1-q46",
+      "module": "p1m1",
+      "domain": "responsible",
+      "q": "A developer wants Copilot CLI to run a data-cleanup task against a production database unattended, using --allow-all-tools so it never asks for approval. What does GitHub's guidance suggest?",
+      "options": [
+        "Avoid blanket approval for destructive, hard-to-reverse actions",
+        "Proceed, since Copilot CLI won't run commands that delete data",
+        "Proceed, since GitHub is responsible for commands the CLI runs",
+        "Proceed, but launch the CLI from the home directory for access"
+      ],
+      "answer": 0,
+      "explain": "GitHub warns that with an automatic approval option such as --allow-all-tools, Copilot can run any shell command you can run without asking first. You are ultimately responsible for the commands Copilot CLI executes, and GitHub urges extra caution where agent actions are irreversible. It also says you typically shouldn't launch the CLI from your home directory.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p1m1-c20",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Accountability in practice",
+      "back": "People, not the AI, answer for AI systems. AI creators and deployers take responsibility for how their systems operate, continuously monitor performance, and mitigate risks.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-c21",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Pseudonymization vs. aggregation",
+      "back": "Pseudonymization replaces personal details with random identifiers but keeps each record separate. Aggregation groups data into summaries, which removes individual details.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-c22",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Privacy and security: keys and access",
+      "back": "Store keys in HSMs or secure vaults, consider envelope encryption (two keys), rotate and back up keys, limit employee access to sensitive models and data, classify data by sensitivity, and run regular security audits.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/responsible-ai-with-github-copilot/3-six-principles-of-responsible-ai"
+    },
+    {
+      "id": "p1m1-c23",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "\"Check Copilot's work\" (GitHub best practices)",
+      "back": "Understand suggested code before you use it (ask Chat to explain it). Review it for functionality, security, readability and maintainability. Use automated tests and tooling such as linting, code scanning and IP scanning.",
+      "source": "https://docs.github.com/en/copilot/get-started/best-practices"
+    },
+    {
+      "id": "p1m1-c24",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Who owns Copilot output?",
+      "back": "GitHub does not claim ownership of your input or output. You are responsible for how you use it, including checking whether matched code needs a third-party license and complying with that license.",
+      "source": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#j-ai-features-training-and-your-data"
+    },
+    {
+      "id": "p1m1-c25",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Consequential decisions and sensitive domains",
+      "back": "Decisions with legal or significant impact on access to things like employment, housing, healthcare, insurance or finance. Use extra caution, and make sure affected people can understand decisions, appeal them, and update their input data.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-c26",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Red teaming",
+      "back": "Structured testing in which testers deliberately try to provoke unsafe, harmful or unintended behavior from an AI system, to find vulnerabilities and improve safety mitigations. GitHub red-teams its Copilot features.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-c27",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Content filtering in Copilot",
+      "back": "A safety system that scans prompts and responses to detect and block harmful content (and, for suggestions, insecure code). It reduces risk but doesn't replace review. Report offensive output to copilot-safety@github.com.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-c28",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "Copilot limitations GitHub documents",
+      "back": "Limited scope (complex code, obscure languages), potential biases, security risks, possible matches with public code, inaccurate code that looks valid, weaker answers to non-coding questions, and an English-first design.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat"
+    },
+    {
+      "id": "p1m1-c29",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "GitHub's responsible use docs (application cards)",
+      "back": "Per-feature documents (Chat, inline suggestions, agents) that describe capabilities, intended uses, limitations and mitigations. GitHub presents them as transparency in practice. Older docs called them \"Responsible use of GitHub Copilot ...\" pages.",
+      "source": "https://docs.github.com/en/copilot/responsible-use"
+    },
+    {
+      "id": "p1m1-c30",
+      "module": "p1m1",
+      "domain": "responsible",
+      "front": "What a \"Verified\" Copilot cloud agent commit does and doesn't tell you",
+      "back": "It shows the commit was made by Copilot and hasn't been altered. The human who started the task is the co-author, and the commit links to the session logs. It says nothing about correctness, so review and test before merging.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/agents"
+    }
+  ]
+}

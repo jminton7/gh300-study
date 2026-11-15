@@ -1,0 +1,19 @@
+# Audit log: part-h.json
+
+Checked: 32 questions, 14 cards (46 items). Changed: 11. Deleted: 0.
+
+| id | problem | fix | source |
+|---|---|---|---|
+| p1m2-q40 | Explain didn't mention Copilot Max, a newer individual tier above Pro+ (not an option, so the answer still stands) | Added premium-model access and a note about Max to explain | https://docs.github.com/en/copilot/get-started/plans |
+| p1m2-q42 | Correct option "Excluding specified files from Copilot (content exclusion)" was 35% longer than the longest distractor | Shortened it to "Content exclusion for specified files and paths" | https://docs.github.com/en/copilot/get-started/plans |
+| p1m2-q44 | Correct option said Free is for people "without organization access", but the docs say "without access to Copilot through an organization" (org membership alone doesn't block Free) | Reworded it to "without org-provided Copilot" | https://docs.github.com/en/copilot/get-started/plans |
+| p1m6-q45 | Explain said "You still ran the command yourself", but the extension's ghcs alias could run a suggestion after you confirmed | Replaced with "It didn't edit files or work agentically" | https://github.com/github/gh-copilot |
+| p1m6-c44 | Same "you ran them yourself" overstatement | Changed to "couldn't edit files or open PRs" | https://github.com/github/gh-copilot |
+| p1m8-q49 | Explain said the mock-objects recipe uses #file for an existing test, which the recipe doesn't say | Removed that claim and explained why the distractors are wrong | https://docs.github.com/en/copilot/tutorials/copilot-cookbook/testing-code/create-mock-objects |
+| p1m8-q50 | Explain said the E2E recipe suggests passing an existing test with #file, which the recipe doesn't say | Credited the #file/example advice to the prompt-engineering guidance (give examples, attach relevant files) | https://docs.github.com/en/copilot/concepts/prompting-and-context/prompt-engineering |
+| p1m8-c43 | Same #file claim presented as recipe guidance | Reworded it as general advice | https://docs.github.com/en/copilot/concepts/prompting-and-context/prompt-engineering |
+| extra-q43 | The stem didn't say which IDE. Current docs say edit mode is only in VS Code and JetBrains, and VS Code now hides it by default. The explain wrongly called it "deprecated" and dated 1.110 to March 2026 (it's the February 2026 release, hidden by default and can be re-enabled) | Stem now says "In an IDE whose Copilot Chat offers Ask, Edit, Plan, and Agent modes". Explain corrected and now cites GitHub's "full control over the number of LLM requests" rationale | https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/chat-in-ide ; https://code.visualstudio.com/updates/v1_110 |
+| extra-c41 | Same "deprecated" / "March 2026" error | Corrected to "hidden by default (Feb 2026 release), can be re-enabled". Added the use-case note | https://code.visualstudio.com/updates/v1_110 |
+| p1m2-c40 | Said "audit logs" were organization-only, but current plans table shows audit logs for Pro+ and Max. The plan list also left out Student and Max | Replaced audit logs with organization custom instructions (org-only in the table) and listed all individual plans | https://docs.github.com/en/copilot/get-started/plans |
+
+Other items checked and found correct: 35. These include the p1m2-q41/q43/q45/q46 plan and seat claims (seat assignment auto-cancels personal Pro/Pro+/Max with a prorated refund; Business/Enterprise data isn't used for training, so the setting is hidden), the CLI items (setup order confirmed as install → run copilot in the project folder → trust the folder → /login if not signed in → prompt; credential order COPILOT_GITHUB_TOKEN → GH_TOKEN → GITHUB_TOKEN → keychain OAuth → gh fallback), the cookbook and COBOL-blog productivity items, prompt files, the Visual Studio 17.10+ built-in setup, the Chat limitations application card, and the "Used n references" item.

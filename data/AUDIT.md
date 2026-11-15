@@ -4,6 +4,11 @@ You are auditing questions someone else wrote for an offline study app for the G
 exam (GH-300). Today is 15 November 2026. The exam skills outline was last updated 7 August 2026.
 Be skeptical: assume each item may be wrong until you've confirmed it.
 
+IMPORTANT: also read the "Exam alignment" section at the end of BRIEF.md. The marked answer must be correct ON THE
+EXAM (exam-era material, outline updated 7 Aug 2026). Never accept an answer that is only correct because of a
+change made after ~Aug 2026. "(Choose two.)" questions have `answer` as an array; check every listed answer is
+correct and every other option is wrong.
+
 File format is described in C:\Users\james\gh300-study\data\BRIEF.md (read it).
 
 ## For EVERY question and card in your file

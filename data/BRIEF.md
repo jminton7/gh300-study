@@ -83,3 +83,23 @@ Write a single JSON file (UTF-8, valid JSON, no comments) at the path you are gi
 
 After writing, validate the file parses (e.g. `node -e "JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'))" <file>`) and fix errors.
 Finally reply with: counts per module, and a list of anything you deliberately skipped because sources conflicted or were unclear.
+
+## Exam alignment (added after audit; overrides anything above)
+
+The goal is answers that are correct ON THE EXAM. The exam outline was last updated 7 Aug 2026 and its questions
+were written against Microsoft Learn + GitHub docs as of roughly early/mid 2026.
+
+- Only test points where Learn, exam-era docs, and current docs agree; OR test the exam-era answer and say in
+  `explain` what changed since ("Exam-era material: X. Since <month> 2026: Y.").
+- Never mark as correct an answer that is only true because of a change after ~Aug 2026. Known post-exam changes:
+  content exclusion support in Copilot app/CLI (GA 2 Sep 2026; exam-era: exclusion NOT supported in IDE agent/edit
+  mode, Copilot CLI, or coding agent); cloud sandboxes / `copilot --cloud` / "Copilot in the cloud" (28 Oct 2026);
+  GitHub.com chat retention becoming "life of account" (announced 28 Aug 2026; exam-era: up to 28 days).
+- Test-takers report the live exam still contains some older items (e.g. the retired `gh copilot suggest/explain`
+  CLI extension, "premium requests"). It's fine to write cards/questions that teach those, clearly labeled as the
+  older version, so the learner recognizes them.
+- Exactly 4 options is the norm. "Choose two" questions are allowed: put "(Choose two.)" at the end of `q`, use
+  4 or 5 options, and make `answer` an array of two 0-based indexes, e.g. `"answer": [0, 3]`.
+- Ordering/sequence questions: write as a normal single-answer question whose options are 4 different sequences.
+- Option-length balance: the correct option must not be more than ~25% longer than the longest distractor and
+  should be the longest in no more than ~30% of your questions.

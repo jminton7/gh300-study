@@ -1,0 +1,472 @@
+{
+  "questions": [
+    {
+      "id": "p1m3-q30",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A developer with a Copilot Business seat asks Copilot Chat in VS Code to refactor a proprietary module. With default settings, what does GitHub do with that prompt and Copilot's response?",
+      "options": [
+        "It doesn't retain them; Chat in the editor keeps no prompts or responses",
+        "It retains them for up to 28 days for abuse monitoring, then deletes them",
+        "It keeps them for two years, together with the user engagement data",
+        "It stores them in the organization's audit log so admins can review them"
+      ],
+      "answer": 0,
+      "explain": "For Copilot Business and Enterprise, Copilot Chat in the code editor doesn't retain prompts and suggestions by default. The 28-day default applies to Copilot on GitHub.com and GitHub Mobile, and two years is the retention for user engagement data, not prompts.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/4-github-copilot-data"
+    },
+    {
+      "id": "p1m3-q31",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A compliance officer at a Copilot Enterprise company asks how long prompts and suggestions from Copilot on GitHub.com and in GitHub Mobile are kept by default. Based on exam-era guidance, what is the answer?",
+      "options": [
+        "They aren't retained once the response has been returned",
+        "They're retained for up to 28 days by default",
+        "They're retained for two years, like engagement data",
+        "They're retained until the user deletes the conversation"
+      ],
+      "answer": 1,
+      "explain": "Exam-era material (Learn and the Trust Center): Copilot in GitHub and GitHub Mobile keep prompts and suggestions for up to 28 days by default, while Chat in the IDE keeps none. Since an announcement on 28 Aug 2026 (after the exam outline), Copilot on github.com moves to the agent sessions model and keeps chat data for the life of the account.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/4-github-copilot-data"
+    },
+    {
+      "id": "p1m3-q32",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "According to GitHub's Copilot FAQ, how long is user engagement data (for example, accepted or dismissed suggestions and error messages) kept by default for Copilot Business and Enterprise?",
+      "options": [
+        "Two years, regardless of which surface was used",
+        "Up to 28 days, then it's deleted on every surface",
+        "It isn't kept; it's discarded along with the prompt",
+        "Only for as long as the user's Copilot seat is active"
+      ],
+      "answer": 0,
+      "explain": "GitHub's exam-era Copilot FAQ ('How long does GitHub retain Copilot data for Business and Enterprise customers?', mirrored in the Trust Center) lists user engagement data as kept for two years for both IDE access and all other Copilot access. The 'not retained' and '28 days' periods describe prompts and suggestions, not engagement data.",
+      "source": "https://web.archive.org/web/20260228173246/https://github.com/features/copilot"
+    },
+    {
+      "id": "p1m3-q33",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A privacy reviewer is listing the categories of personal data that Copilot processes. Which item is an example of 'user engagement data'?",
+      "options": [
+        "Pseudonymous events such as accepted or dismissed completions and error logs",
+        "The code before and after the cursor that's sent to the model with a request",
+        "The generated code lines or chat answers that Copilot returns to the user",
+        "Thumbs-up or thumbs-down reactions and optional comments on a response"
+      ],
+      "answer": 0,
+      "explain": "GitHub defines user engagement data as pseudonymous identifiers captured on interactions, such as accepted or dismissed completions, error messages, system logs and usage metrics. Code context is part of the prompt, generated code is a suggestion, and reactions with comments are feedback data.",
+      "source": "https://github.com/features/copilot#faq"
+    },
+    {
+      "id": "p1m3-q34",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "The legal team at a Copilot Enterprise customer asks whether GitHub uses their developers' Copilot prompts and code to train AI models. Which statement is accurate?",
+      "options": [
+        "No, GitHub doesn't use Business or Enterprise data to train models",
+        "Yes, but only once prompts are anonymized and the 28-day window ends",
+        "Only if an org owner leaves the 'model training' policy at its default",
+        "Only for code in public repositories that the organization owns"
+      ],
+      "answer": 0,
+      "explain": "GitHub uses neither Copilot Business nor Enterprise data to train models; that data is protected under GitHub's Data Protection Agreement, so the model-training setting isn't even shown for these plans. Training on interaction data (with an opt-out) applies only to individual plans.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m3-q35",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A developer on Copilot Pro doesn't want their Copilot prompts, suggestions and code snippets used to train GitHub's AI models. What should they do?",
+      "options": [
+        "Opt out of AI model training in their personal Copilot settings on GitHub",
+        "Set 'Suggestions matching public code' to Block in their Copilot settings",
+        "Add each of their repositories to a .copilotignore file so prompts aren't kept",
+        "Turn off 'Copilot access to Bing' so no prompt data leaves the GitHub tenant"
+      ],
+      "answer": 0,
+      "explain": "Individual subscribers can opt out in their personal Copilot settings (Learn: 'Individual subscribers can opt-out'; current docs: since 24 Apr 2026, Free/Pro/Pro+/Max interaction data may be used for training unless 'Allow GitHub to use my data for AI model training' is Disabled). The public-code setting and Bing access control other things.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m3-q36",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Under Copilot Business default settings, as described in exam-era material, which TWO statements about retention of prompts and suggestions are accurate? (Choose two.)",
+      "options": [
+        "Copilot Chat in the IDE doesn't retain prompts or suggestions",
+        "Copilot on GitHub.com retains them for up to 28 days",
+        "IDE code completions retain them for 28 days for debugging",
+        "Every surface retains them for two years with engagement data",
+        "GitHub Mobile doesn't retain them because it has no code context"
+      ],
+      "answer": [0, 1],
+      "explain": "Exam-era defaults for Business/Enterprise: Chat in the code editor keeps nothing, while Copilot in GitHub and GitHub Mobile keep prompts and suggestions for up to 28 days. Two years applies to user engagement data. (Since 28 Aug 2026, github.com chat moves to life-of-account retention; that's after the exam outline.)",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/4-github-copilot-data"
+    },
+    {
+      "id": "p1m3-q37",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "An administrator enables web search for Copilot Chat. When Chat uses Bing to help answer a question, how is data shared?",
+      "options": [
+        "The prompt and some context form a Bing query, under Microsoft's Privacy Statement",
+        "Only the user's GitHub username is sent to Bing; the prompt itself stays with GitHub",
+        "The whole repository is uploaded to Bing so the search results can be grounded in it",
+        "Nothing leaves GitHub; the Bing results come from a cached copy of the public web"
+      ],
+      "answer": 0,
+      "explain": "When web search is used, the content of the prompt plus additional context is used to generate a Bing search query, which is governed by Microsoft's Privacy Statement. Admins can enable or disable Bing for the organization.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat-in-your-ide"
+    },
+    {
+      "id": "p1m3-q38",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "When Copilot builds the prompt for an inline suggestion in the IDE, which context does it gather?",
+      "options": [
+        "Code before and after the cursor, the file name and type, and open editor tabs",
+        "The full Git history, CI logs, and every file in the repository's default branch",
+        "Only the current line, so suggestions stay fast and independent of other files",
+        "Recent terminal output, browser history, and the user's last chat conversation"
+      ],
+      "answer": 0,
+      "explain": "Context gathering collects code before and after the cursor, the file name and type, information from adjacent open tabs, project structure and file paths, and languages and frameworks. It doesn't pull the whole repository history or unrelated personal data.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-q39",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A developer writes a comment saying 'return active users' in both `users.sql` and `users.py`. Copilot proposes a SQL query in one file and a Python function in the other. What explains this?",
+      "options": [
+        "The file name and type are part of the context gathered to build the prompt",
+        "The proxy filter rewrites each suggestion into the language of the open file",
+        "The public code filter blocks suggestions that don't match the file extension",
+        "Copilot runs a separate fine-tuned model per language and picks one per file"
+      ],
+      "answer": 0,
+      "explain": "Copilot collects the file name and type of the file being edited so it can tailor suggestions to that file type. The proxy filter blocks prompt-hacking attempts; it doesn't translate code between languages.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-q40",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "In Copilot Chat in the IDE, a developer asks for a parsing function, then follows up with 'now add retry logic to it'. Copilot correctly updates the earlier function. Which part of Chat's input processing makes this work?",
+      "options": [
+        "The conversation history is combined with the new prompt as context",
+        "Fill-in-the-Middle reads the code after the cursor in the chat window",
+        "The proxy filter caches the last answer and patches it with the change",
+        "LoRA fine-tuning updates the model with each message in the session"
+      ],
+      "answer": 0,
+      "explain": "Chat pre-processes the prompt and combines it with context such as open files and chat history before sending it to the model. FIM is about code around the cursor in the editor, and LoRA is a training technique, not something that happens per message.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat-in-your-ide"
+    },
+    {
+      "id": "p1m3-q41",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "An organization has configured a content exclusion for `/secrets/**`. In the life cycle of an inline suggestion in the IDE, where does this protection take effect?",
+      "options": [
+        "In the IDE, so excluded files aren't used as context in the prompt",
+        "At the proxy, which strips excluded paths from the model's response",
+        "In the LLM, which is fine-tuned to ignore the excluded file patterns",
+        "In post-processing, alongside the filter for matching public code"
+      ],
+      "answer": 0,
+      "explain": "Content exclusions act at the start of the life cycle, in the IDE: excluded files don't get inline suggestions and their content doesn't inform suggestions or responses, so it never enters the prompt. The proxy and post-processing stages handle prompt hacking, toxicity, code quality and public-code matching instead.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m3-q42",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "During outbound post-processing, part of a generated suggestion fails Copilot's code quality and security checks. What happens?",
+      "options": [
+        "The response is truncated or discarded before it reaches the developer",
+        "It's shown with a warning banner so the developer can still accept it",
+        "It's sent back to the LLM repeatedly until it passes every single check",
+        "It's delivered unchanged and recorded in the organization's audit log"
+      ],
+      "answer": 0,
+      "explain": "If any part of the response fails the post-processing checks, it's either truncated or discarded; only responses that pass all filters are delivered. Copilot doesn't loop back to the model until it passes, and failures aren't written to the audit log.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-q43",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "An architect is diagramming Copilot's outbound flow. After the toxicity filter removes harmful generated content, which component applies the final checks for code quality, security and (optionally) matching public code?",
+      "options": [
+        "The proxy server in GitHub's Azure tenant",
+        "The Copilot extension running in the IDE",
+        "GitHub Actions code scanning on the repo",
+        "The LLM itself, through system prompt rules"
+      ],
+      "answer": 0,
+      "explain": "In the outbound flow, the proxy server applies a final layer of checks for code quality, security and ethical standards, including the optional public-code filter. The IDE extension only displays what passes; code scanning is a separate GitHub feature.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-q44",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Copilot has filters that block or flag common insecure coding patterns in its suggestions. Which TWO patterns does GitHub name as targets of these filters? (Choose two.)",
+      "options": [
+        "Hardcoded credentials",
+        "SQL injection",
+        "Unused import statements",
+        "Missing license headers",
+        "Inefficient nested loops"
+      ],
+      "answer": [0, 1],
+      "explain": "GitHub says the insecure-code filters target the most common vulnerable patterns, including hardcoded credentials, SQL injections and path injections (Learn also cites XSS). They don't target style or performance issues, and you still need code review and security tools.",
+      "source": "https://github.com/features/copilot#faq"
+    },
+    {
+      "id": "p1m3-q45",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "According to the Microsoft Learn prompt-engineering module's process flow, which sequence correctly describes the life cycle of a Copilot code suggestion?",
+      "options": [
+        "Gather context → proxy filter → toxicity filter → LLM generates → post-processing checks → deliver",
+        "Gather context → LLM generates → proxy filter → toxicity filter → post-processing checks → deliver",
+        "Proxy filter → gather context → LLM generates → toxicity filter → deliver → post-processing checks",
+        "Gather context → toxicity filter → LLM generates → proxy filter → deliver → public code check"
+      ],
+      "answer": 0,
+      "explain": "Inbound: the prompt is sent over HTTPS with context gathered, passes the proxy filter, then toxicity filtering, then the LLM generates code. Outbound: post-processing checks (toxicity, quality/security, optional public-code filter) run before only passing responses are delivered.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-q46",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "After the LLM produces a response, in what order do Copilot's outbound steps happen?",
+      "options": [
+        "Toxicity filter → proxy quality, security and public-code checks → delivery → feedback loop",
+        "Proxy public-code check → delivery → toxicity filter → quality and security checks → feedback loop",
+        "Delivery → developer accepts or rejects → proxy security checks → toxicity filter → feedback loop",
+        "Proxy quality and security checks → feedback loop → toxicity filter → public-code check → delivery"
+      ],
+      "answer": 0,
+      "explain": "Outbound, the toxicity filter first removes harmful generated content, then the proxy applies quality, security and optional public-code checks. Only passing responses are delivered, and the feedback loop then starts from the developer's accepts, edits and rejections.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-q47",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "GitHub's application card for inline suggestions describes a four-stage pipeline. What is the correct order of the stages?",
+      "options": [
+        "Input processing → language model analysis → response generation → output formatting",
+        "Language model analysis → input processing → output formatting → response generation",
+        "Input processing → response generation → language model analysis → output formatting",
+        "Output formatting → input processing → language model analysis → response generation"
+      ],
+      "answer": 0,
+      "explain": "Surrounding code and context are pre-processed into a prompt (input processing), the LLM analyzes it, generates a response, and the response is formatted and shown inline as a visually distinct suggestion. Copilot Chat's application card uses the same four stages.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-q48",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A developer pastes a 3,000-line legacy module into Copilot Chat and asks for a full refactor. The answer ignores much of the first half of the file. Which limitation is most likely at play, and what helps?",
+      "options": [
+        "Limited context window; split the work into smaller prompts with relevant snippets",
+        "The toxicity filter dropped the code; rephrase the request in more neutral terms",
+        "Training cutoff; tell Copilot which version of the language the code is written in",
+        "The public code filter blocked it; ask an admin to set public code matching to Allow"
+      ],
+      "answer": 0,
+      "explain": "The model can only process a limited amount of surrounding code and text at once. Learn recommends breaking complex problems into smaller, focused queries and providing only the relevant code snippets.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/4-github-copilot-data"
+    },
+    {
+      "id": "p1m3-q49",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "A team writing in a rarely used programming language finds Copilot's suggestions much weaker than for their JavaScript services. According to GitHub, what best explains this?",
+      "options": [
+        "Quality depends on the volume and diversity of training data for each language",
+        "Copilot only supports languages that have an official GitHub Linguist grammar",
+        "The proxy filter rejects suggestions for languages it can't scan for security",
+        "Organization policy limits the number of languages that a single seat can use"
+      ],
+      "answer": 0,
+      "explain": "GitHub's application card says suggestion quality depends on the volume and diversity of training data for each language; JavaScript is well represented in public repositories, while less-represented languages are harder to assist with.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-q50",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Copilot keeps suggesting a deprecated method from a library that the team upgraded last month. What is the most likely cause, and a sensible mitigation?",
+      "options": [
+        "Training data includes older public code; add current docs or examples as context",
+        "The proxy filter caches old suggestions; clear the cache by restarting the IDE",
+        "Context gathering skipped the lockfile; delete and regenerate the lockfile",
+        "The public code filter prefers older code; set public code matching to Block"
+      ],
+      "answer": 0,
+      "explain": "Public code used for training can contain outdated APIs or idioms, and the model's knowledge isn't updated when your dependencies change. Giving current examples or docs as context (or using web search where enabled) steers it toward the new API; there's no suggestion cache to clear.",
+      "source": "https://github.com/features/copilot#faq"
+    },
+    {
+      "id": "p1m3-q51",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Two developers type an identical comment in identical files, with the same tabs open, yet Copilot offers each of them a different implementation. What explains this?",
+      "options": [
+        "Suggestions are generated probabilistically, so output can vary between requests",
+        "Copilot assigns each user a personal model fine-tuned on their own past commits",
+        "The public code filter randomly hides one of the two matching implementations",
+        "One of the requests failed the proxy filter and fell back to a cached answer"
+      ],
+      "answer": 0,
+      "explain": "LLMs generate code in a probabilistic way, so the same prompt and context can produce different suggestions. That's expected behavior, not a filter or caching artifact.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-q52",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Copilot Chat confidently recommends calling `client.retryWithBackoff()`, but the SDK has no such method. What term describes this, and what is the right response?",
+      "options": [
+        "Hallucination; check the SDK's docs and test the code before relying on it",
+        "Prompt injection; report it so the proxy filter can block that pattern next time",
+        "Code referencing; open the matching public repository to find the method's source",
+        "Toxicity; rephrase the request so the content filter doesn't alter the answer"
+      ],
+      "answer": 0,
+      "explain": "A hallucination is output that sounds plausible but is incorrect or fabricated, a known LLM risk and a key reason human review matters. Code referencing only reports matches with real public code.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-q53",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Copilot's pull request text completion gives less relevant suggestions on a very large pull request. What reason does GitHub's documentation give?",
+      "options": [
+        "Some PR content may not fit into the API call, so less context reaches the model",
+        "Text completion is turned off for PRs that change more than a few hundred lines",
+        "The public code filter blocks suggestions whenever a diff contains a lot of code",
+        "Large PRs are routed to a smaller model that doesn't read the commit messages"
+      ],
+      "answer": 0,
+      "explain": "For very large pull requests, some of the content that text completion relies on may not fit into the API call, so suggestions may be missing or less accurate. It's a context limit, not a feature cut-off or filter.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-q54",
+      "module": "p1m3",
+      "domain": "data",
+      "q": "Which TWO are documented limitations of Copilot inline suggestions? (Choose two.)",
+      "options": [
+        "They may miss larger design or architecture issues beyond the code being written",
+        "Rarely, they may generate code that matches code in the training set",
+        "They can't generate unit tests, because tests require running the code",
+        "They always return the same output, so retrying never gives a new option",
+        "They only work when the comments in the file are written in English"
+      ],
+      "answer": [0, 1],
+      "explain": "GitHub lists limited scope (suggestions are based on the code being written, so they may not spot larger design issues) and a low probability of matching training-set code. Generating unit tests is an intended use, output is probabilistic, and suggestions work across many languages.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p1m3-c30",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Prompt/suggestion retention defaults (Business & Enterprise, exam-era)",
+      "back": "Copilot Chat in the code editor (and IDE completions): not retained. Copilot in GitHub and GitHub Mobile: up to 28 days. Learn now also lists Copilot CLI as not retained (older material grouped it with 28 days). After the exam outline (announced 28 Aug 2026), github.com chat moves to life-of-account retention.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/4-github-copilot-data"
+    },
+    {
+      "id": "p1m3-c31",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Four categories of data Copilot processes",
+      "back": "User engagement data (pseudonymous events: accepts/dismisses, errors, usage metrics), prompts (inputs plus context), suggestions (generated code or chat answers), and feedback data (thumbs up/down, comments, support tickets).",
+      "source": "https://github.com/features/copilot#faq"
+    },
+    {
+      "id": "p1m3-c32",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Retention of user engagement data and feedback data",
+      "back": "Business/Enterprise defaults (exam-era GitHub Copilot FAQ / Trust Center): user engagement data kept for two years; feedback data stored as long as needed for its intended purpose. Both apply whether Copilot is used in the IDE or elsewhere.",
+      "source": "https://web.archive.org/web/20260228173246/https://github.com/features/copilot"
+    },
+    {
+      "id": "p1m3-c33",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Is Copilot data used to train AI models?",
+      "back": "Business/Enterprise: no; their data is protected under GitHub's Data Protection Agreement (the training setting isn't shown). Individual plans (Free/Pro/Pro+/Max): may be used for training (since 24 Apr 2026) unless the user disables 'Allow GitHub to use my data for AI model training'.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m3-c34",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Context gathered when building an inline-suggestion prompt",
+      "back": "Code before and after the cursor (Fill-in-the-Middle), file name and type, adjacent open tabs, project structure and file paths, and languages/frameworks. Content-excluded files are left out in the IDE.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-c35",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Outbound flow (order)",
+      "back": "1) Toxicity filter removes harmful generated content. 2) Proxy applies final checks: code quality/security (e.g. XSS, SQL injection) and the optional public-code filter. 3) Failing output is truncated or discarded. 4) Passing suggestions are delivered. 5) Feedback loop from accepts, edits and rejections.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/3-github-copilot-user-prompt-process-flow"
+    },
+    {
+      "id": "p1m3-c36",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Four-stage pipeline (GitHub application card)",
+      "back": "Input processing (code and context pre-processed into a prompt) → language model analysis → response generation → output formatting (shown as a distinct suggestion, applied only if you accept it).",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-c37",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Insecure-code filtering targets",
+      "back": "Copilot's filters block or flag common vulnerable patterns such as hardcoded credentials, SQL injection and path injection. They don't replace testing, code review and security tools like code scanning.",
+      "source": "https://github.com/features/copilot#faq"
+    },
+    {
+      "id": "p1m3-c38",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Training-data limits: language coverage and outdated APIs",
+      "back": "Suggestion quality depends on the volume and diversity of training data per language (JavaScript is strong; rare languages are weaker). Public training code can contain outdated APIs or idioms, so give current docs or examples as context.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-c39",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Non-determinism and hallucination",
+      "back": "LLMs generate output probabilistically, so the same prompt can give different suggestions. They can also hallucinate: produce plausible but incorrect or fabricated output. Always review and test.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/copilot-code-completion"
+    },
+    {
+      "id": "p1m3-c40",
+      "module": "p1m3",
+      "domain": "data",
+      "front": "Copilot Chat web search (Bing): data sharing",
+      "back": "Optional and admin-controlled. When used, the prompt plus additional context is turned into a Bing query, governed by Microsoft's Privacy Statement. Useful for recent events and new technologies.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat-in-your-ide"
+    }
+  ]
+}

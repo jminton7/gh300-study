@@ -1,0 +1,611 @@
+{
+  "questions": [
+    {
+      "id": "p1m2-q40",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "An independent consultant with no organization uses Copilot all day. They want access to the most advanced models and a bigger monthly usage allowance than Copilot Pro gives, and they don't need any admin controls. Which of these plans fits best?",
+      "options": [
+        "Copilot Business, bought for a one-person organization",
+        "Copilot Pro+",
+        "Copilot Enterprise on GitHub Enterprise Cloud",
+        "Copilot Free, upgraded with a usage add-on"
+      ],
+      "answer": 1,
+      "explain": "Copilot Pro+ is the individual plan for power users: everything in Pro, access to premium models, and a higher monthly allowance (premium requests in exam-era material, AI credits now). Business and Enterprise are organization plans whose value is central management and policies, which this person doesn't need. Current docs also list Copilot Max, a newer individual tier above Pro+.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m2-q41",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "Developers at a company each pay for personal Copilot Pro. Legal now requires IP indemnity from the vendor, a guarantee that company code isn't used to train models, and central control over who has access. What should the company do?",
+      "options": [
+        "Keep Pro and ask each developer to opt out of model training",
+        "Move everyone to Copilot Pro+ and enable the public code filter",
+        "Buy Copilot Business and assign seats centrally",
+        "Keep Pro and add the organization's custom instructions file"
+      ],
+      "answer": 2,
+      "explain": "Copilot Business adds centralized management and policy control, and Learn lists IP indemnity among its key features. GitHub's docs say Business and Enterprise customer data is protected by the Data Protection Agreement and isn't used to train models. Individual opt-outs don't give central control or contractual protections.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-to-github-copilot/2-github-copilot-your-ai-pair-programmer"
+    },
+    {
+      "id": "p1m2-q42",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "An admin is comparing individual plans (Free, Pro, Pro+) with Copilot Business. Which two capabilities are available only on the organization plans? (Choose two.)",
+      "options": [
+        "Content exclusion for specified files and paths",
+        "Blocking suggestions that match public code",
+        "Organization-wide Copilot policy management",
+        "Using reusable prompt files in the IDE",
+        "Using agent mode and MCP servers in the IDE"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "explain": "GitHub's plan comparison lists content exclusion and organization-wide policy management only for Business and Enterprise. Blocking public-code matches, prompt files, agent mode, and MCP are available on individual plans too, so they don't justify an organization plan on their own.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m2-q43",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "A company on GitHub Enterprise Cloud already uses Copilot Business. The CTO asks what moving to Copilot Enterprise would add. Which answer is accurate?",
+      "options": [
+        "Content exclusion, which Copilot Business plans don't support at all",
+        "IP indemnity, which isn't included with Copilot Business seats",
+        "All of Business, plus a larger allowance and enterprise extras",
+        "A guarantee that prompts aren't used for model training, unlike Business"
+      ],
+      "answer": 2,
+      "explain": "Copilot Enterprise includes everything in Copilot Business, a larger monthly allowance per seat (premium requests in exam-era material, AI credits now), and additional enterprise-grade capabilities. Content exclusion, IP indemnity, and no training on customer data already come with Business.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m2-q44",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "A developer has a Copilot Business seat from their employer. For weekend side projects they want to activate Copilot Free on the same GitHub account so their personal work isn't governed by the employer's policies. What happens?",
+      "options": [
+        "Copilot Free activates and is used only in personal repositories",
+        "Copilot Free activates and its settings override the employer's policies",
+        "They can't: Copilot Free is only for users without org-provided Copilot",
+        "They can, but only after an organization owner approves the request"
+      ],
+      "answer": 2,
+      "explain": "GitHub's plans page says Copilot Free is only available to individual developers who don't already have Copilot through an organization or enterprise. A user with an assigned Business seat uses Copilot under the company's policies.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m2-q45",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "A developer who pays for Copilot Pro+ is assigned a Copilot Business seat by their employer's organization. Which two statements are correct? (Choose two.)",
+      "options": [
+        "The personal Pro+ plan is canceled automatically with a prorated refund",
+        "They keep both plans and choose one per repository in their IDE",
+        "From now on they use Copilot under the company's policies",
+        "Their Pro+ settings take priority whenever they conflict with org policy"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "explain": "When a user with Pro, Pro+, or Max is assigned a Business or Enterprise seat, the personal plan is canceled automatically with a prorated refund, and the user then follows the company's Copilot policies. The two plans don't run side by side.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-billing/seat-assignment"
+    },
+    {
+      "id": "p1m2-q46",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "A developer with a Copilot Business seat wants to turn off the use of their data for AI model training, but can't find that setting in their personal Copilot settings. Why?",
+      "options": [
+        "The setting only appears once the developer has used Copilot Chat",
+        "An organization owner has hidden it and it must be re-enabled by policy",
+        "The setting is only offered in the IDE, not on GitHub.com",
+        "Business data isn't used for training, so the setting isn't shown"
+      ],
+      "answer": 3,
+      "explain": "GitHub doesn't use Copilot Business or Enterprise customer data to train models; the Data Protection Agreement prohibits it. That's why the training setting isn't displayed for those plans. Individual plans (Free, Pro, Pro+, Max) have an opt-out in personal settings.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m6-q40",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A developer who works mostly in the terminal asks what GitHub Copilot CLI is for. Which description is accurate?",
+      "options": [
+        "A shell helper that only suggests a single command for you to copy and run",
+        "A terminal agent that answers questions, edits code, and works with GitHub.com",
+        "A CI service that runs a Copilot code review automatically on every push to a branch",
+        "A command-line viewer for your organization's Copilot usage metrics"
+      ],
+      "answer": 1,
+      "explain": "Copilot CLI is an AI agent in your terminal. It can answer questions, write and debug code, and work with GitHub.com, for example by creating a pull request, so you don't have to leave the terminal. 'Only suggests a single command' describes the retired gh copilot extension.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-q41",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A Windows developer is setting up Copilot CLI for the first time and isn't logged in yet. Which sequence matches GitHub's documented flow?",
+      "options": [
+        "Run /login → winget install GitHub.Copilot → run copilot in the project folder → trust the folder → enter a prompt",
+        "winget install GitHub.Copilot → run copilot in the project folder → trust the folder → run /login → enter a prompt",
+        "winget install GitHub.Copilot → enter a prompt → run copilot in the project folder → run /login → trust the folder",
+        "Run copilot in the home folder → winget install GitHub.Copilot → run /login → trust all folders → enter a prompt"
+      ],
+      "answer": 1,
+      "explain": "First you install the CLI (for example with WinGet). Then you go to the project folder and run copilot. Copilot asks you to confirm that you trust the folder, prompts you to use /login if you aren't signed in, and then you enter prompts. Launching from your home directory isn't recommended.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview"
+    },
+    {
+      "id": "p1m6-q42",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A developer signs in with copilot login as their work account, but Copilot CLI keeps using a different account. They set GH_TOKEN in their shell profile months ago for another tool. What explains this?",
+      "options": [
+        "The CLI checks environment tokens before the stored OAuth token",
+        "copilot login only lasts for one session and must be repeated each time",
+        "The CLI always uses the GitHub CLI's token before any other credential",
+        "OAuth tokens from copilot login can't be used with work accounts"
+      ],
+      "answer": 0,
+      "explain": "Copilot CLI checks credentials in this order: COPILOT_GITHUB_TOKEN, GH_TOKEN, GITHUB_TOKEN, the stored OAuth token, and finally the gh CLI token. An environment variable silently overrides the token from copilot login, so unset variables you don't want the CLI to use. The gh fallback has the lowest priority.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli"
+    },
+    {
+      "id": "p1m6-q43",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "Yesterday a developer closed their terminal halfway through an interactive Copilot CLI session. Today they want to continue where they left off, with the earlier context. What should they run?",
+      "options": [
+        "copilot -p with yesterday's prompt pasted in again",
+        "copilot, then /compact to reload yesterday's last conversation",
+        "copilot --continue, or select the session with --resume",
+        "copilot, then /context to restore yesterday's history"
+      ],
+      "answer": 2,
+      "explain": "copilot --continue resumes the most recently closed local session, and --resume or /resume lets you pick a session with its saved context. /compact compresses the current context, /context shows token usage, and -p runs a single prompt in a new session.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview"
+    },
+    {
+      "id": "p1m6-q44",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "In an interactive Copilot CLI session, a developer wants Copilot to fix a bug specifically in src/app.js. They also want to run git status themselves without sending anything to the model. What should they type?",
+      "options": [
+        "Fix the bug in #src/app.js, then /git status",
+        "Fix the bug in @src/app.js, then !git status",
+        "/fix src/app.js, then /shell git status",
+        "Fix the bug in src/app.js --file, then $git status"
+      ],
+      "answer": 1,
+      "explain": "Adding @ before a relative path puts that file's contents into the prompt as context. Starting input with ! runs it directly as a shell command without calling the model.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview"
+    },
+    {
+      "id": "p1m6-q45",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "(Older material.) A study guide shows gh copilot suggest \"Install and configure git lfs\". What did this command do, and what is used now?",
+      "options": [
+        "It installed Git LFS on its own; it was replaced by gh copilot run",
+        "It opened a pull request that adds Git LFS; it's now done by the cloud agent",
+        "It suggested a shell command for the task; it's been replaced by Copilot CLI (copilot)",
+        "It explained what a Git LFS command does; it was replaced by Copilot Chat on GitHub.com"
+      ],
+      "answer": 2,
+      "explain": "The gh-copilot extension for GitHub CLI suggested a command (gh copilot suggest) or explained one (gh copilot explain). It didn't edit files or work agentically. It was deprecated and stopped working on 25 October 2025, and was replaced by the agentic GitHub Copilot CLI, which you run with copilot.",
+      "source": "https://github.com/github/gh-copilot"
+    },
+    {
+      "id": "p1m8-q40",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A Java method validates an order, calculates the total, updates the status, and prints a summary, all in one place. A developer wants Copilot's help to make it easier to maintain without changing its behavior. What is the best approach?",
+      "options": [
+        "Ask Copilot to translate the class to Kotlin, which tends to be shorter",
+        "Ask Copilot to split it into smaller methods, then run existing tests",
+        "Accept the first inline suggestion that appears in the method body",
+        "Ask Copilot to optimize it for speed and then merge without review"
+      ],
+      "answer": 1,
+      "explain": "GitHub's cookbook shows Copilot Chat splitting a large method into focused methods such as validateOrder and calculateTotalPrice. Because Copilot's responses are non-deterministic, run your tests afterwards to confirm the refactor didn't change behavior.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/refactor-code/improve-code-readability"
+    },
+    {
+      "id": "p1m8-q41",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A Python script that finds prime numbers is slow. A developer asks Copilot Chat \"Optimize this code for performance\" and gets back a sieve-based rewrite. What should they do before adopting it?",
+      "options": [
+        "Adopt it right away, since Copilot's optimizations are deterministic",
+        "Ask Copilot to confirm it's faster, and treat that answer as the benchmark",
+        "Check the output matches the original and measure the runtime gain",
+        "Discard it, because Copilot can't suggest algorithmic changes"
+      ],
+      "answer": 2,
+      "explain": "Copilot Chat can spot performance hotspots and suggest better algorithms, data structures, caching, or parallelism. But its responses are non-deterministic and must be validated, so confirm the output is unchanged and measure the speed-up yourself.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/refactor-code/refactor-for-optimization"
+    },
+    {
+      "id": "p1m8-q42",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "Copilot Chat finds an XSS risk in a function that assigns user input to innerHTML and suggests textContent instead. A lead proposes switching off code scanning, since \"Copilot finds vulnerabilities now\". What is the right response?",
+      "options": [
+        "Agree, because Copilot Chat now gives a comprehensive security analysis",
+        "Agree, but only for repositories that have content exclusion configured",
+        "Keep code scanning, but stop reviewing Copilot's security-related fixes",
+        "Keep code scanning; Copilot finds some common issues but isn't complete"
+      ],
+      "answer": 3,
+      "explain": "GitHub's docs say Copilot Chat can help find and fix common vulnerabilities such as XSS and SQL injection, but you shouldn't rely on it for a comprehensive security analysis. Code scanning checks more thoroughly. Copilot's fixes still need review.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/analyze-security/find-vulnerabilities"
+    },
+    {
+      "id": "p1m8-q43",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A team wants to use Copilot to improve the security of a web application. Which two uses match GitHub's guidance? (Choose two.)",
+      "options": [
+        "Ask Chat to analyze selected code for issues such as SQL injection and suggest fixes",
+        "Ask Chat to help set up Dependabot so that dependency updates are streamlined",
+        "Replace CodeQL with Copilot Chat reviews, since Chat analysis is comprehensive",
+        "Merge Copilot's security fixes without tests, since they follow best practices"
+      ],
+      "answer": [
+        0,
+        1
+      ],
+      "explain": "The Copilot cookbook includes recipes for finding existing vulnerabilities (for example XSS or SQL injection) and for setting up Dependabot. GitHub says Copilot isn't a substitute for comprehensive tools like code scanning, and all generated code still needs review and testing.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook"
+    },
+    {
+      "id": "p1m8-q44",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A team inherits a module with no comments and no README. Which use of Copilot for documentation matches the Learn module?",
+      "options": [
+        "Generate function descriptions and a README draft, then check them",
+        "Have Copilot publish documentation to the wiki on every commit",
+        "Skip documentation, since Copilot Chat can explain the code later",
+        "Document only public APIs, since Copilot can't explain private code"
+      ],
+      "answer": 0,
+      "explain": "The Learn module says Copilot can generate inline comments, function descriptions with parameters and return values, and README structure, and can help keep the documentation style consistent. Generated explanations can be inaccurate, so review them.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/2-boost-developer-productivity"
+    },
+    {
+      "id": "p1m8-q45",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "QA needs a few hundred realistic customer records, including edge-case values, to test a new signup flow. Production data must not be used. How can Copilot help most appropriately?",
+      "options": [
+        "Paste a production export into Chat and ask Copilot to anonymize it",
+        "Describe the schema and rules, then ask Copilot for synthetic data",
+        "Ask Copilot to read customer data directly from the production database",
+        "Use only random strings, since Copilot can't produce realistic records"
+      ],
+      "answer": 1,
+      "explain": "The Learn module lists sample data creation as a use case: Copilot can generate realistic test data sets, which saves manual work. Describing the schema and constraints keeps real customer data out of prompts. Then check the generated records before you use them.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/2-boost-developer-productivity"
+    },
+    {
+      "id": "p1m8-q46",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A team must move a small COBOL account-management program to Node.js with Copilot Chat. Which order of steps matches GitHub's modernization walkthrough?",
+      "options": [
+        "Convert all files at once → delete the COBOL source → ask Copilot to explain the new code → write tests only if bugs appear in production",
+        "Generate Node.js tests first → convert the files → ask Copilot to explain the COBOL → create a test plan last",
+        "Ask Copilot to explain the COBOL files → create a test plan of the business logic → convert file by file → generate unit and integration tests",
+        "Create a test plan → convert all files at once → ask Copilot to explain the COBOL → skip integration tests, since unit tests are enough"
+      ],
+      "answer": 2,
+      "explain": "In GitHub's walkthrough, Copilot first explains the COBOL files and how they link together. Next it produces a test plan for the current business logic. Then the files are converted one at a time and each result is reviewed. Finally, unit and integration tests are generated from the test plan.",
+      "source": "https://github.blog/ai-and-ml/github-copilot/modernizing-legacy-code-with-github-copilot-tips-and-examples/"
+    },
+    {
+      "id": "p1m8-q47",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A developer wants Copilot Chat to rewrite a legacy Perl script in TypeScript. Which prompt is most likely to give a usable result?",
+      "options": [
+        "\"Make this script better and more modern.\"",
+        "\"Rewrite this script in whichever newer language you think fits best, and modernize it too.\"",
+        "\"Convert this to TypeScript, keep behavior and output identical, and say how to run it with Node.\"",
+        "\"TypeScript version please.\""
+      ],
+      "answer": 2,
+      "explain": "GitHub's translation recipe names the target language, requires the functionality and output to stay exactly the same, and asks how to run the result. The other prompts are vague, and a specific prompt gives a result you can check against the original.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/refactor-code/translate-code"
+    },
+    {
+      "id": "p1m8-q48",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A team plans to use Copilot to upgrade a large legacy application to a modern framework in one big change, with no tests in place. What does GitHub's legacy-modernization guidance recommend instead?",
+      "options": [
+        "Start with small modules, write tests for current behavior, and use branches and PRs",
+        "Let Copilot convert everything in one pass, since it understands the entire codebase",
+        "Turn off code review during the upgrade so Copilot's suggestions merge faster",
+        "Write tests only after the upgrade, because the old behavior no longer matters"
+      ],
+      "answer": 0,
+      "explain": "GitHub's guidance is to start small, write tests that capture current behavior before changing code, work in branches and pull requests, and always review Copilot's suggestions. A big-bang change without a safety net makes regressions hard to find.",
+      "source": "https://github.blog/ai-and-ml/github-copilot/modernizing-legacy-code-with-github-copilot-tips-and-examples/"
+    },
+    {
+      "id": "p1m8-q49",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A SvelteKit load function calls a service that queries a database. The developer wants a unit test that checks the service is called correctly without touching the database. Which prompt fits best?",
+      "options": [
+        "/tests Create an integration test that calls the load function against the real staging database",
+        "/explain Show how the service connects to the database",
+        "/tests Create a unit test to ensure the service is called correctly. Mock the service object.",
+        "/fix Remove the database call from the load function so it becomes easier to test"
+      ],
+      "answer": 2,
+      "explain": "Mock objects keep unit tests isolated from external services. GitHub's recipe asks /tests for a unit test and tells it to mock the service object. An integration test against a real database is the opposite of what's wanted, and /fix or /explain don't produce a test.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/testing-code/create-mock-objects"
+    },
+    {
+      "id": "p1m8-q50",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A developer asks Copilot Chat for end-to-end tests of a React product page. The output uses a different framework from the team's existing Playwright suite. How should they adjust the prompt?",
+      "options": [
+        "Name Playwright in the prompt and add an existing test with #file",
+        "Ask for unit tests instead, since Copilot can't write end-to-end tests",
+        "Repeat the same prompt until the framework happens to change",
+        "Remove the component code from context so the result is more general"
+      ],
+      "answer": 0,
+      "explain": "GitHub's end-to-end test recipe names the framework in the prompt (\"Using Playwright, generate an e2e test...\"). GitHub's prompt-engineering guidance also says to give examples and attach relevant files as context, so an existing test passed with #file helps the output follow the team's patterns.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/testing-code/create-end-to-end-tests"
+    },
+    {
+      "id": "p1m8-q51",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "During a COBOL-to-Node.js migration, Copilot generated a test plan that describes the current business logic. The team will use it to generate the new unit and integration tests. What should happen first?",
+      "options": [
+        "Nothing: a plan generated from the code is accurate by definition",
+        "Ask Copilot to rate its own plan, then keep only the cases it rates highest",
+        "Delete the edge cases from the plan to keep the test suite small",
+        "Have business stakeholders confirm the plan reflects intended behavior"
+      ],
+      "answer": 3,
+      "explain": "In GitHub's walkthrough the test plan is something to validate with business stakeholders before it drives the new tests. Copilot can misread intent, and legacy code may contain behavior the business no longer wants.",
+      "source": "https://github.blog/ai-and-ml/github-copilot/modernizing-legacy-code-with-github-copilot-tips-and-examples/"
+    },
+    {
+      "id": "p1m8-q52",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A developer who has never used COBOL must understand how three COBOL files work together before changing anything. They want to stay in the IDE rather than search the web. What is the most effective use of Copilot Chat?",
+      "options": [
+        "Ask Copilot to rewrite the files in Java first, then read the Java version",
+        "Use /explain with each file attached via #file, then ask for a data-flow diagram",
+        "Ask a general question about COBOL syntax, without attaching any files",
+        "Turn on inline suggestions and wait for them to add explanatory comments to the code"
+      ],
+      "answer": 1,
+      "explain": "GitHub's walkthrough combines /explain with #file references to get an overview of each file and how they link, then asks for a Mermaid sequence diagram of the data flow. This speeds up learning unfamiliar code and avoids switching to web searches.",
+      "source": "https://github.blog/ai-and-ml/github-copilot/modernizing-legacy-code-with-github-copilot-tips-and-examples/"
+    },
+    {
+      "id": "extra-q40",
+      "module": "extra",
+      "domain": "features",
+      "q": "In VS Code, Copilot Chat gives an answer that is wrong for the developer's question. They want to tell GitHub the response wasn't helpful. What is the documented way?",
+      "options": [
+        "Email copilot-safety@github.com with the full text of the response",
+        "Click the thumbs-down icon shown next to that response",
+        "Run /feedback in the chat input box, then type a short message",
+        "Delete the response so Copilot learns the answer was incorrect"
+      ],
+      "answer": 1,
+      "explain": "In VS Code, you show whether a response was helpful with the thumbs-up and thumbs-down icons next to it. copilot-safety@github.com is for reporting offensive content, and /feedback is a Copilot CLI command.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/chat-in-ide"
+    },
+    {
+      "id": "extra-q41",
+      "module": "extra",
+      "domain": "features",
+      "q": "Reviewers keep pasting the same REST API security checklist into Copilot Chat. They want to save it in the repository as a reusable task, which they run only when they choose to review an API. What should they create?",
+      "options": [
+        "A Copilot Memory entry that stores the checklist for the repository",
+        "Organization custom instructions that contain the checklist text",
+        "A .prompt.md prompt file in .github/prompts, run from chat on demand",
+        "A path-specific .instructions.md file targeting all API source files"
+      ],
+      "answer": 2,
+      "explain": "Prompt files are reusable Markdown templates (.prompt.md, usually in .github/prompts) that you invoke for a specific interaction, and they can take input variables. Custom instructions and memories are applied automatically, so they don't fit an on-demand task.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/prompt-files"
+    },
+    {
+      "id": "extra-q42",
+      "module": "extra",
+      "domain": "features",
+      "q": "A developer uses Visual Studio 2022 version 17.12 and has a Copilot license. What do they need to do to start using Copilot?",
+      "options": [
+        "Download the Copilot extension from the Marketplace and restart",
+        "Install Copilot CLI, which Visual Studio then uses for completions",
+        "Add their GitHub account that has Copilot access to Visual Studio",
+        "Run :Copilot setup from the Visual Studio command window"
+      ],
+      "answer": 2,
+      "explain": "From Visual Studio 2022 17.10, Copilot and Copilot Chat are built in, so you don't install them separately. You enable Copilot by adding a GitHub account with Copilot access to Visual Studio. :Copilot setup is the Vim/Neovim command.",
+      "source": "https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-extension"
+    },
+    {
+      "id": "extra-q43",
+      "module": "extra",
+      "domain": "features",
+      "q": "In an IDE whose Copilot Chat offers Ask, Edit, Plan, and Agent modes, a developer wants Copilot to change three specific files. They want to choose those files themselves, review and accept or discard the changes per file, keep full control over how many requests are used, and not have Copilot run terminal commands. Which chat mode fits best?",
+      "options": [
+        "Ask mode, then copy each code block into the files by hand",
+        "Agent mode, with automatic approval of all tool calls enabled",
+        "Plan mode, which writes the requested change directly into each file",
+        "Edit mode (Copilot Edits), with the three files in the working set"
+      ],
+      "answer": 3,
+      "explain": "In edit mode (Copilot Edits), you choose the files in a working set, prompt, and then Accept or Discard the proposed changes per file; GitHub says it suits a defined set of files and full control over the number of LLM requests. Agent mode picks files and runs tools on its own. Exam-era VS Code offered Edit mode; since VS Code 1.110 (February 2026 release) it's hidden by default but can be re-enabled, and JetBrains still offers it.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/chat-in-ide"
+    },
+    {
+      "id": "extra-q44",
+      "module": "extra",
+      "domain": "features",
+      "q": "A team lead is writing guidance on Copilot Chat's limitations. Which two statements are documented limitations of Copilot Chat? (Choose two.)",
+      "options": [
+        "It is optimized mainly for English, so prompts in other languages may perform differently",
+        "It can never produce code that matches public code, so licensing checks aren't needed",
+        "Less common programming languages may get lower-quality results than JavaScript does",
+        "It answers general non-coding questions as reliably as it answers coding questions"
+      ],
+      "answer": [
+        0,
+        2
+      ],
+      "explain": "GitHub's application card for Copilot Chat lists these limitations: Chat is optimized primarily for English, and quality depends on training data, so less common languages may yield lower-quality results. It can occasionally match public code, and it isn't designed for non-coding questions.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/chat-in-your-ide"
+    },
+    {
+      "id": "extra-q45",
+      "module": "extra",
+      "domain": "features",
+      "q": "In VS Code, a developer wants to check which files Copilot Chat used to produce an answer, including whether the repository's custom instructions file was applied. Where should they look?",
+      "options": [
+        "The Copilot status bar menu at the bottom of the window",
+        "The Used n references list at the top of the response",
+        "The Output panel's GitHub Copilot log for that request",
+        "The repository's Copilot settings page on GitHub.com"
+      ],
+      "answer": 1,
+      "explain": "Each Copilot Chat response in VS Code has a Used n references dropdown at the top. It lists the files used as context, which can include the repository's custom instructions file.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/chat-in-ide"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p1m2-c40",
+      "module": "p1m2",
+      "domain": "features",
+      "front": "Individual plans vs organization plans",
+      "back": "Individual plans (Free, Pro, Pro+, and now Student and Max) have no content exclusion and no organization-wide policy management. Business and Enterprise add central seat and policy control, content exclusion, and organization custom instructions, and their data isn't used for model training.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m2-c41",
+      "module": "p1m2",
+      "domain": "features",
+      "front": "Copilot Business: why organizations choose it",
+      "back": "It gives centralized management and policy controls, public-code filtering with code referencing, and IP indemnity with enterprise-grade security and privacy. Business data is covered by the Data Protection Agreement and isn't used for training.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-to-github-copilot/2-github-copilot-your-ai-pair-programmer"
+    },
+    {
+      "id": "p1m2-c42",
+      "module": "p1m2",
+      "domain": "features",
+      "front": "Premium requests vs AI credits",
+      "back": "Exam-era material measures usage allowances in premium requests. Current GitHub docs use GitHub AI Credits. Either way, Pro+ has more than Pro, and Enterprise has more per seat than Business.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m6-c40",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "What is GitHub Copilot CLI?",
+      "back": "An AI agent in your terminal. It answers questions, writes and debugs code, and works with GitHub.com (issues, PRs). Run copilot for an interactive session, or copilot -p \"PROMPT\" to run one prompt and exit.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-c41",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Copilot CLI credential order",
+      "back": "COPILOT_GITHUB_TOKEN → GH_TOKEN → GITHUB_TOKEN → OAuth token stored by copilot login or /login → gh CLI token. Classic PATs (ghp_) aren't supported. A fine-grained PAT must be user-owned and have the Copilot Requests permission.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/authenticate-copilot-cli"
+    },
+    {
+      "id": "p1m6-c42",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Copilot CLI interactive session tips",
+      "back": "Type @path to add a file to the prompt, and start a line with ! to run a shell command without calling the model. Press Esc twice to stop a running task. Use copilot --continue or --resume / /resume to pick a session back up.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview"
+    },
+    {
+      "id": "p1m6-c43",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "RETIRED: the gh copilot extension (older exam material)",
+      "back": "You signed in to GitHub CLI with gh auth login, then installed the extension with gh extension install github/gh-copilot. gh copilot suggest \"...\" proposed a command, and gh copilot explain \"...\" explained one. It stopped working on 25 October 2025.",
+      "source": "https://github.com/github/gh-copilot"
+    },
+    {
+      "id": "p1m6-c44",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Old gh copilot vs current Copilot CLI",
+      "back": "Old gh-copilot was a GitHub CLI extension that only suggested and explained shell commands; it couldn't edit files or open PRs. Its replacement is the agentic Copilot CLI (copilot), which can edit files, run commands with approval, and create PRs.",
+      "source": "https://github.blog/changelog/2025-09-25-upcoming-deprecation-of-gh-copilot-cli-extension/"
+    },
+    {
+      "id": "p1m8-c40",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Refactoring requests that work well (cookbook)",
+      "back": "Ask Copilot to improve variable names, replace if/else chains (for example with a lookup map), flatten nesting with guard clauses, or split large methods. Re-run your tests afterwards, because responses are non-deterministic.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/refactor-code/improve-code-readability"
+    },
+    {
+      "id": "p1m8-c41",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Copilot for security fixes vs code scanning",
+      "back": "Copilot Chat can find common vulnerabilities (XSS, SQL injection, CSRF) and suggest fixes, but it isn't a comprehensive security analysis. Keep using code scanning (CodeQL) and Dependabot, and review every fix.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/analyze-security/find-vulnerabilities"
+    },
+    {
+      "id": "p1m8-c42",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Modernizing legacy code with Copilot",
+      "back": "First have Copilot explain the code (/explain with #file) and diagram the data flow. Write a test plan or tests for the current behavior, then convert in small steps on branches. Review each change, then generate unit and integration tests.",
+      "source": "https://github.blog/ai-and-ml/github-copilot/modernizing-legacy-code-with-github-copilot-tips-and-examples/"
+    },
+    {
+      "id": "p1m8-c43",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Mocks and end-to-end tests with Copilot",
+      "back": "For isolated unit tests, ask /tests to mock the service object. For E2E tests, name the framework (Playwright, Selenium, Cypress). Attaching an existing test as an example (#file) helps Copilot follow your conventions.",
+      "source": "https://docs.github.com/en/copilot/tutorials/copilot-cookbook/testing-code/create-mock-objects"
+    },
+    {
+      "id": "extra-c40",
+      "module": "extra",
+      "domain": "features",
+      "front": "Giving feedback on Copilot Chat",
+      "back": "In VS Code and Xcode, use the thumbs up/down icons next to a response. Visual Studio has a Send feedback button, JetBrains has a share feedback link, and Copilot CLI uses /feedback. Report offensive content to copilot-safety@github.com.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/chat-in-ide"
+    },
+    {
+      "id": "extra-c41",
+      "module": "extra",
+      "domain": "features",
+      "front": "Copilot Edits (edit mode)",
+      "back": "You choose the files in a working set and prompt, then Accept or Discard the proposed edits per file. Best for a defined set of files and full control over request use. Exam-era VS Code offered it; since VS Code 1.110 (Feb 2026 release) it's hidden by default but can be re-enabled, and JetBrains still offers it.",
+      "source": "https://code.visualstudio.com/updates/v1_110"
+    }
+  ]
+}

@@ -32,9 +32,13 @@ for (const file of readdirSync(dataDir).filter(f => /^part-.*\.json$/.test(f)).s
     if (!MODULES.includes(q.module)) errors.push(`${where}: bad module ${q.module}`);
     if (!DOMAINS.includes(q.domain)) errors.push(`${where}: bad domain ${q.domain}`);
     if (!nonEmpty(q.q)) errors.push(`${where}: missing question`);
-    if (!Array.isArray(q.options) || q.options.length !== 4 || !q.options.every(nonEmpty)) errors.push(`${where}: needs 4 non-empty options`);
-    else if (new Set(q.options.map(o => o.trim().toLowerCase())).size !== 4) errors.push(`${where}: duplicate options`);
-    if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3) errors.push(`${where}: bad answer index`);
+    const multi = Array.isArray(q.answer);
+    const nOpts = Array.isArray(q.options) ? q.options.length : 0;
+    if (!(nOpts === 4 || (multi && nOpts === 5)) || !q.options.every(nonEmpty)) errors.push(`${where}: needs 4 non-empty options (5 allowed for choose-two)`);
+    else if (new Set(q.options.map(o => o.trim().toLowerCase())).size !== nOpts) errors.push(`${where}: duplicate options`);
+    const okIdx = i => Number.isInteger(i) && i >= 0 && i < nOpts;
+    if (multi ? !(q.answer.length >= 2 && q.answer.length < nOpts && q.answer.every(okIdx) && new Set(q.answer).size === q.answer.length) : !okIdx(q.answer)) errors.push(`${where}: bad answer index`);
+    if (multi && !/choose (two|three)/i.test(q.q)) errors.push(`${where}: multi-answer question must say "(Choose two.)"`);
     if (!nonEmpty(q.explain)) errors.push(`${where}: missing explanation`);
     if (!/^https:\/\//.test(q.source || "")) errors.push(`${where}: missing https source`);
     questions.push({ id: q.id, module: q.module, domain: q.domain, q: q.q.trim(), options: q.options.map(o => o.trim()), answer: q.answer, explain: q.explain.trim(), source: q.source, ...(q.recent ? { recent: true } : {}) });

@@ -134,7 +134,10 @@ const DOMAINS = {
 const MODE_NAMES = { quiz: "Quiz", cards: "Flashcards", weak: "Weak spots", mock: "Mock exam", retry: "Retry" };
 const MOCK_SIZE = 50;
 const MOCK_MS = 100 * 60 * 1000;
-const LETTERS = "ABCD";
+const LETTERS = "ABCDE";
+const isMulti = it => Array.isArray(it.answer);
+const sameSet = (a, b) => a.length === b.length && a.every(x => b.includes(x));
+const isRight = (it, picked) => picked != null && (isMulti(it) ? sameSet(picked, it.answer) : picked === it.answer);
 
 const ALL = [
   ...BANK.questions.map(x => ({ ...x, type: "q" })),
@@ -190,6 +193,12 @@ function pick(pool, n, wfn) {
     .sort((a, b) => b.k - a.k)
     .slice(0, n)
     .map(o => o.x);
+}
+// Scale each item's weight so domains come up in proportion to the real exam, not to how many items the bank has.
+function examWeighted(pool) {
+  const counts = {};
+  for (const x of pool) counts[x.domain] = (counts[x.domain] || 0) + 1;
+  return x => weight(x) * ((DOMAINS[x.domain] || { w: 10 }).w / counts[x.domain]);
 }
 const pct = (c, n) => (n ? Math.round((c / n) * 100) : 0);
 function srcLink(url) {
@@ -300,8 +309,8 @@ function topicsPicker() {
 
 function start(mode) {
   let items = [];
-  if (mode === "quiz") items = pick(QUESTIONS.filter(inScope), S.len, weight);
-  else if (mode === "cards") items = pick(ALL.filter(x => x.type === "c" && inScope(x)), S.len, weight);
+  if (mode === "quiz") items = pick(QUESTIONS.filter(inScope), S.len, examWeighted(QUESTIONS.filter(inScope)));
+  else if (mode === "cards") items = pick(ALL.filter(x => x.type === "c" && inScope(x)), S.len, examWeighted(ALL.filter(x => x.type === "c" && inScope(x))));
   else if (mode === "weak") items = shuffle(weakPool().slice(0, S.len));
   else if (mode === "mock") items = mockSet(MOCK_SIZE);
   if (!items.length) return;
@@ -310,7 +319,7 @@ function start(mode) {
 function begin(mode, items) {
   SES = {
     mode, items, i: 0, t0: Date.now(), done: false,
-    st: items.map(x => ({ order: x.type === "q" ? shuffle([0, 1, 2, 3]) : null, picked: null, flipped: false, res: null }))
+    st: items.map(x => ({ order: x.type === "q" ? shuffle(x.options.map((_, i) => i)) : null, picked: null, sel: [], checked: false, flipped: false, res: null }))
   };
   document.body.classList.add("insession");
   history.pushState({ s: 1 }, "");
@@ -350,38 +359,64 @@ function sessionView() {
 }
 function questionBody(it, st) {
   const mock = SES.mode === "mock";
-  const answered = st.picked != null;
+  const multi = isMulti(it);
+  const answered = multi ? (mock ? st.sel.length > 0 : st.checked) : st.picked != null;
+  const reveal = !mock && answered;
   const opts = st.order.map((oi, k) => {
     let cls = "btn opt";
-    if (answered) {
-      if (mock) { if (oi === st.picked) cls += " sel"; }
-      else if (oi === it.answer) cls += " right";
-      else if (oi === st.picked) cls += " wrong";
-      else cls += " dim";
-    }
+    const chosen = multi ? st.sel.includes(oi) : oi === st.picked;
+    const correct = multi ? it.answer.includes(oi) : oi === it.answer;
+    if (reveal) cls += correct ? " right" : chosen ? " wrong" : " dim";
+    else if (chosen) cls += " sel";
     return h("button", { class: cls, onclick: () => choose(oi) }, h("span", { class: "l" }, LETTERS[k]), h("span", {}, it.options[oi]));
   });
   const parts = [h("div", { class: "q" }, it.q), opts];
-  if (answered && !mock) {
-    const ok = st.picked === it.answer;
+  if (reveal) {
+    const ok = st.res;
+    const letters = (multi ? it.answer : [it.answer]).map(a => LETTERS[st.order.indexOf(a)]).sort().join(" and ");
     parts.push(h("div", { class: "fb " + (ok ? "ok" : "bad") },
-      h("b", {}, ok ? "✓ Correct" : `✗ Incorrect. The answer is ${LETTERS[st.order.indexOf(it.answer)]}.`),
+      h("b", {}, ok ? "✓ Correct" : `✗ Incorrect. The answer${multi ? "s are" : " is"} ${letters}.`),
       h("div", {}, it.explain),
       srcLink(it.source)));
   }
   const last = SES.i === SES.items.length - 1;
-  parts.push(h("div", { class: "row" },
-    mock && SES.i > 0 ? h("button", { class: "btn", onclick: () => move(-1) }, "Back") : null,
-    h("button", { class: "btn primary", disabled: !answered && !mock, onclick: () => move(1) },
-      last ? "Finish" : mock && !answered ? "Skip" : "Next")));
+  const need = multi ? it.answer.length : 1;
+  const row = h("div", { class: "row" });
+  if (mock && SES.i > 0) row.append(h("button", { class: "btn", onclick: () => move(-1) }, "Back"));
+  if (multi && !mock && !st.checked) {
+    row.append(h("button", { class: "btn primary", disabled: st.sel.length !== need, onclick: check }, `Check answer (${st.sel.length}/${need})`));
+  } else {
+    row.append(h("button", { class: "btn primary", disabled: !answered && !mock, onclick: () => move(1) },
+      last ? "Finish" : mock && !answered ? "Skip" : "Next"));
+  }
+  parts.push(row);
   return h("div", {}, parts);
 }
 function choose(oi) {
   const it = SES.items[SES.i], st = SES.st[SES.i];
-  if (SES.mode === "mock") { st.picked = oi; render(); return; }
+  const mock = SES.mode === "mock";
+  if (isMulti(it)) {
+    if (!mock && st.checked) return;
+    if (st.sel.includes(oi)) st.sel = st.sel.filter(x => x !== oi);
+    else { st.sel = [...st.sel, oi]; if (st.sel.length > it.answer.length) st.sel.shift(); }
+    if (mock) st.picked = st.sel.length ? st.sel.slice() : null;
+    render();
+    return;
+  }
+  if (mock) { st.picked = oi; render(); return; }
   if (st.picked != null) return;
   st.picked = oi;
-  st.res = oi === it.answer;
+  st.res = isRight(it, oi);
+  rec(it.id, st.res);
+  render();
+  const fb = document.querySelector(".fb");
+  if (fb) fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+function check() {
+  const it = SES.items[SES.i], st = SES.st[SES.i];
+  st.checked = true;
+  st.picked = st.sel.slice();
+  st.res = isRight(it, st.picked);
   rec(it.id, st.res);
   render();
   const fb = document.querySelector(".fb");
@@ -425,7 +460,7 @@ function finish() {
   if (s.mode === "mock") {
     s.items.forEach((it, i) => {
       const st = s.st[i];
-      st.res = st.picked === it.answer;
+      st.res = isRight(it, st.picked);
       if (st.picked != null) rec(it.id, st.res);
     });
   }
@@ -459,10 +494,12 @@ function summaryView() {
 }
 function reviewItem(it, st) {
   if (it.type === "c") return h("div", { class: "rev" }, h("div", { class: "rq" }, it.front), h("div", {}, it.back), srcLink(it.source));
+  const ans = Array.isArray(it.answer) ? it.answer : [it.answer];
+  const wrongPicks = st.picked == null ? [] : (Array.isArray(st.picked) ? st.picked : [st.picked]).filter(i => !ans.includes(i));
   return h("div", { class: "rev" },
     h("div", { class: "rq" }, it.q),
-    st.picked != null ? h("div", { class: "ry" }, "✗ " + it.options[st.picked]) : h("div", { class: "ry" }, "✗ Not answered"),
-    h("div", { class: "ra" }, "✓ " + it.options[it.answer]),
+    st.picked == null ? h("div", { class: "ry" }, "✗ Not answered") : wrongPicks.map(i => h("div", { class: "ry" }, "✗ " + it.options[i])),
+    ans.map(i => h("div", { class: "ra" }, "✓ " + it.options[i])),
     h("div", { class: "muted" }, it.explain),
     srcLink(it.source));
 }
