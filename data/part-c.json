@@ -1,0 +1,957 @@
+{
+  "questions": [
+    {
+      "id": "p1m7-q01",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A repository administrator adds an exclusion for /config/secrets/** in the repository's Copilot settings. Which effect should developers with Copilot Business seats expect?",
+      "options": [
+        "Inline suggestions stop in those files, and their content no longer informs suggestions or Copilot responses elsewhere",
+        "Inline suggestions still appear in those files, but Copilot Chat refuses to answer any question that mentions them by name",
+        "The files are encrypted before being sent to Copilot, so suggestions continue but with secret values masked out",
+        "The files are hidden from the repository for anyone who lacks admin access, including in pull requests and code search"
+      ],
+      "answer": 0,
+      "explain": "Excluded files get no inline suggestions, and their content doesn't inform suggestions in other files or Copilot's responses. Exclusion doesn't encrypt or hide files from people; it only controls what Copilot uses.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-q02",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "Which roles can configure Copilot content exclusion?",
+      "options": [
+        "Repository administrators, organization owners, and enterprise owners",
+        "Only enterprise owners, because exclusions are an enterprise-wide policy",
+        "Any developer with a Copilot Business seat, using a file in the repository",
+        "Organization owners and billing managers, but not repository administrators"
+      ],
+      "answer": 0,
+      "explain": "Current docs list repository administrators, organization owners, and enterprise owners. Exclusions are set in GitHub settings, not by individual developers or billing managers.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-q03",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A security team wants to treat Copilot content exclusion as the only control that stops AI tools from reading a directory of private keys. What is the main problem with this plan?",
+      "options": [
+        "Content exclusion only works for repositories hosted on GitHub Enterprise Server, not GitHub.com",
+        "Content exclusion is a guardrail for GitHub's own tools, not a filesystem security boundary",
+        "Content exclusion only applies to Copilot Chat responses and never affects inline suggestions",
+        "Content exclusion requires each developer to opt in individually from their IDE settings"
+      ],
+      "answer": 1,
+      "explain": "GitHub states that content exclusion is not a filesystem security boundary and can't prevent every form of file access. It isn't a substitute for operating-system permissions or other access controls.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-q04",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An organization excludes a file named internal-pricing.ts. Developers later notice that Copilot still seems to know the type signatures defined in that file when they work in other files. What is the most likely explanation?",
+      "options": [
+        "The exclusion was misconfigured, because exclusions always block every form of semantic information",
+        "Copilot cached the file during model training, so the exclusion has no effect on it",
+        "The IDE can indirectly provide semantic information, such as type information, from excluded files",
+        "Exclusions only take effect after the repository is archived and then restored"
+      ],
+      "answer": 2,
+      "explain": "Docs say Copilot may use semantic information from an excluded file if the IDE provides it indirectly, for example type information and hover-over definitions. This is a documented limitation, not necessarily a misconfiguration.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-q05",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "Content exclusions are configured correctly, but a team still sees Copilot reading excluded content in one setup. Which situation is a documented case where content exclusions currently do NOT apply?",
+      "options": [
+        "Files opened in Visual Studio Code on Windows with WSL integration disabled",
+        "Files in repositories that use Git LFS to store large binary assets",
+        "Files reached through symbolic links or repositories on remote filesystems",
+        "Files whose names contain uppercase letters, since patterns are case sensitive"
+      ],
+      "answer": 2,
+      "explain": "Docs say content exclusions don't currently apply to symlinks or to repositories on remote filesystems. Patterns are case insensitive, and VS Code is a supported client.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-q06",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A team connects a third-party MCP server to Copilot and asks whether organization content exclusions will stop that server from reading excluded files. What is the accurate answer?",
+      "options": [
+        "Yes, exclusions are enforced on every MCP server that Copilot connects to, local or remote",
+        "Yes, as long as the MCP server runs on the same machine as the IDE and uses stdio",
+        "No, because MCP servers can only ever read files that are not under Git control",
+        "No: exclusion isn't guaranteed to be respected by third-party MCP servers or clients"
+      ],
+      "answer": 3,
+      "explain": "Content exclusion is a guardrail for tools GitHub controls and is not guaranteed to be respected by third-party MCP servers or clients.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-q07",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A developer uses Copilot agent mode in the IDE in a repository with content exclusions. Which statement about how exclusions apply to the agent is correct?",
+      "options": [
+        "Agents ignore content exclusions entirely, so excluded files must be removed from the workspace before starting a session",
+        "It can't read excluded files via Copilot tools and paths in commands are checked, but indirect access may be missed",
+        "The agent can read excluded files for context but is blocked from editing or deleting them during the session",
+        "Exclusions apply to agents only when the session runs in the cloud, not in local IDE agent sessions"
+      ],
+      "answer": 1,
+      "explain": "For agents in an IDE, Copilot CLI, or the Copilot app, exclusion blocks access through Copilot tools and checks identifiable file paths in commands and scripts, but might not detect indirect file access.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m7-q08",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An organization owner updates content exclusions, but a developer with VS Code already open still gets suggestions in a newly excluded file. What should the developer do to apply the change immediately?",
+      "options": [
+        "Run Developer: Reload Window from the Command Palette",
+        "Uninstall and reinstall the Copilot extension",
+        "Ask the organization owner to recreate the exclusion rule",
+        "Clear the browser cache and sign in to GitHub.com again"
+      ],
+      "answer": 0,
+      "explain": "Changes can take up to 30 minutes to reach IDEs that already loaded the settings. In VS Code, Developer: Reload Window reloads them right away. Reinstalling or recreating the rule isn't needed.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m7-q09",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A developer wonders why Copilot offers no inline suggestions in one file. Which quick check in the IDE confirms that a content exclusion applies to that file?",
+      "options": [
+        "Look for a red underline on the file name in the Explorer view, which marks excluded files",
+        "Run git status and check whether the file is listed under an excluded section",
+        "Check for a diagonal line through the Copilot status bar icon, then hover over it",
+        "Open the file's properties to look for a read-only attribute set by the Copilot extension"
+      ],
+      "answer": 2,
+      "explain": "When a file is excluded, the Copilot status bar icon has a diagonal line through it. Hovering shows which settings applied the restriction.",
+      "source": "https://docs.github.com/en/copilot/troubleshooting-github-copilot/troubleshooting-common-issues-with-github-copilot"
+    },
+    {
+      "id": "p1m7-q10",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An enterprise has several organizations, each assigning its own Copilot seats. Security wants one set of exclusion rules for every Copilot user in the enterprise. Where should the rules be configured?",
+      "options": [
+        "In each repository's settings, because only repository rules affect all users",
+        "At the enterprise level, because those rules apply to all Copilot users in the enterprise",
+        "In one organization, because organization rules automatically extend to sibling organizations",
+        "In a .copilotignore file committed to every repository"
+      ],
+      "answer": 1,
+      "explain": "Enterprise-level rules apply to all Copilot users in the enterprise. Organization rules only apply to users assigned a seat by that organization. A committed ignore file isn't how GitHub configures exclusions.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m7-q11",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An organization owner wants Copilot to ignore every .env file, including files that are not inside any Git repository. Which organization-level exclusion entry achieves this?",
+      "options": [
+        "octo-repo: [\"**/.env\"]",
+        "\"*\": [\"**/.env\"]",
+        "- \"/.env\" in each repository's settings",
+        "git@github.com:*/*: [\".env\"]"
+      ],
+      "answer": 1,
+      "explain": "In organization settings, the \"*\" key matches files anywhere, both Git and non-Git. Repository-keyed entries only cover files within the named repositories.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m7-q12",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An auditor asks who changed an organization's Copilot content exclusion list last week and what the new rules are. Where should the organization owner look?",
+      "options": [
+        "The organization's audit log entries for the copilot.content_exclusion_changed action",
+        "The Copilot usage metrics dashboard, filtered to the content exclusion settings page",
+        "The commit history of the organization's .github repository, where the rules are stored",
+        "The organization owner's Copilot Chat history, which records every settings change"
+      ],
+      "answer": 0,
+      "explain": "The last-changed link on the content exclusion settings page opens the audit log filtered to copilot.content_exclusion_changed. The entry details show the excluded paths after the change.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/review-changes"
+    },
+    {
+      "id": "p1m7-q13",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "With the \"Suggestions matching public code\" setting set to Block, how does Copilot decide whether to hide an inline suggestion?",
+      "options": [
+        "It compares the suggestion plus ~150 characters of context with public GitHub code and hides matches or near matches",
+        "It hides any suggestion longer than 150 characters, since long suggestions are the most likely to be copied verbatim",
+        "It scans each suggestion for license headers or copyright notices and hides any suggestion that contains one",
+        "It compares the suggestion against private repositories in your organization and hides any duplicated code"
+      ],
+      "answer": 0,
+      "explain": "In most Copilot products, Block mode checks suggestions with about 150 characters of surrounding code against public code on GitHub and doesn't show a match or near match. It doesn't look for license headers or check private repositories.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m7-q14",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A developer whose Copilot seat comes from their organization on GitHub Enterprise Cloud wants to change \"Suggestions matching public code\" in their personal settings. What happens?",
+      "options": [
+        "They can change it, and their personal choice overrides the organization's policy for their account",
+        "They can change it, but only for repositories they own under their personal account",
+        "They can't change it there; the setting is inherited from the organization or enterprise",
+        "They can change it, but only after an organization owner grants them a policy exception"
+      ],
+      "answer": 2,
+      "explain": "Members with an organization-assigned seat can't configure this setting in their personal account. It's inherited from the organization or enterprise.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m7-q15",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A team allows suggestions matching public code and wants to check the license of matched code after accepting an inline suggestion in VS Code. Where do they find it?",
+      "options": [
+        "In the Problems panel, which lists license conflicts for each file Copilot edited",
+        "In the Output window under the GitHub Copilot Log (Code References) channel",
+        "In a LICENSES.md file that Copilot creates and updates in the repository root",
+        "In the repository's Insights tab on GitHub.com under the Dependency graph view"
+      ],
+      "answer": 1,
+      "explain": "In VS Code, accepted suggestions that match public code are logged in Output > GitHub Copilot Log (Code References). Each entry shows the license, if one was found, and the URL of the matching file.",
+      "source": "https://docs.github.com/en/copilot/how-tos/get-code-suggestions/find-matching-code"
+    },
+    {
+      "id": "p1m7-q16",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An organization sets \"Suggestions matching public code\" to Block and then starts using Copilot cloud agent. What should reviewers expect?",
+      "options": [
+        "The cloud agent is disabled for the organization while the public code policy is set to Block",
+        "It applies Block exactly as inline suggestions do, so matching code never appears in its output",
+        "It may still generate matching code, and the matches are shown in the agent session logs",
+        "It automatically rewrites any matching code until no match remains, then opens the pull request"
+      ],
+      "answer": 2,
+      "explain": "Docs say the cloud agent may generate code that matches public code even when the policy is Block. If that happens, Copilot shows the matches in the agent session logs with a link to details.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/agents"
+    },
+    {
+      "id": "p1m7-q17",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A developer is confused that code referencing found no match for a snippet they know exists in their company's private GitHub repository. Why?",
+      "options": [
+        "The public-code index doesn't include private repositories or code hosted outside GitHub",
+        "Code referencing only checks code that was pushed to GitHub within the last 30 days",
+        "Code referencing only runs when the organization's public code policy is set to Block",
+        "Private repositories are indexed, but matches are only shown to Copilot Enterprise customers"
+      ],
+      "answer": 0,
+      "explain": "The public-code index doesn't include private repositories or code hosted outside GitHub. It's refreshed periodically, so it may also miss very recent code.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-in-ides"
+    },
+    {
+      "id": "p1m7-q18",
+      "module": "p1m7",
+      "domain": "features",
+      "q": "A company evaluating Copilot plans needs to exclude specific files from Copilot and manage Copilot policies across the organization. Which plans meet both needs?",
+      "options": [
+        "Copilot Pro+ and Copilot Max, the highest individual tiers",
+        "Copilot Business and Copilot Enterprise",
+        "Copilot Free and Copilot Pro",
+        "Copilot Enterprise only, since Business lacks content exclusion"
+      ],
+      "answer": 1,
+      "explain": "Content exclusion and organization-wide policy management are included in Copilot Business and Copilot Enterprise, not in individual plans. Business includes both, so the answer isn't Enterprise only.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m7-q19",
+      "module": "p1m7",
+      "domain": "features",
+      "q": "An enterprise owner sets a Copilot policy to Disabled. An organization owner in that enterprise wants to enable the feature for their organization. What happens?",
+      "options": [
+        "The organization setting wins, because the more specific scope always takes precedence",
+        "The organization owner can still enable it, but only for selected repositories",
+        "The organization can't override it; enterprise-selected policies take precedence",
+        "The feature is enabled for newly added members and stays disabled for existing ones"
+      ],
+      "answer": 2,
+      "explain": "If an enterprise owner has chosen a specific policy setting, organization owners can't override it. Organizations decide only when the enterprise lets them.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-policies"
+    },
+    {
+      "id": "p1m7-q20",
+      "module": "p1m7",
+      "domain": "features",
+      "q": "A developer gets Copilot seats from two organizations in the same enterprise. The organizations configure the same policy differently. Which setting usually applies?",
+      "options": [
+        "The most restrictive setting",
+        "The least restrictive setting",
+        "The setting from the organization that assigned the seat first",
+        "Neither; the feature is disabled until the conflict is fixed"
+      ],
+      "answer": 1,
+      "explain": "Across organizations in the same enterprise, the least restrictive policy usually applies, with some exceptions. Across different enterprises, the most restrictive policy almost always applies.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "p1m7-q21",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A legal team asks which item in a Copilot rollout is a contractual protection rather than a technical setting. Which one is it?",
+      "options": [
+        "Intellectual property (IP) indemnity",
+        "Content exclusion rules for sensitive paths",
+        "The public code filter set to Block",
+        "Audit log events for Copilot policy changes"
+      ],
+      "answer": 0,
+      "explain": "IP indemnity, like the Data Protection Agreement, is a contractual protection: legal defense against third-party IP claims about Copilot output. Content exclusion, the public code filter, and audit logs are settings or tooling.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-management-and-customizations/3-github-copilot-contractual-protections-disabling-matching-public-code"
+    },
+    {
+      "id": "p1m7-q22",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "VS Code shows \"GitHub Copilot could not connect to server. Extension activation failed.\" What is the recommended first step?",
+      "options": [
+        "Delete the workspace's .vscode folder and reopen the project to reset settings",
+        "Sign out of Copilot in the IDE and sign back in to request a new token",
+        "Disable all other extensions permanently to remove any conflict",
+        "Ask the organization owner to remove the content exclusions"
+      ],
+      "answer": 1,
+      "explain": "This error means there's no Copilot plan or the token request to the GitHub API failed. Signing out and back in requests a new token. Content exclusions don't cause this error.",
+      "source": "https://docs.github.com/en/copilot/troubleshooting-github-copilot/troubleshooting-common-issues-with-github-copilot"
+    },
+    {
+      "id": "p1m7-q23",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "A developer on an older VS Code release can't get the latest Copilot Chat features, although inline suggestions still work. What is the fix?",
+      "options": [
+        "Update VS Code; new Copilot Chat versions only support the latest VS Code release",
+        "Switch the organization's Copilot plan from Business to Enterprise to unlock Chat features",
+        "Turn off suggestions matching public code, which blocks newer Chat features",
+        "Pin an older Copilot Chat extension version that matches the installed VS Code"
+      ],
+      "answer": 0,
+      "explain": "Copilot Chat releases are tied to VS Code releases, and each new Chat version only works with the latest VS Code. Updating VS Code fixes it.",
+      "source": "https://docs.github.com/en/copilot/troubleshooting-github-copilot/troubleshooting-common-issues-with-github-copilot"
+    },
+    {
+      "id": "p1m7-q24",
+      "module": "p1m7",
+      "domain": "privacy",
+      "q": "An admin wants to test that a new exclusion also works for Copilot Chat in the IDE. Which test is recommended?",
+      "options": [
+        "Ask Chat to list every file in the repository and confirm that the excluded file is missing from its answer list",
+        "Open only the excluded file, attach it, prompt \"explain this file\", and confirm it isn't used or listed as a reference",
+        "Commit a change to the excluded file and check whether Copilot code review leaves comments on it",
+        "Rename the excluded file to a new path and confirm that Chat can then explain its full contents"
+      ],
+      "answer": 1,
+      "explain": "Docs say to open the excluded file with other files closed, attach it as context, and ask \"explain this file\". If it's excluded, Chat can't use it and won't list it as a reference.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m8-q01",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A senior Java developer joins a Go project. How does Copilot best help them get productive quickly?",
+      "options": [
+        "By converting the whole Go codebase to Java so they can keep working in a familiar language",
+        "By suggesting context-aware code in the editor and explaining unfamiliar code on request",
+        "By installing the Go toolchain and managing the project's module dependencies automatically",
+        "By providing recorded video tutorials and interactive Go lessons inside the IDE"
+      ],
+      "answer": 1,
+      "explain": "The module says Copilot speeds up learning by suggesting context-aware snippets that show how to use unfamiliar APIs and by explaining code with options like Explain. It doesn't replace the language or deliver tutorials.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/2-boost-developer-productivity"
+    },
+    {
+      "id": "p1m8-q02",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "How does Copilot reduce context switching for developers?",
+      "options": [
+        "It offers suggestions and API usage help in the editor, so developers search outside it less",
+        "It merges project management and ticketing tools into the IDE so developers never switch apps",
+        "It schedules developer tasks and blocks notifications to reduce interruptions during focus time",
+        "It removes the need to read any external documentation, since it replaces all API references"
+      ],
+      "answer": 0,
+      "explain": "In-editor suggestions, quick API references, and completions reduce the need to leave the IDE to search. They don't fully replace documentation or manage schedules.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/2-boost-developer-productivity"
+    },
+    {
+      "id": "p1m8-q03",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A team is building on a newly released, niche framework. What should they expect from Copilot's suggestions?",
+      "options": [
+        "The same quality as for mainstream languages, because Copilot reads the framework's source at runtime",
+        "No suggestions at all, because Copilot only supports a fixed list of frameworks",
+        "Possibly less accurate or relevant suggestions, so extra review is needed",
+        "Suggestions are blocked until an admin enables the framework"
+      ],
+      "answer": 2,
+      "explain": "Effectiveness varies by language and framework. For less common or newer technologies, suggestions may be less accurate, so reviewing them matters more.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/5-understand-limitations-measure-impact"
+    },
+    {
+      "id": "p1m8-q04",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "An architect wants Copilot to make the final decision between an event-driven and a monolithic design for a new system. Which limitation is most relevant?",
+      "options": [
+        "Copilot can't generate code for event-driven systems, so it can only assess the monolithic option",
+        "Copilot is strong at code-level tasks but may miss complex architectural trade-offs, so humans decide",
+        "Copilot always recommends a monolith because monoliths dominate the public code it was trained on",
+        "Copilot requires a Copilot Enterprise plan before it can discuss architecture or system design questions"
+      ],
+      "answer": 1,
+      "explain": "The module lists limited high-level design as a limitation: Copilot does well with code-level tasks but may not grasp complex architectural decisions. It can help analyze options, but humans decide.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/5-understand-limitations-measure-impact"
+    },
+    {
+      "id": "p1m8-q05",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A maintenance team inherits an undocumented legacy module. In which SDLC phase is Copilot's help here, and what does it offer?",
+      "options": [
+        "Requirement analysis: it gathers the original requirements from stakeholders and tickets",
+        "Deployment: it deploys the legacy module to production automatically",
+        "Maintenance: it explains unfamiliar or legacy code and suggests modern equivalents",
+        "Testing: it guarantees full test coverage of the legacy module before changes"
+      ],
+      "answer": 2,
+      "explain": "In maintenance and support, Copilot helps developers understand unfamiliar or legacy code by explaining it and suggesting modern equivalents. It doesn't gather requirements, deploy on its own, or guarantee coverage.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/4-ai-software-development-lifecycle"
+    },
+    {
+      "id": "p1m8-q06",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "An engineering director wants to see how Copilot adoption depth relates to pull request output and time to merge. Which Copilot usage metrics dashboard fits best?",
+      "options": [
+        "The code generation dashboard",
+        "The impact dashboard",
+        "The billing usage report",
+        "The audit log"
+      ],
+      "answer": 1,
+      "explain": "The impact dashboard connects adoption depth (cohorts) with pull request output and time to merge. The code generation dashboard breaks down code generated by users and agents.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-q07",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "The impact dashboard shows that developers in later adoption phases merge more pull requests. How should leadership read this?",
+      "options": [
+        "As proof that Copilot caused the increase, since adoption cohorts control for other factors",
+        "As an association that can also reflect team composition, project complexity, or experience",
+        "As a billing figure that shows the exact return on the organization's Copilot spend",
+        "As invalid data, because the impact dashboard only counts accepted inline suggestions"
+      ],
+      "answer": 1,
+      "explain": "Docs say these comparisons show associations, not proof that adoption caused a change. Team composition, complexity, and experience can also affect results.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-q08",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "An analyst adds up active-user totals from each organization's Copilot usage metrics to get an enterprise total. Why is this a mistake?",
+      "options": [
+        "Organization metrics only cover inline suggestions and leave out Copilot Chat activity",
+        "The same user can belong to several organizations, so organization totals can overlap",
+        "Organization metrics are delayed by a full week compared with enterprise-level metrics",
+        "Organization metrics count assigned licenses, while enterprise metrics count actual activity"
+      ],
+      "answer": 1,
+      "explain": "Organization-level metrics can overlap because one user may belong to several organizations, so docs advise against adding them up to get an enterprise total.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-q09",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A finance team wants to know how many Copilot seats are assigned. Is the Copilot usage metrics dashboard the right source?",
+      "options": [
+        "Yes, it lists every assigned seat, including users who have never used Copilot",
+        "Yes, but only if telemetry is enabled in every developer's IDE and Copilot CLI",
+        "No; usage metrics track activity, not licenses. Use the Copilot user management API",
+        "No, seat assignment data is only available by opening a ticket with GitHub Support"
+      ],
+      "answer": 1,
+      "explain": "Usage metrics measure activity, not license assignments. Docs point to the Copilot user management API for seat and license information.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-q10",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "After a training session, the code completions acceptance rate for a team drops sharply. What is a reasonable interpretation?",
+      "options": [
+        "Training made developers stricter reviewers, which proves that Copilot's suggestion quality has improved",
+        "Suggestions may not fit the team's work or there's workflow friction; check with developer feedback",
+        "The drop proves the team should stop using Copilot and return to working without AI assistance",
+        "Acceptance rate only measures agent edits in files, so a drop in it has no meaning for completions"
+      ],
+      "answer": 1,
+      "explain": "Docs say a falling acceptance rate may point to mismatched suggestions or workflow friction. They recommend combining metric trends with developer feedback instead of reading one number as a verdict.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-usage-metrics/interpret-copilot-metrics"
+    },
+    {
+      "id": "p1m8-q11",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "Why do agent edits appear differently from inline completions in Copilot lines-of-code metrics?",
+      "options": [
+        "Agent edits aren't measured at all, because agents run outside the telemetry that IDEs send to GitHub",
+        "Agents edit files without a suggest-then-accept step, so their edits count as lines added and deleted",
+        "Agent edits are counted twice, once as lines suggested and again as lines accepted",
+        "Agent edits are only counted once the pull request containing them has been reviewed and merged"
+      ],
+      "answer": 1,
+      "explain": "Agents edit files without explicit acceptance, so their edits are counted as lines added and deleted under the agent_edit feature and aren't included in suggested metrics.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-usage-metrics/lines-of-code-metrics"
+    },
+    {
+      "id": "p1m8-q12",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "An organization runs a Copilot developer survey alongside usage metrics. Which practice does the module recommend when analyzing the responses?",
+      "options": [
+        "Link each response to the developer's commit history to confirm that answers are accurate",
+        "Anonymize responses so they can't be traced to individuals, then track trends over time",
+        "Run the long-form survey every week so the data set grows as quickly as possible",
+        "Use survey results instead of usage metrics, because telemetry-based metrics are unreliable"
+      ],
+      "answer": 1,
+      "explain": "The module says to anonymize responses for privacy and track results over time in BI tools or spreadsheets. It warns against survey fatigue: long-form surveys no more than once every four weeks.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/5-understand-limitations-measure-impact"
+    },
+    {
+      "id": "p1m8-q13",
+      "module": "p1m8",
+      "domain": "productivity",
+      "q": "A team asks Copilot for an authentication helper and plans to merge the result without review because \"Copilot follows best practices\". What is the main risk?",
+      "options": [
+        "Generated code may have bugs or skip security best practices, so it still needs careful review",
+        "Copilot-generated code can't be committed to private repositories without an admin exception",
+        "Copilot output always duplicates public code, so merging it creates license compliance issues",
+        "The public code filter blocks generated authentication code, so the helper will be incomplete"
+      ],
+      "answer": 0,
+      "explain": "The module lists bugs, security issues, and context misreading as limitations. Generated code needs careful review, especially security-sensitive code.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/5-understand-limitations-measure-impact"
+    },
+    {
+      "id": "p1m9-q01",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "In VS Code Copilot Chat, which slash command generates unit tests for the selected or active code?",
+      "options": [
+        "/tests",
+        "/setupTests",
+        "/fix",
+        "/explain"
+      ],
+      "answer": 0,
+      "explain": "/tests generates unit tests for the selected code. /setupTests helps configure a test framework, and /fix proposes fixes for problems.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m9-q02",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A test fails in VS Code's Test Explorer. What's the quickest way to get a Copilot fix proposal for that specific failure?",
+      "options": [
+        "Hover over the failed test and select the Fix Test Failure (sparkle) button",
+        "Run /setupTests in the Chat view to rebuild the test configuration",
+        "Delete the failing test and regenerate it from scratch with the /tests command",
+        "Open inline chat in the test file and ask Copilot to explain the assertion"
+      ],
+      "answer": 0,
+      "explain": "The sparkle Fix Test Failure button in Test Explorer starts a Copilot fix for that failure. You should still review the proposed change against expected behavior and rerun the test.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    },
+    {
+      "id": "p1m9-q03",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "Before changing any files, a developer wants Copilot to list edge cases worth testing for a complex method. Which agent fits best?",
+      "options": [
+        "Agent, with Bypass Approvals so it can work uninterrupted",
+        "Ask, because it answers questions without changing files",
+        "Agent, with the terminal tool enabled to run the tests",
+        "Cloud agent, assigned to the method through a GitHub issue"
+      ],
+      "answer": 1,
+      "explain": "Ask mode is read-only Q&A, good for exploring edge cases and options before letting Agent change code. The Agent options would allow file edits.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/3-generate-unit-tests-chat-view"
+    },
+    {
+      "id": "p1m9-q04",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A testing task spans several files, and the team's conventions for fixtures and naming are still unclear. What is the recommended approach?",
+      "options": [
+        "Use ghost text in each file and accept the suggestions one by one until coverage is complete",
+        "Use the Plan agent to agree on a reviewable plan, then hand it off to Agent to implement",
+        "Use Ask mode so it can write all the tests directly to disk without any approvals",
+        "Run /fixTestFailure first so Copilot creates the missing test files and fixtures"
+      ],
+      "answer": 1,
+      "explain": "Use Plan first when the work is ambiguous, spans multiple files, or needs conventions confirmed. The plan can then be handed to Agent. Ask doesn't modify files.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/4-plan-automate-tests-using-agents"
+    },
+    {
+      "id": "p1m9-q05",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A test file already has several xUnit tests in an Arrange-Act-Assert style. The developer wants to quickly add a few more edge cases while typing in the editor. Which Copilot feature fits best?",
+      "options": [
+        "Ghost text inline suggestions, started with a descriptive comment or test name",
+        "The Plan agent, to design a new test strategy for the class before writing tests",
+        "The /setupTests command, to reconfigure the xUnit framework for extra cases",
+        "Copilot cloud agent, assigned through a GitHub issue to add the edge cases"
+      ],
+      "answer": 0,
+      "explain": "Ghost text uses the existing test patterns to suggest similar cases. It works best when the file already shows the pattern and a comment describes the scenario.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/5-extend-fix-tests-using-github-copilot"
+    },
+    {
+      "id": "p1m9-q06",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "After an agent adds new tests, two fail. The agent suggests changing the expected values so the tests pass. What should the developer do?",
+      "options": [
+        "Accept the change, because the current implementation should be treated as the source of truth for expected values",
+        "Diagnose whether it's test setup, a wrong expectation, or a real bug; don't weaken assertions to pass",
+        "Mark the failing tests as skipped and revisit them in a later sprint once the code is stable",
+        "Delete the failing tests, because generated tests are unreliable and should be rewritten by hand"
+      ],
+      "answer": 1,
+      "explain": "VS Code guidance says to identify the cause before accepting a fix. Don't delete assertions, skip tests, or change expected values just to get a passing result, because a failure may reveal a real bug.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    },
+    {
+      "id": "p1m9-q07",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A reviewer sees a generated test that computes its expected value by calling the function under test. Why is this a problem?",
+      "options": [
+        "It makes the test noticeably slower because the function runs twice per assertion",
+        "A bug in the function skews both the actual and expected values, so the test can still pass",
+        "Test frameworks such as xUnit and pytest don't allow calling production code from inside assertions",
+        "It stops the test from being discovered and listed in VS Code's Test Explorer view"
+      ],
+      "answer": 1,
+      "explain": "Expected results should be independent of the function under test. Otherwise the same bug can affect both values and the test still passes.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    },
+    {
+      "id": "p1m9-q08",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A username must be 3 to 20 characters long. Which set of lengths best covers the boundaries when asking Copilot to generate tests?",
+      "options": [
+        "3, 11, and 20",
+        "1, 10, 20, and 50",
+        "2, 3, 20, and 21",
+        "0, 3, 20, and 100"
+      ],
+      "answer": 2,
+      "explain": "Testing at each limit and just outside it (2, 3, 20, 21) catches off-by-one errors. Testing only the limits misses values just outside them.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    },
+    {
+      "id": "p1m9-q09",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A team wants every developer's Copilot-generated tests to use xUnit, Arrange-Act-Assert, and the same naming conventions, but only for files in the tests folder. What should they do?",
+      "options": [
+        "Commit a *.instructions.md file whose applyTo pattern targets the tests path",
+        "Ask each developer to paste the team's testing conventions into every test prompt",
+        "Configure a content exclusion for all non-test files so Copilot only sees tests",
+        "Set the public code filter to Block so Copilot only learns from the team's own code"
+      ],
+      "answer": 0,
+      "explain": "Path-specific custom instructions (*.instructions.md with applyTo) scope guidance to matching files. Committing the file shares it with the team. Exclusions and the public code filter don't set conventions.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions"
+    },
+    {
+      "id": "p1m9-q10",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A developer runs /tests on a file that has no tests yet, and the output uses a different framework from the rest of the project. What simple step helps next time?",
+      "options": [
+        "Open existing test files in adjacent editor tabs so Copilot sees the framework",
+        "Switch the public code filter to Allow so Copilot can match common test patterns",
+        "Disable inline suggestions while using Chat so the two don't conflict over context",
+        "Rename the source file so its name ends in _test before running /tests again"
+      ],
+      "answer": 0,
+      "explain": "GitHub recommends opening existing test files in nearby tabs. This gives Copilot context about the framework, so generated tests match existing ones.",
+      "source": "https://docs.github.com/en/copilot/tutorials/write-tests"
+    },
+    {
+      "id": "p1m9-q11",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A team wants Copilot to scaffold a test project, generate tests across several files, run them, and fix failures in one session. Which built-in agent is designed for this?",
+      "options": [
+        "Ask",
+        "Plan",
+        "Agent",
+        "Inline chat"
+      ],
+      "answer": 2,
+      "explain": "Agent handles autonomous multi-step work: editing files, running terminal commands like the test runner, and iterating on failures. Plan only produces a plan, and Ask is read-only.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/4-plan-automate-tests-using-agents"
+    },
+    {
+      "id": "p1m9-q12",
+      "module": "p1m9",
+      "domain": "productivity",
+      "q": "A test suite generated by Copilot passes and shows high code coverage. What should the team conclude?",
+      "options": [
+        "The implementation is proven correct, because every line was executed by at least one passing test",
+        "Coverage shows which code ran, not whether assertions are right, so the tests still need review",
+        "No further manual or code review is needed, since Copilot checked the assertions itself",
+        "Coverage tools can't measure Copilot-generated tests, so the coverage number is meaningless"
+      ],
+      "answer": 1,
+      "explain": "Coverage shows executed code, not correct assertions. A passing suite with high coverage doesn't prove correctness. Generated tests still need review.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p1m7-c01",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Content exclusion: effects",
+      "back": "No inline suggestions in excluded files. Their content doesn't inform suggestions in other files or Copilot responses, and Copilot code review doesn't review them.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-c02",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Who can configure content exclusion?",
+      "back": "Repository administrators (their repos), organization owners (users with seats from that org), and enterprise owners (all Copilot users in the enterprise).",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-c03",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Content exclusion limitations",
+      "back": "It isn't a filesystem security boundary and isn't guaranteed for third-party MCP servers or clients. It doesn't apply to symlinks or remote filesystems, and the IDE may still pass semantic info such as types.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
+    },
+    {
+      "id": "p1m7-c04",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Content exclusion change not taking effect in the IDE",
+      "back": "It can take up to 30 minutes. To apply it now: in VS Code run Developer: Reload Window; in JetBrains or Visual Studio, close and reopen the app. Vim/Neovim fetches exclusions each time a file opens.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m7-c05",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Content exclusion path syntax",
+      "back": "fnmatch patterns that are case insensitive. Repo settings use - \"/path\". Org/enterprise settings use REPO-REFERENCE: plus paths, or \"*\": for files anywhere, including outside Git.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+    },
+    {
+      "id": "p1m7-c06",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Auditing content exclusion changes",
+      "back": "Look for the copilot.content_exclusion_changed audit log action. The entry details show excluded_paths after the change.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/review-changes"
+    },
+    {
+      "id": "p1m7-c07",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Public code filter (Block)",
+      "back": "Checks suggestions plus about 150 characters of surrounding code against public code on GitHub and hides matches or near matches. Org-assigned users inherit the setting.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m7-c08",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Code referencing",
+      "back": "When matches are allowed, Copilot shows matching public repos and licenses (in VS Code: Output > GitHub Copilot Log (Code References)). The index excludes private repos and code outside GitHub.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/copilot-in-ides"
+    },
+    {
+      "id": "p1m7-c09",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Block mode and agents",
+      "back": "Copilot cloud agent and Copilot CLI may still generate code matching public code even when the policy is Block. The cloud agent shows matches in session logs.",
+      "source": "https://docs.github.com/en/copilot/responsible-use/agents"
+    },
+    {
+      "id": "p1m7-c10",
+      "module": "p1m7",
+      "domain": "features",
+      "front": "Business/Enterprise-only management features",
+      "back": "Content exclusion, organization-wide policy management, and organization custom instructions. All plans can block suggestions matching public code.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m7-c11",
+      "module": "p1m7",
+      "domain": "features",
+      "front": "Policy conflicts across licenses",
+      "back": "Same enterprise, several orgs: the least restrictive usually applies. Several enterprises: the most restrictive almost always applies. Orgs can't override an enterprise-selected policy.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "p1m7-c12",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Business/Enterprise data and model training",
+      "back": "GitHub doesn't use Copilot Business or Enterprise customer data to train AI models. It's protected under GitHub's Data Protection Agreement.",
+      "source": "https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies"
+    },
+    {
+      "id": "p1m7-c13",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "\"Could not connect to server. Extension activation failed\"",
+      "back": "No Copilot plan, or the token request to the GitHub API failed. Sign out of Copilot in the IDE and sign back in.",
+      "source": "https://docs.github.com/en/copilot/troubleshooting-github-copilot/troubleshooting-common-issues-with-github-copilot"
+    },
+    {
+      "id": "p1m8-c01",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Three Copilot usage metrics dashboards",
+      "back": "Usage metrics (adoption and engagement), code generation (code from users and agents), and impact (adoption depth vs. PR output and time to merge).",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-c02",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Metric categories in Copilot usage metrics",
+      "back": "Adoption, engagement, acceptance rate, lines of code, and pull request lifecycle. Look at patterns together with developer feedback, not one number.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-c03",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Usage metrics caveats",
+      "back": "Not a complete record of all activity. Don't add org totals together (users overlap). They measure activity, not licenses; use the user management API for seats.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-c04",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Custom reporting on Copilot usage",
+      "back": "Use the Copilot usage metrics REST APIs and NDJSON exports for enterprise and org reports with repository- and user-level detail.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m8-c05",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Key Copilot limitations",
+      "back": "Possible bugs and insecure code, misread context, weaker results for niche or new technologies, bias from training data, and limited grasp of high-level architecture.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/5-understand-limitations-measure-impact"
+    },
+    {
+      "id": "p1m8-c06",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Copilot across the SDLC",
+      "back": "Requirements: prototypes and API sketches. Development: boilerplate and patterns. Testing: tests, data, and edge cases. Deployment: config and scripts. Maintenance: bug fixes, refactoring, and explaining legacy code.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/4-ai-software-development-lifecycle"
+    },
+    {
+      "id": "p1m8-c07",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Copilot developer survey: short vs long form",
+      "back": "Short-form: quick satisfaction and time-saved feedback, up to every two weeks. Long-form: deeper impact, no more than once every four weeks. Anonymize responses.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/developer-use-cases-for-ai-with-github-copilot/5-understand-limitations-measure-impact"
+    },
+    {
+      "id": "p1m8-c08",
+      "module": "p1m8",
+      "domain": "productivity",
+      "front": "Impact dashboard comparisons",
+      "back": "They show associations, not proof that adoption caused productivity changes. Team composition, complexity, and experience also affect results.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
+    },
+    {
+      "id": "p1m9-c01",
+      "module": "p1m9",
+      "domain": "productivity",
+      "front": "/tests vs /fixTestFailure vs /setupTests",
+      "back": "/tests: generate unit tests for selected code. /fixTestFailure: find and fix a failing test. /setupTests: recommend and configure a test framework.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/3-generate-unit-tests-chat-view"
+    },
+    {
+      "id": "p1m9-c02",
+      "module": "p1m9",
+      "domain": "productivity",
+      "front": "Ask vs Plan vs Agent for testing",
+      "back": "Ask: read-only exploration of edge cases. Plan: reviewable multi-file test strategy. Agent: writes, runs, and iterates on tests autonomously.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/4-plan-automate-tests-using-agents"
+    },
+    {
+      "id": "p1m9-c03",
+      "module": "p1m9",
+      "domain": "productivity",
+      "front": "Fix Test Failure in Test Explorer",
+      "back": "Hover over a failed test and select the sparkle button. Copilot proposes a fix to test or app code; review it and rerun the test.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    },
+    {
+      "id": "p1m9-c04",
+      "module": "p1m9",
+      "domain": "productivity",
+      "front": "Ghost text for tests",
+      "back": "Best for adding more cases to a test file that already shows the pattern. Start with a descriptive comment or test name, then press Tab to accept.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/5-extend-fix-tests-using-github-copilot"
+    },
+    {
+      "id": "p1m9-c05",
+      "module": "p1m9",
+      "domain": "productivity",
+      "front": "Rules for reviewing AI-generated tests",
+      "back": "Keep expected values independent of the code under test. Don't weaken assertions or skip tests just to pass. Remember that coverage isn't correctness.",
+      "source": "https://code.visualstudio.com/docs/agents/guides/test-code-with-ai"
+    },
+    {
+      "id": "p1m9-c06",
+      "module": "p1m9",
+      "domain": "productivity",
+      "front": "Consistent test conventions with Copilot",
+      "back": "Put framework, naming, and Arrange-Act-Assert rules in custom instructions, such as a *.instructions.md file with applyTo scoped to test paths, committed to the repo.",
+      "source": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions"
+    }
+  ]
+}

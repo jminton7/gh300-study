@@ -1,0 +1,730 @@
+{
+  "questions": [
+    {
+      "id": "extra-q01",
+      "module": "extra",
+      "domain": "features",
+      "q": "A developer gets a Copilot Business license from two organizations in the same enterprise. Org A enables Copilot CLI and Org B disables it. The enterprise delegated the policy with \"Let organizations decide\". What happens?",
+      "options": [
+        "Enabled: within one enterprise the least restrictive setting usually applies",
+        "Disabled, because the most restrictive setting wins within an enterprise",
+        "Whichever organization is billed for the user's seat that month decides, so access can change monthly",
+        "The user must choose a default organization in settings, and only that org's policy is applied"
+      ],
+      "answer": 0,
+      "explain": "Within one enterprise, the least restrictive policy usually applies, and the policy-conflicts reference lists Copilot CLI as 'least restrictive organization'. 'Most restrictive' is the rule for licenses from multiple different enterprises, plus a few sensitive policies.",
+      "source": "https://docs.github.com/en/copilot/reference/enterprise-administrators/policy-conflicts"
+    },
+    {
+      "id": "extra-q02",
+      "module": "extra",
+      "domain": "features",
+      "q": "A contractor holds Copilot licenses from two different enterprises. Enterprise X disables Copilot Chat on GitHub.com; Enterprise Y enables it. What is the result for the contractor?",
+      "options": [
+        "Disabled, because across different enterprises the most restrictive policy almost always applies to the user",
+        "Enabled, because the least restrictive policy applies whenever a user holds more than one license",
+        "The enterprise that assigned its license first takes precedence until that license is removed",
+        "The contractor's personal Copilot settings decide, since the two enterprise policies cancel out"
+      ],
+      "answer": 0,
+      "explain": "When a user has licenses from multiple different enterprises, the most restrictive policy almost always applies; the docs use exactly this Copilot Chat example. 'Least restrictive' is the usual rule for organizations within one enterprise.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-q03",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise owner sets a Copilot feature policy to \"Disabled\" at the enterprise level. An organization owner wants the feature for one team. What can the organization owner do?",
+      "options": [
+        "Nothing at org level; an explicit enterprise setting can't be overridden by org owners",
+        "Override it in the organization's Copilot policies",
+        "Enable it for that one team only, because team-level overrides are allowed under enterprise policies",
+        "Commit a repository custom instructions file that re-enables the feature in that team's repositories"
+      ],
+      "answer": 0,
+      "explain": "If the enterprise owner has explicitly enabled or disabled a policy, organization owners cannot override it. Organizations only control policies the enterprise set to 'Let organizations decide'. Custom instructions guide responses; they don't change policies.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-policies"
+    },
+    {
+      "id": "extra-q04",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise assigns some Copilot licenses directly to users rather than through an organization. Several policies are set to \"Let organizations decide\". Which setting determines those policies for the directly assigned users?",
+      "options": [
+        "A separate \"Policies for enterprise-assigned users\" setting that sets them to enabled or disabled",
+        "The policy of whichever organization the user most recently joined, even if that org didn't grant the license",
+        "The user's personal Copilot settings",
+        "GitHub's built-in defaults for Copilot Free, since enterprise-assigned users have no organization policy"
+      ],
+      "answer": 0,
+      "explain": "\"Let organizations decide\" doesn't cover users who get Copilot directly from the enterprise. A separate \"Policies for enterprise-assigned users\" setting decides whether those policies default to enabled or disabled for them.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-q05",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise wants newly released generally available Copilot features to reach users automatically, with organizations unable to switch them off. How should the \"Default policy for new features and clients\" policy be set?",
+      "options": [
+        "Enabled everywhere",
+        "Let organizations decide",
+        "Unconfigured",
+        "Enabled for selected organizations"
+      ],
+      "answer": 0,
+      "explain": "With \"Enabled everywhere\", any unconfigured GA feature is turned on for all Copilot users and organizations cannot disable it. \"Let organizations decide\" hands the default to each organization's own setting.",
+      "source": "https://docs.github.com/en/copilot/concepts/enterprise/default-availability"
+    },
+    {
+      "id": "extra-q06",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise has enabled the default-availability policies for features and models. A new feature is released in public preview. Which statement is correct?",
+      "options": [
+        "That policy doesn't apply to features in preview, so it won't auto-enable this preview feature",
+        "It is enabled for all users automatically, because the default policy covers every newly released feature",
+        "It is enabled automatically, but only for organization owners until it reaches general availability",
+        "It is enabled in IDEs only, because preview features are never offered on GitHub.com"
+      ],
+      "answer": 0,
+      "explain": "The \"Default policy for new features and clients\" applies to newly released and unconfigured generally available (GA) features. It does not apply to features in preview.",
+      "source": "https://docs.github.com/en/copilot/concepts/enterprise/default-availability"
+    },
+    {
+      "id": "extra-q07",
+      "module": "extra",
+      "domain": "features",
+      "q": "An admin sets \"Default availability for released models\" to Enabled. A model in pre-release (not GA) becomes available in Copilot. What is its default status for the enterprise?",
+      "options": [
+        "Disabled by default, because pre-GA models are outside the default availability policy",
+        "Enabled automatically, because the policy covers every model that is not explicitly configured",
+        "Enabled automatically, but only in Copilot Chat on GitHub.com and not in IDEs",
+        "Enabled for organization owners only, until an enterprise owner approves it"
+      ],
+      "answer": 0,
+      "explain": "Pre-GA models are excluded from the default availability policy and are disabled by default whatever that policy says. The policy only affects GA models labeled \"Delegate to Default Policy\".",
+      "source": "https://docs.github.com/en/copilot/concepts/enterprise/default-availability"
+    },
+    {
+      "id": "extra-q08",
+      "module": "extra",
+      "domain": "features",
+      "q": "A security team asks whether disabling a Copilot feature by policy will also take effect in developers' IDEs and Copilot CLI, not just on GitHub.com. What is the accurate answer?",
+      "options": [
+        "They can apply on any surface where users sign in to Copilot, but not every policy covers every surface",
+        "Policies only apply on GitHub.com; IDE and CLI behavior must be set in each tool's local settings files",
+        "Every policy applies equally everywhere, so one disabled on GitHub.com is always disabled in IDEs and CLI",
+        "They apply to IDEs and GitHub.com, but Copilot CLI ignores organization policies because it runs locally"
+      ],
+      "answer": 0,
+      "explain": "Policies can apply to IDEs, the GitHub website, and Copilot CLI, but not all policies apply to every surface. GitHub keeps a 'Supported surfaces for GitHub Copilot policies' reference for checking each policy.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-q09",
+      "module": "extra",
+      "domain": "features",
+      "q": "Two organizations in one enterprise license the same user. Org A allows members without a Copilot license to use Copilot code review on GitHub.com; Org B does not. How is this policy resolved?",
+      "options": [
+        "Most restrictive: one organization disabled it, so it's disabled for the user in all their organizations",
+        "Least restrictive: it's enabled, as with most Copilot policies, because one organization enabled it",
+        "The organization billed for the user's seat that month decides the setting for both orgs",
+        "The enterprise's default for code review applies, and both organization settings are ignored"
+      ],
+      "answer": 0,
+      "explain": "Most policies resolve to the least restrictive organization, but 'Allow members without a Copilot license to use Copilot code review in GitHub.com' is one of the exceptions that resolve to the most restrictive. The general 'Copilot code review' policy is least restrictive.",
+      "source": "https://docs.github.com/en/copilot/reference/enterprise-administrators/policy-conflicts"
+    },
+    {
+      "id": "extra-q10",
+      "module": "extra",
+      "domain": "features",
+      "q": "A developer pays for a personal Copilot Pro plan and is then assigned a Copilot Business seat by their employer's organization. What happens to the personal plan?",
+      "options": [
+        "It's cancelled automatically with a prorated refund, and the user then follows the organization's policies",
+        "It stays active, and the user switches between personal and organization policies per repository",
+        "It stays active, and its personal policies override the organization's wherever the two conflict",
+        "It's paused until the Business seat is removed, then resumes automatically, with no refund issued"
+      ],
+      "answer": 0,
+      "explain": "When a user with Copilot Pro, Pro+, or Max is assigned a Business or Enterprise seat, the personal plan is cancelled automatically with a prorated refund. That's why personal policies can't conflict with organization or enterprise policies.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-billing/seat-assignment"
+    },
+    {
+      "id": "extra-q11",
+      "module": "extra",
+      "domain": "features",
+      "q": "A user is assigned a Copilot Business seat by Org A and a Copilot Enterprise seat by Org B, both in the same enterprise. How is the user billed?",
+      "options": [
+        "Only the Enterprise seat is billed, and the user gets Copilot Enterprise features",
+        "Both seats are billed separately, and the user gets the combined features of both plans",
+        "Only the Business seat is billed, because it was the first seat assigned to the user",
+        "Both seats are billed, but the user is limited to Copilot Business features until one is removed"
+      ],
+      "answer": 0,
+      "explain": "If a user has Business and Enterprise seats from different organizations in the same enterprise, only the Enterprise seat is billed and the user gets Enterprise features. A unique user is billed only once per billing cycle within an enterprise.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-billing/seat-assignment"
+    },
+    {
+      "id": "extra-q12",
+      "module": "extra",
+      "domain": "features",
+      "q": "A compliance officer wants to know what the GitHub audit log records about Copilot in their enterprise. Which statement is accurate?",
+      "options": [
+        "Plan changes (policies, settings, licenses) and agent activity on GitHub, but not prompts sent in local clients",
+        "Every prompt and suggestion from IDEs and Copilot CLI, so admins can review exactly what each developer asked Copilot",
+        "Only billing events such as invoices; policy changes and seat assignments are visible only in the settings UI",
+        "Each accepted inline suggestion with its file and line, so admins can trace which code Copilot generated"
+      ],
+      "answer": 0,
+      "explain": "The audit log covers changes to the Copilot plan (settings, policies, licenses) and agent activity on the GitHub website. It does not include client session data such as prompts sent locally; capturing those needs a custom solution such as hooks.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
+    },
+    {
+      "id": "extra-q13",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise owner wants to search the audit log for every event related to their Copilot plan. Which search term should they use?",
+      "options": [
+        "action:copilot",
+        "actor:Copilot",
+        "event:copilot_usage",
+        "repo:copilot-settings"
+      ],
+      "answer": 0,
+      "explain": "The 'action:copilot' search shows all events related to the Copilot plan. 'actor:Copilot' is a different search: it shows activity performed by Copilot agents.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
+    },
+    {
+      "id": "extra-q14",
+      "module": "extra",
+      "domain": "features",
+      "q": "An admin needs to see what actions Copilot agents took on the GitHub website, such as pushes made by an agent. Which audit log search is intended for this?",
+      "options": [
+        "actor:Copilot",
+        "actor:agent",
+        "action:copilot.cfb_org_settings_changed",
+        "action:copilot.content_exclusion_changed"
+      ],
+      "answer": 0,
+      "explain": "Use 'actor:Copilot' to view agent activity. The 'action:copilot.*' events record plan changes such as seat assignments, settings changes, and content exclusion updates, not actions taken by agents.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
+    },
+    {
+      "id": "extra-q15",
+      "module": "extra",
+      "domain": "privacy",
+      "q": "An organization owner changes the paths excluded from Copilot in the organization's content exclusion settings. Which audit log event records this?",
+      "options": [
+        "copilot.content_exclusion_changed",
+        "copilot.cfb_seat_management_changed",
+        "copilot.plan_changed",
+        "copilot.cfb_seat_assignment_refreshed"
+      ],
+      "answer": 0,
+      "explain": "copilot.content_exclusion_changed is logged when the excluded paths for Copilot are updated, and it includes an excluded_paths field. cfb_seat_management_changed covers who gets Copilot access, not exclusions.",
+      "source": "https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/audit-log-events-for-your-enterprise"
+    },
+    {
+      "id": "extra-q16",
+      "module": "extra",
+      "domain": "features",
+      "q": "A user got a Copilot seat automatically after SCIM added them to a team that has Copilot access. Who is shown as the actor on the copilot.cfb_seat_added audit event?",
+      "options": [
+        "Whoever originally granted Copilot access to that team, not the account that added the new member",
+        "The account or integration that added the user to the team, such as the SCIM provisioning identity",
+        "The user who received the seat, since team-based seat creation is recorded as self-service",
+        "No actor; team-based seat events are logged as anonymous system events"
+      ],
+      "answer": 0,
+      "explain": "For team-based assignments, copilot.cfb_seat_added credits whoever originally gave the team Copilot access. The actual membership change is recorded correctly on the team.add_member or org.add_member event.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-billing/seat-assignment"
+    },
+    {
+      "id": "extra-q17",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise must keep Copilot audit events for three years for compliance. What do GitHub's docs recommend?",
+      "options": [
+        "Stream the audit log to a SIEM, because the built-in audit log keeps events for 180 days",
+        "Increase the audit log retention setting to three years in the enterprise settings",
+        "Export the audit log once a year, because the built-in audit log keeps events for 400 days",
+        "Enable Copilot Memory, which stores audit events alongside repository facts"
+      ],
+      "answer": 0,
+      "explain": "The audit log keeps events for the last 180 days. GitHub recommends streaming it to a SIEM for long-term history and alerts. There is no setting to extend built-in retention to years.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
+    },
+    {
+      "id": "extra-q18",
+      "module": "extra",
+      "domain": "features",
+      "q": "An org owner wants a script that lists everyone the organization is currently billed for in Copilot Business, with each user's last activity. Which REST endpoint fits?",
+      "options": [
+        "GET /orgs/{org}/copilot/billing/seats",
+        "GET /orgs/{org}/copilot/billing",
+        "GET /orgs/{org}/members?filter=copilot",
+        "GET /orgs/{org}/copilot/metrics/reports/organization-28-day/latest"
+      ],
+      "answer": 0,
+      "explain": "GET /orgs/{org}/copilot/billing/seats lists billed seats, including last_activity_at and last_activity_editor. GET /orgs/{org}/copilot/billing returns a seat breakdown and settings, not per-user seats.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
+    },
+    {
+      "id": "extra-q19",
+      "module": "extra",
+      "domain": "features",
+      "q": "During automated onboarding, a platform team wants to give Copilot Business seats to a list of specific users through the API. Which endpoint should they call?",
+      "options": [
+        "POST /orgs/{org}/copilot/billing/selected_users",
+        "PUT /orgs/{org}/members/{username}/copilot/seat",
+        "POST /orgs/{org}/copilot/billing/seats/bulk_assign",
+        "PATCH /orgs/{org}/copilot/billing"
+      ],
+      "answer": 0,
+      "explain": "POST /orgs/{org}/copilot/billing/selected_users buys a seat for each user listed. The matching endpoint for teams is POST /orgs/{org}/copilot/billing/selected_teams.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
+    },
+    {
+      "id": "extra-q20",
+      "module": "extra",
+      "domain": "features",
+      "q": "An admin calls DELETE /orgs/{org}/copilot/billing/selected_users for a user who also belongs to a team with Copilot access. What happens?",
+      "options": [
+        "The seat goes to pending cancellation; access ends at the end of the cycle unless the user keeps team access",
+        "The user loses Copilot access immediately, and the unused days are refunded to the organization",
+        "Access ends immediately, and the user's team-based assignment is also removed by the same call",
+        "The request fails, because users with team-based access can only be removed by deleting the team"
+      ],
+      "answer": 0,
+      "explain": "Removing users sets their seats to 'pending cancellation'. They lose access at the end of the current billing cycle unless they keep access through team membership.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
+    },
+    {
+      "id": "extra-q21",
+      "module": "extra",
+      "domain": "features",
+      "q": "A seat report shows last_activity_at as null for developers who use Copilot daily in their IDE. What is the most likely cause?",
+      "options": [
+        "IDE telemetry is turned off; IDE activity only appears in last_activity_at when telemetry is enabled",
+        "Their seats are pending cancellation, and pending seats stop reporting activity data until renewed",
+        "They use custom instructions, which stop Copilot from recording activity data for those sessions",
+        "Content exclusions are configured for their repos, which hides all activity for affected users"
+      ],
+      "answer": 0,
+      "explain": "The seat endpoints note that users must have telemetry enabled in their IDE for Copilot IDE activity to show up in last_activity_at.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
+    },
+    {
+      "id": "extra-q22",
+      "module": "extra",
+      "domain": "features",
+      "q": "An enterprise analytics team calls the Copilot usage metrics REST endpoints and gets errors, although they have the right role. Which enterprise policy must be configured for these endpoints to work?",
+      "options": [
+        "The \"Copilot usage metrics\" policy must be set to Enabled everywhere",
+        "The \"Default policy for new features and clients\" must be set to Enabled everywhere",
+        "The \"Editor preview features\" policy must be enabled for all organizations",
+        "The \"Suggestions matching public code\" policy must be set to Allowed"
+      ],
+      "answer": 0,
+      "explain": "The usage metrics endpoints require the enterprise's \"Copilot usage metrics\" policy to be set to Enabled everywhere. The other policies control feature availability or privacy, not metrics API access.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-metrics"
+    },
+    {
+      "id": "extra-q23",
+      "module": "extra",
+      "domain": "features",
+      "q": "What does a Copilot usage metrics report endpoint, such as GET /enterprises/{enterprise}/copilot/metrics/reports/enterprise-28-day/latest, return?",
+      "options": [
+        "Signed, expiring download links to report files, plus the date range covered",
+        "A paginated JSON array of every prompt and response sent to Copilot during the period",
+        "A CSV of seat assignments with billing amounts for the current billing cycle, per user",
+        "A live stream of usage events for the enterprise over a WebSocket connection"
+      ],
+      "answer": 0,
+      "explain": "The reports endpoints return download_links (signed URLs with a limited lifetime) to report files, plus report_start_day and report_end_day. They provide aggregated usage metrics, not prompts or billing amounts.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-metrics"
+    },
+    {
+      "id": "extra-q24",
+      "module": "extra",
+      "domain": "prompt",
+      "q": "A team wants Copilot to always follow their repository's coding conventions automatically, and separately wants a reusable \"generate a React form\" task that developers run only when needed. What is the best combination?",
+      "options": [
+        "Conventions in .github/copilot-instructions.md; the reusable task as a .prompt.md in .github/prompts",
+        "Put both in .github/copilot-instructions.md so they are automatically available in every chat",
+        "Conventions in a .prompt.md file; the task in .github/copilot-instructions.md, run on demand",
+        "Put both in AGENTS.md, since that file is only loaded when a developer invokes it manually"
+      ],
+      "answer": 0,
+      "explain": "Custom instructions apply automatically within their scope. Prompt files (.prompt.md, usually in .github/prompts) are reusable templates you call for one interaction. AGENTS.md is also applied automatically; it isn't invoked on demand.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/prompt-files"
+    },
+    {
+      "id": "extra-q25",
+      "module": "extra",
+      "domain": "prompt",
+      "q": "A monorepo has backend Python and frontend TypeScript code with different conventions. The team doesn't want TypeScript guidance cluttering requests about Python files. What should they use?",
+      "options": [
+        "Path-specific .instructions.md files in .github/instructions with applyTo globs",
+        "A single .github/copilot-instructions.md file with separate headings for each language",
+        "Separate .prompt.md files that developers must remember to attach to every request",
+        "Personal custom instructions configured by each developer on GitHub.com"
+      ],
+      "answer": 0,
+      "explain": "Path-specific instructions in .github/instructions/**/*.instructions.md use an applyTo glob, so they only apply to matching files. This keeps repository-wide instructions from filling up with guidance meant for other files.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions"
+    },
+    {
+      "id": "extra-q26",
+      "module": "extra",
+      "domain": "features",
+      "q": "A team wants a reusable \"security reviewer\" role that can read and search files but has no editing tools, and that they can pick or delegate to. What should they create?",
+      "options": [
+        "A custom agent profile in .github/agents with a restricted tools list in its frontmatter",
+        "An AGENTS.md file in the repository root that describes the reviewer role and lists its allowed tools",
+        "A path-specific instructions file with applyTo: \"**\" telling Copilot never to edit any files",
+        "A personal instruction on GitHub.com asking Copilot to always act as a security reviewer"
+      ],
+      "answer": 0,
+      "explain": "Custom agents are Markdown profiles with YAML frontmatter that define a specialist role and can restrict its tools. AGENTS.md only provides instructions and is separate from agent definitions in .github/agents. An instruction saying 'don't edit' doesn't remove any tools.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-custom-agents"
+    },
+    {
+      "id": "extra-q27",
+      "module": "extra",
+      "domain": "prompt",
+      "q": "In Copilot Chat on GitHub.com, a user's personal instructions say \"respond in French\" while the organization's custom instructions say \"respond in English\". Which instruction has higher precedence?",
+      "options": [
+        "Personal instructions, which rank above repository and organization instructions on GitHub.com",
+        "Organization instructions, which always override personal and repository instructions",
+        "Repository-wide instructions, which rank above both personal and organization instructions",
+        "Neither; Copilot Chat on GitHub.com ignores personal instructions when organization instructions exist"
+      ],
+      "answer": 0,
+      "explain": "For Copilot Chat on GitHub.com, precedence from highest to lowest is: personal, then repository (path-specific, repository-wide, agent instructions), then organization. All relevant instructions are still provided to the model.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/response-customization"
+    },
+    {
+      "id": "extra-q28",
+      "module": "extra",
+      "domain": "features",
+      "q": "An organization owner adds organization custom instructions requiring a security checklist. Developers report the instructions are ignored in local IDE chat sessions. Why?",
+      "options": [
+        "They're only supported on the GitHub website and in Copilot code review, not in local clients",
+        "They only take effect after each developer copies them into their own personal instructions",
+        "They only apply to members who get their Copilot license from that organization, not other orgs in the enterprise",
+        "They must also be committed as AGENTS.md in every repository before IDEs will load them"
+      ],
+      "answer": 0,
+      "explain": "Organization custom instructions currently work in sessions on the GitHub website (cloud sandboxes or GitHub Actions) and in Copilot code review, not in local client sessions. They apply to all organization members, whichever organization gives them their license.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/response-customization"
+    },
+    {
+      "id": "extra-q29",
+      "module": "extra",
+      "domain": "features",
+      "q": "During a long agent session, the main conversation is filling with intermediate research output. What is the main benefit of delegating that research to a subagent?",
+      "options": [
+        "It runs in its own context window and returns a focused result to the main agent",
+        "It shares the main agent's context window, so it can reuse the full history at no extra cost",
+        "It always uses fewer model requests than the main agent, so delegation lowers total usage",
+        "It permanently saves its findings as repository instructions"
+      ],
+      "answer": 0,
+      "explain": "A subagent does delegated work in a separate context window, so its intermediate steps don't fill the main conversation. Delegation can increase model usage, because each agent makes its own model calls.",
+      "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/choosing-and-delegating-agent-work/delegating-and-parallelizing-work-with-agents"
+    },
+    {
+      "id": "extra-q30",
+      "module": "extra",
+      "domain": "features",
+      "q": "In Copilot CLI, a developer wants the main agent to split a large task into independent subtasks and run them in parallel with subagents. Which slash command is designed for this?",
+      "options": [
+        "/fleet",
+        "/plan",
+        "/review",
+        "/delegate-all"
+      ],
+      "answer": 0,
+      "explain": "/fleet has the main agent act as orchestrator: it breaks the work into subtasks and runs independent ones in parallel with subagents. /plan helps shape the breakdown first but doesn't run the subtasks in parallel itself.",
+      "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/choosing-and-delegating-agent-work/delegating-and-parallelizing-work-with-agents"
+    },
+    {
+      "id": "extra-q31",
+      "module": "extra",
+      "domain": "features",
+      "q": "A developer is considering /fleet for a strictly sequential migration, where each step depends on the previous one. What is the most accurate advice?",
+      "options": [
+        "It may not help with sequential work, and multiple agents can consume more AI credits",
+        "It always finishes faster, because subagents share one context window and skip duplicate work",
+        "It is required for multi-step work, because the main agent can't carry out dependent steps itself",
+        "It reduces AI credit use, because subagents run on cheaper models by default"
+      ],
+      "answer": 0,
+      "explain": "Parallel delegation helps most when tasks are independent. Each subagent calls the model separately, so /fleet can use more GitHub AI credits and may not help with sequential work.",
+      "source": "https://docs.github.com/en/copilot/concepts/agent-capabilities/choosing-and-delegating-agent-work/delegating-and-parallelizing-work-with-agents"
+    },
+    {
+      "id": "extra-q32",
+      "module": "extra",
+      "domain": "features",
+      "q": "In VS Code with the Copilot harness, a developer wants to understand how authentication works in an unfamiliar codebase, with no risk of files being changed. Which built-in agent fits best?",
+      "options": [
+        "Ask, which only has read-only tools and can't edit files",
+        "Agent, with a prompt telling it \"do not change any files\" so it stays read-only",
+        "Plan, which edits files in small batches and asks for approval after each change",
+        "Autopilot, which works autonomously but skips file edits while it researches"
+      ],
+      "answer": 0,
+      "explain": "Ask answers questions and researches the codebase with read-only tools only. Telling Agent not to change files guides the model but doesn't change its tools or permissions.",
+      "source": "https://code.visualstudio.com/docs/agents/run/agent-harnesses"
+    },
+    {
+      "id": "extra-q33",
+      "module": "extra",
+      "domain": "features",
+      "q": "A developer wants Copilot in VS Code to research a cross-cutting change, ask clarifying questions, and produce an implementation plan to review before any code is written. What should they use?",
+      "options": [
+        "The Plan agent, for example by entering /plan followed by the goal and constraints",
+        "The Ask agent, then copy its answer into a prompt file to run later",
+        "Inline chat on the main file, since it edits code in place and shows a diff",
+        "The Agent agent with Autopilot, so it plans and implements in one step"
+      ],
+      "answer": 0,
+      "explain": "The Plan agent (/plan) researches the project, asks clarifying questions, and presents a plan to review. You can then implement it, approve it, or reject it. Autopilot carries on autonomously, which skips the review checkpoint.",
+      "source": "https://code.visualstudio.com/docs/agents/run/planning"
+    },
+    {
+      "id": "extra-q34",
+      "module": "extra",
+      "domain": "features",
+      "q": "A developer forks a VS Code agent conversation to try an alternative approach, assuming the fork keeps its file changes separate from the original. What is the risk?",
+      "options": [
+        "The fork shares the original workspace, so both can edit the same files unless worktrees are used",
+        "Forking drops the conversation history, so the fork must be re-prompted with every requirement from scratch",
+        "Forking automatically creates a new Git branch, so the fork's changes will need a merge back later",
+        "Forking makes the original conversation read-only until the fork is closed or merged back into it"
+      ],
+      "answer": 0,
+      "explain": "A fork keeps the conversation up to the fork point but can share the original session and worktree. Forking isn't a Git branch or separate worktree, so use separate worktrees when changes must stay apart.",
+      "source": "https://code.visualstudio.com/docs/agents/concepts/sessions"
+    },
+    {
+      "id": "extra-q35",
+      "module": "extra",
+      "domain": "features",
+      "q": "Copilot Memory stored the fact \"this repository uses Vitest for unit tests\". Who can benefit from this memory?",
+      "options": [
+        "Eligible users working in that repository; it isn't used in other repositories",
+        "Only the user whose session created it, because repository facts are private to their creator",
+        "Every member of the organization, across all of its repositories, including private ones",
+        "Anyone who forks the repository, because stored memories are copied into each fork"
+      ],
+      "answer": 0,
+      "explain": "Repository-level facts are shared with eligible collaborators and only apply in that repository. They aren't pooled across an organization's repositories and aren't copied to forks.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-memory"
+    },
+    {
+      "id": "extra-q36",
+      "module": "extra",
+      "domain": "features",
+      "q": "A tech lead wants a rule (\"never call the payment provider directly\") that Copilot applies consistently. Copilot Memory has already learned it. What does GitHub recommend?",
+      "options": [
+        "Put it in custom instructions; Copilot uses memories by judgment, so they aren't guaranteed",
+        "Rely on the memory, because stored repository facts are enforced as hard rules in every session",
+        "Ask Copilot to upvote the memory repeatedly until it becomes a permanent, enforced rule",
+        "Store it as a user-level preference instead, so it overrides repository settings everywhere"
+      ],
+      "answer": 0,
+      "explain": "Copilot judges whether a stored fact is still accurate before using it, so a memory shouldn't be treated as a rule that is always followed. GitHub recommends custom instructions for consistent guidance.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-memory"
+    }
+  ],
+  "cards": [
+    {
+      "id": "extra-c01",
+      "module": "extra",
+      "domain": "features",
+      "front": "Where are Copilot policies configured?",
+      "back": "Enterprise: the AI controls tab (Agents, Copilot, MCP pages). Organization: Settings > Copilot > Policies (features) and Models.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies"
+    },
+    {
+      "id": "extra-c02",
+      "module": "extra",
+      "domain": "features",
+      "front": "Enterprise policy options",
+      "back": "For most policies: explicitly enable, explicitly disable, or 'Let organizations decide'. An explicit enterprise setting can't be overridden by organization owners.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-c03",
+      "module": "extra",
+      "domain": "features",
+      "front": "Policy conflict: multiple orgs, same enterprise",
+      "back": "Usually the least restrictive applies (any org enabling a feature enables it). Exceptions are sensitive policies such as the Copilot Metrics API and suggestions matching public code, where the most restrictive applies.",
+      "source": "https://docs.github.com/en/copilot/reference/enterprise-administrators/policy-conflicts"
+    },
+    {
+      "id": "extra-c04",
+      "module": "extra",
+      "domain": "features",
+      "front": "Policy conflict: multiple enterprises",
+      "back": "The most restrictive policy almost always applies. For example, if any enterprise disables Copilot Chat on GitHub, it's disabled for the user.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-c05",
+      "module": "extra",
+      "domain": "features",
+      "front": "Who do Copilot policies apply to?",
+      "back": "Generally only users who get their Copilot Business/Enterprise license from that enterprise or organization. A few policies, such as blocking Copilot in the cloud in enterprise repositories, cover everyone.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-c06",
+      "module": "extra",
+      "domain": "features",
+      "front": "Default availability policies",
+      "back": "Two policies decide whether unconfigured GA features ('Default policy for new features and clients') and GA models ('Default availability for released models') default to on or off. Preview features and pre-GA models aren't covered.",
+      "source": "https://docs.github.com/en/copilot/concepts/enterprise/default-availability"
+    },
+    {
+      "id": "extra-c07",
+      "module": "extra",
+      "domain": "features",
+      "front": "Surfaces covered by policies",
+      "back": "Any surface where users sign in to Copilot: IDEs, GitHub.com, Copilot CLI, and more. Not every policy applies to every surface, so check the supported-surfaces reference.",
+      "source": "https://docs.github.com/en/copilot/concepts/policies"
+    },
+    {
+      "id": "extra-c08",
+      "module": "extra",
+      "domain": "features",
+      "front": "Personal plan + assigned Business/Enterprise seat",
+      "back": "The personal Pro/Pro+/Max plan is cancelled automatically with a prorated refund. The user then follows the company's policies.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-billing/seat-assignment"
+    },
+    {
+      "id": "extra-c09",
+      "module": "extra",
+      "domain": "features",
+      "front": "Seat billing across orgs in one enterprise",
+      "back": "A unique user is billed once per cycle even with seats from several orgs. Business + Enterprise seats means only the Enterprise seat is billed. Removing all of an org's seats cancels its Copilot plan.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-billing/seat-assignment"
+    },
+    {
+      "id": "extra-c10",
+      "module": "extra",
+      "domain": "features",
+      "front": "Copilot audit log: logged vs not logged",
+      "back": "Logged: plan changes (settings, policies, seats/licenses, content exclusions) and agent activity on GitHub. Not logged: client session data such as prompts sent locally.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
+    },
+    {
+      "id": "extra-c11",
+      "module": "extra",
+      "domain": "features",
+      "front": "Audit log search terms for Copilot",
+      "back": "'action:copilot' shows all Copilot plan events (e.g. copilot.cfb_seat_assignment_created). 'actor:Copilot' shows agent activity. Retention is 180 days; stream to a SIEM for longer.",
+      "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
+    },
+    {
+      "id": "extra-c12",
+      "module": "extra",
+      "domain": "features",
+      "front": "Key Copilot audit log events",
+      "back": "cfb_seat_added / cfb_seat_cancelled (seats), cfb_org_settings_changed / cfb_enterprise_settings_changed (settings), cfb_seat_management_changed (who gets access), content_exclusion_changed (excluded paths).",
+      "source": "https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/audit-log-events-for-your-enterprise"
+    },
+    {
+      "id": "extra-c13",
+      "module": "extra",
+      "domain": "features",
+      "front": "REST: Copilot user management endpoints",
+      "back": "GET /orgs/{org}/copilot/billing (summary and settings); GET .../billing/seats (list seats); POST/DELETE .../billing/selected_users and .../billing/selected_teams; GET /orgs/{org}/members/{username}/copilot.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
+    },
+    {
+      "id": "extra-c14",
+      "module": "extra",
+      "domain": "features",
+      "front": "REST: removing Copilot users or teams",
+      "back": "DELETE on selected_users or selected_teams marks seats 'pending cancellation'. Access ends at the end of the billing cycle unless kept through another team. Only org owners can do this.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
+    },
+    {
+      "id": "extra-c15",
+      "module": "extra",
+      "domain": "features",
+      "front": "REST: Copilot usage metrics",
+      "back": "Report endpoints (e.g. .../copilot/metrics/reports/organization-28-day/latest) return signed download links to daily or 28-day reports. They require the 'Copilot usage metrics' policy to be enabled.",
+      "source": "https://docs.github.com/en/rest/copilot/copilot-metrics"
+    },
+    {
+      "id": "extra-c16",
+      "module": "extra",
+      "domain": "prompt",
+      "front": "Custom instructions vs prompt files",
+      "back": "Custom instructions (.github/copilot-instructions.md, .github/instructions/*.instructions.md) apply automatically in their scope. Prompt files (.prompt.md, usually .github/prompts) are reusable templates you call when needed.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting-and-context/prompt-files"
+    },
+    {
+      "id": "extra-c17",
+      "module": "extra",
+      "domain": "prompt",
+      "front": "AGENTS.md vs .github/agents",
+      "back": "AGENTS.md (or CLAUDE.md/GEMINI.md) holds agent instructions, similar to repository-wide instructions. Files in .github/agents (e.g. NAME.agent.md) define custom agents: a role with instructions, tools, and optionally a model.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/response-customization"
+    },
+    {
+      "id": "extra-c18",
+      "module": "extra",
+      "domain": "prompt",
+      "front": "Instruction precedence in Copilot Chat on GitHub.com",
+      "back": "Personal > repository (path-specific > repository-wide > AGENTS.md) > organization. VS Code, Visual Studio and Copilot CLI combine instruction files without a general precedence order.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/response-customization"
+    },
+    {
+      "id": "extra-c19",
+      "module": "extra",
+      "domain": "features",
+      "front": "Organization custom instructions: scope",
+      "back": "Copilot Business/Enterprise only. Used for GitHub-website sessions and Copilot code review, not local client sessions. Apply to all org members, whichever org licenses them.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/response-customization"
+    },
+    {
+      "id": "extra-c20",
+      "module": "extra",
+      "domain": "features",
+      "front": "Custom agent vs subagent",
+      "back": "A custom agent is the definition of a specialist. A subagent is an agent doing delegated work in its own context window, which keeps the main conversation focused and lets independent tasks run in parallel.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-custom-agents"
+    },
+    {
+      "id": "extra-c21",
+      "module": "extra",
+      "domain": "features",
+      "front": "VS Code built-in agents (Copilot harness)",
+      "back": "Ask: read-only questions and research. Plan (/plan): research plus a plan to review. Agent: implements and validates changes. Autopilot is a separate mode, not a built-in agent.",
+      "source": "https://code.visualstudio.com/docs/agents/run/agent-harnesses"
+    },
+    {
+      "id": "extra-c22",
+      "module": "extra",
+      "domain": "features",
+      "front": "Copilot Memory: two scopes",
+      "back": "Repository-level facts are shared with collaborators and used only in that repository. User-level preferences follow you across repositories. Secrets are rejected and not stored.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-memory"
+    },
+    {
+      "id": "extra-c23",
+      "module": "extra",
+      "domain": "features",
+      "front": "GitHub Spark status",
+      "back": "GitHub Spark on github.com has been deprecated and retired. It no longer accepts new users or new apps, but apps already deployed keep working.",
+      "source": "https://github.blog/changelog/2026-08-04-upcoming-deprecation-of-github-spark-on-github-com/"
+    }
+  ]
+}

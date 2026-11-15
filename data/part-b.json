@@ -1,0 +1,951 @@
+{
+  "questions": [
+    {
+      "id": "p1m4-q01",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "An SRE team keeps asking Copilot the same questions about one payments service and gets inconsistent answers from general chat. They want repeatable, grounded answers based on that service's runbook, config files, and open incidents. What should they do?",
+      "options": [
+        "Create a Copilot Space with the service's files, issues, and focused instructions",
+        "Use repo-wide chat across every organization repository for broader discovery",
+        "Paste the full runbook into a brand-new chat conversation each time they ask",
+        "Ask Copilot to automatically discover all related content across the organization"
+      ],
+      "answer": 0,
+      "explain": "Spaces trade breadth for depth: curating a focused set of sources and instructions gives more consistent, reproducible answers on a tightly scoped topic. Broad or org-wide chat favors discovery over precision, and pasting content each time isn't reusable or kept current.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-spaces/1-introduction"
+    },
+    {
+      "id": "p1m4-q02",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "The owner of a Space wants Copilot to answer only as a SQL generator that uses the attached schemas, and to avoid unrelated topics. Which part of the Space should they edit?",
+      "options": [
+        "The Space description shown under the name",
+        "The Space instructions",
+        "The Space name and its naming prefix",
+        "The Space sharing and visibility settings"
+      ],
+      "answer": 1,
+      "explain": "Instructions are free text describing what Copilot should focus on, which tasks to help with, and what to avoid. The description does not affect Copilot's responses; it only helps people understand the Space's purpose.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/create-copilot-spaces"
+    },
+    {
+      "id": "p1m4-q03",
+      "module": "p1m4",
+      "domain": "privacy",
+      "q": "An organization-owned Space includes files from a private repository. A colleague who has viewer access to the Space but no access to that repository asks a question in the Space. What happens?",
+      "options": [
+        "The Space grants the colleague temporary read access to the private repository",
+        "The colleague sees a cached copy of the private files stored inside the Space",
+        "The colleague can only see sources they already have permission to access",
+        "A repository admin must approve the colleague before the Space will answer"
+      ],
+      "answer": 2,
+      "explain": "Spaces follow GitHub's existing permissions and never grant new access; viewers only see sources they are already entitled to. This lets you share a Space widely without exposing private content.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/collaborate-with-others"
+    },
+    {
+      "id": "p1m4-q04",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "A team lead worries that code files attached to a Space will become outdated as developers keep merging changes. What is the correct expectation?",
+      "options": [
+        "Attached files are snapshots and must be re-attached after every release",
+        "GitHub-based sources stay in sync and reflect the latest code on the main branch",
+        "Attached files track whichever feature branch the asking user has checked out",
+        "Spaces refresh attached files only when the Space owner edits the description"
+      ],
+      "answer": 1,
+      "explain": "GitHub files and other GitHub-based sources in a Space are updated automatically as they change, and Spaces refer to the latest version of the code on the repository's main (default) branch. They are not static snapshots or branch-aware per user.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/spaces"
+    },
+    {
+      "id": "p1m4-q05",
+      "module": "p1m4",
+      "domain": "prompt",
+      "q": "A team wants Copilot to always consider its short API style guide when answering every question in their Space. How should they add the guide?",
+      "options": [
+        "Attach the whole repository that contains the style guide document",
+        "Mention the style guide's filename in the Space description field",
+        "Attach the style guide as an individual file in the Space sources",
+        "Link the pull request that most recently changed the style guide"
+      ],
+      "answer": 2,
+      "explain": "When you attach an individual file, its full contents are loaded into the context window and considered for every query. Attaching a whole repository makes Copilot search and retrieve only the content it judges relevant, so the guide might not always be used.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/create-copilot-spaces"
+    },
+    {
+      "id": "p1m4-q06",
+      "module": "p1m4",
+      "domain": "data",
+      "q": "A documentation team attaches an entire large docs repository to a Space so people can ask questions across all of it. How does Copilot use that repository when answering?",
+      "options": [
+        "It searches the repository and retrieves only the most relevant content",
+        "It loads the entire repository into the model context for every question",
+        "It reads only the README file at the root of the attached repository",
+        "It indexes only files that were changed in the most recent pull request"
+      ],
+      "answer": 0,
+      "explain": "Attaching a repository doesn't load the whole project into memory; Copilot searches it and retrieves the most relevant content, which suits large-scale use cases. Loading everything would exceed model context limits.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/create-copilot-spaces"
+    },
+    {
+      "id": "p1m4-q07",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "In an organization-owned Space, a lead wants several teammates to be able to update the attachments, name, and instructions, but not change who has access or delete the Space. Which role should they assign?",
+      "options": [
+        "Viewer",
+        "Editor",
+        "Admin",
+        "Owner"
+      ],
+      "answer": 1,
+      "explain": "Editors can update attachments, description, name, and instructions but can't change sharing settings or delete the Space. Admins can also change sharing and delete; viewers can only ask questions and view content.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/collaborate-with-others"
+    },
+    {
+      "id": "p1m4-q08",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "A developer wants to use the context from a Copilot Space while coding in their IDE. What is required?",
+      "options": [
+        "Install the separate Copilot Spaces extension from the marketplace and use inline chat",
+        "Download the Space as a ZIP file and open it as a workspace folder",
+        "Use the GitHub MCP server with the Spaces toolset enabled, in agent mode",
+        "Add the Space URL to the repository's custom instructions file"
+      ],
+      "answer": 2,
+      "explain": "Spaces are accessed in the IDE through the remote GitHub MCP server, and the copilot_spaces toolset must be explicitly enabled because it isn't in the default configuration. Because access is via MCP tools, Spaces can only be used in agent mode.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/use-copilot-spaces"
+    },
+    {
+      "id": "p1m4-q09",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "A developer uses a Space from their IDE through the GitHub MCP server. Copilot uses the Space's instructions and linked issues, but ignores a spreadsheet that was uploaded to the Space. What is the most likely reason?",
+      "options": [
+        "Spreadsheets must be converted to Markdown before any Space can use them",
+        "Uploaded files and repository context aren't supported when using Spaces in the IDE",
+        "The developer needs editor rights on the Space to read uploaded files",
+        "Uploaded files are only visible to the person who uploaded them, not to other Space members"
+      ],
+      "answer": 1,
+      "explain": "When using Spaces in your IDE, repository context and uploaded files are not supported; text content, GitHub files, issues, pull requests, and instructions are available. Uploads work in Copilot Chat on GitHub.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/use-copilot-spaces"
+    },
+    {
+      "id": "p1m4-q10",
+      "module": "p1m4",
+      "domain": "prompt",
+      "q": "A Space that started as an onboarding helper now covers onboarding, release management, and incident response. Users see size warnings and increasingly vague answers. What is the best next step?",
+      "options": [
+        "Add more examples and documents so the model has more material to use",
+        "Remove the instructions so Copilot can decide the focus on its own",
+        "Reduce sources or split it into smaller Spaces that each do one job",
+        "Switch from linked repository files to pasted copies of their content"
+      ],
+      "answer": 2,
+      "explain": "Model context limits apply, so Spaces should stay small with one job per Space; pruning sources or splitting restores precision. Adding more material makes the context problem worse.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-spaces/6-working-guide-space"
+    },
+    {
+      "id": "p1m4-q11",
+      "module": "p1m4",
+      "domain": "privacy",
+      "q": "A Space owner wants Copilot to know the connection details for a staging database, including credentials, so it can write accurate scripts. What is the recommended approach?",
+      "options": [
+        "Paste the credentials into the Space's free-text notes for convenience",
+        "Put the credentials in the Space description so only owners can see them",
+        "Keep secrets out of the Space and link reviewed, version-controlled files",
+        "Upload the credentials file and set the Space to public view-only"
+      ],
+      "answer": 2,
+      "explain": "Best practice is not to paste sensitive data into free-text notes; link version-controlled files so normal review and permissions apply. Descriptions and public sharing don't protect secrets.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-spaces/3-share-discover-govern"
+    },
+    {
+      "id": "p1m4-q12",
+      "module": "p1m4",
+      "domain": "features",
+      "q": "Who can create and use Copilot Spaces?",
+      "options": [
+        "Only users on a Copilot Enterprise plan",
+        "Only Copilot Business and Enterprise users",
+        "Anyone with a Copilot license, including Free",
+        "Only organization owners with a paid Copilot plan"
+      ],
+      "answer": 2,
+      "explain": "Anyone with a Copilot license, including Copilot Free, can create and use Spaces. Questions asked in a Space count as Copilot Chat requests.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/spaces"
+    },
+    {
+      "id": "p1m4-q13",
+      "module": "p1m4",
+      "domain": "prompt",
+      "q": "A Space's answers keep drifting away from the format the team wants for incident summaries. Which change is most likely to fix this?",
+      "options": [
+        "Tighten the instructions and add a few canonical examples of good output",
+        "Attach every repository the team owns so Copilot can find more past incident summaries",
+        "Make the Space public so more people can give thumbs-up feedback",
+        "Rename the Space so its title clearly mentions incident summaries"
+      ],
+      "answer": 0,
+      "explain": "When responses drift, tighten instructions, add a few high-quality examples of 'good' output, and prune noisy sources. Adding lots of sources adds noise, and the name doesn't change responses.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-spaces/6-working-guide-space"
+    },
+    {
+      "id": "p1m5-q01",
+      "module": "p1m5",
+      "domain": "features",
+      "q": "While typing in VS Code, a developer sees greyed-out code appear after the cursor. What is this, and how do they accept it?",
+      "options": [
+        "A Copilot ghost text suggestion, accepted by pressing Tab",
+        "A linter warning preview, accepted by pressing Enter twice",
+        "An inline chat response, accepted by pressing Ctrl+I again",
+        "A snippet template, accepted by typing a slash command"
+      ],
+      "answer": 0,
+      "explain": "Ghost text is Copilot's inline suggestion; you can ignore it or press Tab to accept it. It doesn't need a prompt because Copilot uses the code around your cursor as context.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/advanced-github-copilot/2-advanced-github-copilot-features"
+    },
+    {
+      "id": "p1m5-q02",
+      "module": "p1m5",
+      "domain": "features",
+      "q": "A developer wants to ask Copilot to rewrite a selected function without switching to the Chat view, and review the change as a diff in place. What should they use?",
+      "options": [
+        "Quick Chat opened from the title bar menu",
+        "Editor inline chat with Ctrl+I (Cmd+I on macOS)",
+        "A @workspace mention in the Chat view",
+        "The multiple suggestions pane with Ctrl+Enter"
+      ],
+      "answer": 1,
+      "explain": "Editor inline chat (Ctrl+I / Cmd+I) works inside the editor, scoped to the active file or selection, and shows a diff you can Keep or Undo. It avoids switching context to a separate pane.",
+      "source": "https://code.visualstudio.com/docs/chat/inline-chat"
+    },
+    {
+      "id": "p1m5-q03",
+      "module": "p1m5",
+      "domain": "productivity",
+      "q": "A developer selects a newly added API route handler and wants Copilot Chat to generate unit tests for it with the least prompt writing. Which slash command fits?",
+      "options": [
+        "/explain",
+        "/fix",
+        "/tests",
+        "/help"
+      ],
+      "answer": 2,
+      "explain": "/tests generates unit tests for the selected code. /explain describes code, /fix proposes fixes for problems, and /help explains how to use Copilot Chat.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-q04",
+      "module": "p1m5",
+      "domain": "productivity",
+      "q": "A developer highlights `contents = file.read` (missing parentheses) and wants Copilot to propose a correction using a built-in intent instead of writing a long prompt. What should they do?",
+      "options": [
+        "Open inline chat and use /fix on the selection",
+        "Open inline chat and use /explain on the selection",
+        "Use /tests so the failing test reveals the bug",
+        "Type a TODO comment and wait for ghost text"
+      ],
+      "answer": 0,
+      "explain": "/fix proposes a fix for problems in the selected code; it acts as an implicit, precrafted prompt. /explain only describes the code, and /tests generates tests rather than fixing the bug.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/advanced-github-copilot/4-applied-copilot-techniques"
+    },
+    {
+      "id": "p1m5-q05",
+      "module": "p1m5",
+      "domain": "prompt",
+      "q": "What is the main benefit of using slash commands such as /fix, /explain, or /tests in Copilot Chat?",
+      "options": [
+        "They enforce the team's formatting rules across the entire codebase",
+        "They state the intent so you get better results with shorter prompts",
+        "They run a security scan before any suggestion is shown to the user",
+        "They switch Copilot to a larger model for that single request only"
+      ],
+      "answer": 1,
+      "explain": "Slash commands give Copilot a specific intent for common tasks, so you get better responses without writing long prompts. They don't change models, format code, or run security scans.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/advanced-github-copilot/4-applied-copilot-techniques"
+    },
+    {
+      "id": "p1m5-q06",
+      "module": "p1m5",
+      "domain": "productivity",
+      "q": "A developer using Copilot Chat in Visual Studio wants a built-in command that analyzes the selected method and improves its running time. Which slash command should they use?",
+      "options": [
+        "/doc",
+        "/optimize",
+        "/explain",
+        "/fix"
+      ],
+      "answer": 1,
+      "explain": "In Visual Studio, /optimize analyzes and improves the running time of selected code. /doc adds a documentation comment, /explain explains code, and /fix addresses problems rather than performance.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-q07",
+      "module": "p1m5",
+      "domain": "productivity",
+      "q": "In Copilot Chat in Visual Studio, a developer wants to add a documentation comment to the symbol under the cursor. Which slash command is designed for this?",
+      "options": [
+        "/tests",
+        "/optimize",
+        "/doc",
+        "/help"
+      ],
+      "answer": 2,
+      "explain": "/doc adds a documentation comment for the symbol. Available slash commands vary by environment; type / in the chat box to see what your IDE supports.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-q08",
+      "module": "p1m5",
+      "domain": "features",
+      "q": "In Copilot Chat, which chat participant has context about the VS Code integrated terminal shell and its contents, and is used to create or debug terminal commands?",
+      "options": [
+        "@vscode",
+        "@github",
+        "@terminal",
+        "@workspace"
+      ],
+      "answer": 2,
+      "explain": "@terminal has context about the terminal shell and its contents. @vscode answers questions about VS Code features and settings and @github gives GitHub-specific skills; neither, nor @workspace, is the terminal participant. Note: current VS Code docs mark @-participants as deprecated in the Copilot harness (they remain for the Local harness).",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-q09",
+      "module": "p1m5",
+      "domain": "features",
+      "q": "A developer wants to ask Copilot how to change an editor setting and which VS Code command enables a feature. Which chat participant is intended for this?",
+      "options": [
+        "@terminal",
+        "@vscode",
+        "@github",
+        "@workspace"
+      ],
+      "answer": 1,
+      "explain": "@vscode has context about Visual Studio Code commands and features. @terminal focuses on the terminal shell, and @github on GitHub-specific skills.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-q10",
+      "module": "p1m5",
+      "domain": "prompt",
+      "q": "In Copilot Chat in VS Code, what does typing `#` in the chat input do?",
+      "options": [
+        "Starts a slash command, such as a request to generate tests or fix code",
+        "Mentions a person on the team so they get a notification",
+        "Adds context such as a file, symbol, folder, or tool to the prompt",
+        "Changes the model that will be used for the next response"
+      ],
+      "answer": 2,
+      "explain": "#-mentions explicitly add context items, such as files (#file), the codebase (#codebase), terminal output, or tools like #fetch. Slash commands start with /, and the model picker changes models.",
+      "source": "https://code.visualstudio.com/docs/chat/copilot-chat-context"
+    },
+    {
+      "id": "p1m5-q11",
+      "module": "p1m5",
+      "domain": "prompt",
+      "q": "A developer asks a VS Code agent where authentication is validated in a large repository and adds `#codebase` to the prompt. What does `#codebase` do?",
+      "options": [
+        "Uploads every file in the workspace into the model's context window",
+        "Requests a search across the workspace for the most relevant code",
+        "Restricts the answer to the file currently open in the active editor",
+        "Fetches the latest version of the repository from GitHub.com first"
+      ],
+      "answer": 1,
+      "explain": "#codebase asks for a search of relevant code across the workspace; it doesn't add the entire codebase to the model context. For a known file, add it explicitly with a #-mention.",
+      "source": "https://code.visualstudio.com/docs/chat/copilot-chat-context"
+    },
+    {
+      "id": "p1m5-q12",
+      "module": "p1m5",
+      "domain": "prompt",
+      "q": "A developer wants Copilot Chat to explain only the logic in controller.js, even though several other files are open. How should they write the prompt?",
+      "options": [
+        "Close all other editor tabs and then ask a general question",
+        "Reference the file explicitly, for example #file:controller.js",
+        "Start the prompt with @terminal so Copilot reads the file from disk",
+        "Add the file name to the repository's README before asking"
+      ],
+      "answer": 1,
+      "explain": "Scoping the question with a file reference (#file:controller.js) tells Copilot Chat to focus on that file's contents. Attaching important files explicitly is more reliable than relying on which tabs are open.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-across-environments/3-git-hub-copilot-chat"
+    },
+    {
+      "id": "p1m5-q13",
+      "module": "p1m5",
+      "domain": "prompt",
+      "q": "Copilot Chat generated a Dockerfile for a Python project, but it doesn't use a virtual environment as the team requires. What is the best next step?",
+      "options": [
+        "Accept it and fix the Dockerfile by hand, since Copilot can't adjust it",
+        "Rephrase the request, adding the constraint to use a virtual environment",
+        "Run /tests on the Dockerfile so Copilot detects the missing environment",
+        "Resend the identical question unchanged until a different answer eventually appears"
+      ],
+      "answer": 1,
+      "explain": "If a suggestion isn't what you want, reword the prompt and be more specific, for example asking for a Dockerfile that uses a Python virtual environment. Adding the constraint is more reliable than retrying the same prompt.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/advanced-github-copilot/4-applied-copilot-techniques"
+    },
+    {
+      "id": "p1m5-q14",
+      "module": "p1m5",
+      "domain": "features",
+      "q": "In VS Code chat, a developer wants the agent to research a feature request and propose an implementation plan before it changes any files. Which slash command fits?",
+      "options": [
+        "/plan",
+        "/fork",
+        "/compact",
+        "/clear"
+      ],
+      "answer": 0,
+      "explain": "/plan researches the task and proposes a plan before implementation. /fork copies the conversation to explore another approach, /compact summarizes earlier context, and /clear starts a new session.",
+      "source": "https://code.visualstudio.com/docs/agents/reference/ai-features-cheat-sheet"
+    },
+    {
+      "id": "p1m5-q15",
+      "module": "p1m5",
+      "domain": "prompt",
+      "q": "A developer wants a VS Code agent to update their app using the latest migration guide published online. How can they bring that web content into the request?",
+      "options": [
+        "Include the URL or use the #fetch tool in the prompt",
+        "Add the URL to the Space description in GitHub",
+        "Use @terminal and run curl to download the page",
+        "Paste the URL into a code comment and wait for ghost text"
+      ],
+      "answer": 0,
+      "explain": "You can include a URL directly in the prompt or use #fetch to retrieve web content; VS Code asks for confirmation before accessing external URLs. The other options don't add the page to chat context.",
+      "source": "https://code.visualstudio.com/docs/chat/copilot-chat-context"
+    },
+    {
+      "id": "p1m6-q01",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "In VS Code on Windows, a developer wants to cycle through alternative inline suggestions for the same spot without leaving the editor. Which shortcuts do this?",
+      "options": [
+        "Alt+] for next and Alt+[ for previous",
+        "Ctrl+] for next and Ctrl+[ for previous",
+        "Tab for next and Shift+Tab for previous",
+        "Ctrl+I for next and Ctrl+Shift+I for previous"
+      ],
+      "answer": 0,
+      "explain": "On Windows and Linux, Alt+] shows the next suggestion and Alt+[ the previous one (Option/Alt on macOS). Tab accepts a suggestion, and Ctrl+I opens inline chat.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/get-ide-code-suggestions"
+    },
+    {
+      "id": "p1m6-q02",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "None of the first few inline suggestions fit. In VS Code, the developer wants to compare several additional suggestions side by side in a separate tab. What should they press?",
+      "options": [
+        "Ctrl+Enter",
+        "Ctrl+Space",
+        "Alt+Enter",
+        "Ctrl+Shift+P"
+      ],
+      "answer": 0,
+      "explain": "Pressing Ctrl+Enter opens a new tab with multiple additional suggestions; you accept one with 'Accept suggestion NUMBER' or close the tab to reject them all.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/get-ide-code-suggestions"
+    },
+    {
+      "id": "p1m6-q03",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A Copilot suggestion starts correctly but goes wrong halfway through. In VS Code on Windows, how can the developer accept only the next word?",
+      "options": [
+        "Press Tab, then delete the unwanted part",
+        "Press Ctrl+Right Arrow to accept the next word",
+        "Press Alt+] until a shorter suggestion appears",
+        "Press Esc, then retype the first word manually"
+      ],
+      "answer": 1,
+      "explain": "Ctrl+Right Arrow (Command+Right Arrow on macOS) accepts the next word of a suggestion. Accepting the next line needs a custom keybinding for editor.action.inlineSuggest.acceptNextLine.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/get-ide-code-suggestions"
+    },
+    {
+      "id": "p1m6-q04",
+      "module": "p1m6",
+      "domain": "prompt",
+      "q": "A developer wants Copilot code completion to produce a sorting function that follows a specific sequence of steps, not just any sort. What is the most effective approach in the editor?",
+      "options": [
+        "Write comments that describe the algorithm's steps above the function",
+        "Name the file sort.py and wait for Copilot to pick an algorithm",
+        "Turn off other extensions so Copilot has fewer distractions",
+        "Accept the first suggestion and rely on code review to catch changes"
+      ],
+      "answer": 0,
+      "explain": "Copilot interprets comments as intent; when comments outline an algorithm's steps, it tends to suggest code that follows them. Comments also shape variable names and function implementations.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-across-environments/2-code-completion-with-git-hub-copilot"
+    },
+    {
+      "id": "p1m6-q05",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "After renaming a parameter, a developer sees an arrow in the editor gutter pointing to a related line further down that also needs to change. Which Copilot feature is this, and how do they move to it?",
+      "options": [
+        "Next edit suggestions; press Tab to go to it, then Tab again to accept",
+        "Multiple suggestions pane; press Ctrl+Enter to open it in a new tab",
+        "Inline chat; press Ctrl+I to ask Copilot to explain the arrow",
+        "Code referencing; hover the arrow to view the matching public code"
+      ],
+      "answer": 0,
+      "explain": "Next edit suggestions predict where and what edits may be needed based on your ongoing changes. A gutter arrow shows an available edit; Tab navigates to it and Tab again accepts.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/get-ide-code-suggestions"
+    },
+    {
+      "id": "p1m6-q06",
+      "module": "p1m6",
+      "domain": "productivity",
+      "q": "A pull request's CI check failed in GitHub Actions. A developer wants Copilot to read the failure and suggest how to fix it, directly from GitHub.com. What should they do?",
+      "options": [
+        "Re-run the workflow with debug logging and email the logs to Copilot",
+        "Use Explain error next to the failed check or on the workflow run page",
+        "Add @copilot to the workflow YAML and push a new commit to the branch",
+        "Open the repository's Insights tab and generate an Actions usage report"
+      ],
+      "answer": 1,
+      "explain": "Clicking Explain error next to the failed check in the merge box (or at the top of the workflow run summary) opens Copilot Chat with the failure as context, and Copilot suggests how to resolve it.",
+      "source": "https://docs.github.com/en/actions/how-tos/troubleshoot-workflows"
+    },
+    {
+      "id": "p1m6-q07",
+      "module": "p1m6",
+      "domain": "productivity",
+      "q": "A developer has already typed a few notes into a pull request description and then asks Copilot to generate a summary. The summary ignores their notes. Why, and what's the recommended practice?",
+      "options": [
+        "Copilot ignores existing description text, so start from a blank description",
+        "Copilot only reads notes written as Markdown checklists, so reformat the notes",
+        "Summaries only use the first commit message, so squash commits before generating",
+        "Copilot needs reviewer approval before reading notes, so request a review first"
+      ],
+      "answer": 0,
+      "explain": "Copilot doesn't take existing content in the PR description into account, so starting with a blank description gives the best results. Always review the generated summary and add context before saving.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/copilot-for-github-tasks/create-a-pr-summary"
+    },
+    {
+      "id": "p1m6-q08",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A Windows developer wants to install the current GitHub Copilot CLI. Which command is a supported installation method?",
+      "options": [
+        "gh extension install github/gh-copilot",
+        "winget install GitHub.Copilot",
+        "pip install github-copilot-cli",
+        "dotnet tool install -g copilot"
+      ],
+      "answer": 1,
+      "explain": "Copilot CLI can be installed with WinGet (winget install GitHub.Copilot), npm (npm install -g @github/copilot), Homebrew, or an install script. The old gh-copilot extension is retired.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli"
+    },
+    {
+      "id": "p1m6-q09",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A team wants a nightly script to run Copilot CLI with one prompt that summarizes the week's commits and then exits without user interaction. Which invocation fits best?",
+      "options": [
+        "copilot, then type the prompt and use /exit when it finishes",
+        "copilot -p \"Summarize this week's commits\" --allow-tool='shell(git)'",
+        "copilot --plan \"Summarize this week's commits\" and approve each step",
+        "gh copilot suggest \"Summarize this week's commits\" in the script"
+      ],
+      "answer": 1,
+      "explain": "The -p/--prompt option runs Copilot programmatically: it completes the task and exits. Pre-approving the needed tool (here shell(git)) avoids an approval prompt that nobody is there to answer.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-q10",
+      "module": "p1m6",
+      "domain": "privacy",
+      "q": "During a Copilot CLI session, Copilot asks to run `rm ./build.log` and the developer chooses 'Yes, and approve TOOL for the rest of the running session'. What is the consequence?",
+      "options": [
+        "Copilot may delete only build.log again without asking during this session",
+        "Copilot can run any rm command, such as rm -rf ./*, without asking this session",
+        "Copilot will never ask to approve rm again, in this session or in any future session",
+        "Copilot must still ask for approval if the rm command targets another file"
+      ],
+      "answer": 1,
+      "explain": "Option 2 approves the tool, not the exact command, for the rest of the running session, so Copilot can use any rm command without asking. Approval is requested again in new or resumed sessions.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-q11",
+      "module": "p1m6",
+      "domain": "privacy",
+      "q": "A developer wants Copilot CLI to run every tool without prompts except that it must never run `git push` or any `rm` command. Which command does this?",
+      "options": [
+        "copilot --yolo --allow-tool='shell' --allow-tool='write' --allow-url='github.com'",
+        "copilot --allow-all-tools --deny-tool='shell(rm)' --deny-tool='shell(git push)'",
+        "copilot --deny-tool='shell(rm)' then answer 'Yes' to every other prompt",
+        "copilot --allow-all-urls --available-tools='shell(git push),shell(rm)'"
+      ],
+      "answer": 1,
+      "explain": "--deny-tool takes precedence over --allow-all-tools and --allow-tool, so combining them blocks rm and git push while auto-approving everything else. For git and gh, you can target a first-level subcommand like 'git push'.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/configure-copilot-cli"
+    },
+    {
+      "id": "p1m6-q12",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "In an interactive Copilot CLI session, a developer wants Copilot to ask clarifying questions and build a structured plan before writing any code for a complex multi-step change. What should they do?",
+      "options": [
+        "Restart Copilot CLI with -p so it plans and then exits",
+        "Press Shift+Tab to switch to plan mode before giving the task",
+        "Run /compact so Copilot condenses the task description into a step-by-step plan",
+        "Run /context to see a breakdown of the planned steps"
+      ],
+      "answer": 1,
+      "explain": "Shift+Tab cycles the interactive interface into plan mode, where Copilot asks clarifying questions and builds a plan before coding (you can also start with --plan or use /plan). /compact and /context manage context, and -p is non-interactive.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-q13",
+      "module": "p1m6",
+      "domain": "privacy",
+      "q": "A new Copilot CLI user plans to always launch `copilot` from their home directory so it can reach all their projects. What is the security guidance?",
+      "options": [
+        "Fine, because Copilot CLI can only read files and never runs commands",
+        "Avoid it; launch from a trusted project directory, not the home directory",
+        "Fine, as long as they choose to trust the folder for all future sessions",
+        "Avoid it, because Copilot CLI only works inside a cloned Git repository"
+      ],
+      "answer": 1,
+      "explain": "Copilot CLI may read, modify, and execute files in and below the trusted directory, so you should only launch it from trusted directories and typically not from your home directory. Trusting a folder permanently increases, not reduces, the risk.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-q14",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A CI job must authenticate Copilot CLI without a browser. Which approach is supported?",
+      "options": [
+        "Set GITHUB_TOKEN to a classic personal access token with the repo and read:org scopes",
+        "Set COPILOT_GITHUB_TOKEN to a fine-grained PAT with the Copilot Requests permission",
+        "Run gh copilot auth with an organization-owned fine-grained token",
+        "Store the GitHub password in ~/.copilot/config.json before running"
+      ],
+      "answer": 1,
+      "explain": "Copilot CLI accepts a fine-grained, user-owned PAT with the Copilot Requests permission from COPILOT_GITHUB_TOKEN, GH_TOKEN, or GITHUB_TOKEN (in that order). Classic PATs aren't supported, and the permission isn't available on organization-owned tokens.",
+      "source": "https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference"
+    },
+    {
+      "id": "p1m6-q15",
+      "module": "p1m6",
+      "domain": "privacy",
+      "q": "A developer wants to try an agent workflow on an unfamiliar repository without Copilot CLI using their laptop's resources, and wants to check in on it from GitHub Mobile later. What should they use?",
+      "options": [
+        "Start the session with copilot --cloud to run it in a cloud sandbox",
+        "Run /sandbox enable to restrict filesystem and network access locally",
+        "Start the session with --allow-all so it finishes without interruptions",
+        "Run copilot -p so the session runs in the background after exit"
+      ],
+      "answer": 0,
+      "explain": "copilot --cloud runs the session in an isolated GitHub-hosted sandbox, so it doesn't use your machine and can be followed and steered from other Copilot clients. /sandbox enable restricts a local session but still runs on your machine.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-q16",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A developer wants to run three agent tasks on the same repository at once in the GitHub Copilot app without them overwriting each other's changes. How does the app support this?",
+      "options": [
+        "It locks the repository so only one session can write at a time",
+        "Each session can run in its own Git worktree and branch",
+        "It merges all three sessions' edits into one shared branch",
+        "It requires a separate clone of the repository for each task"
+      ],
+      "answer": 1,
+      "explain": "The app runs isolated agent sessions in parallel, each with a dedicated Git worktree and branch, so they don't interfere. The app manages the worktrees for you.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app"
+    },
+    {
+      "id": "p1m6-q17",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "In the GitHub Copilot app, a developer has a risky, multi-step refactor and wants to review and approve the agent's approach before it changes any code. Which session mode should they choose?",
+      "options": [
+        "Autopilot",
+        "Plan",
+        "Interactive",
+        "Chats"
+      ],
+      "answer": 1,
+      "explain": "In Plan mode the agent creates a plan first and you review and approve it before execution. Autopilot works fully autonomously, Interactive collaborates step by step, and Chats is a conversation without a branch or workspace.",
+      "source": "https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions"
+    },
+    {
+      "id": "p1m6-q18",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A lead wants one place to pick up issues, run several agents in parallel, review diffs, check CI, and merge pull requests without switching between terminal, IDE, and browser. Which Copilot surface is designed for this?",
+      "options": [
+        "Copilot code completion in the IDE",
+        "The GitHub Copilot app",
+        "Copilot Chat on GitHub Mobile",
+        "Copilot inline chat in the terminal"
+      ],
+      "answer": 1,
+      "explain": "The GitHub Copilot app is a desktop app for agent-driven development that brings parallel workstreams, GitHub integration, and PR lifecycle management into one place. It complements, not replaces, the IDE, CLI, and GitHub.com.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app"
+    },
+    {
+      "id": "p1m6-q19",
+      "module": "p1m6",
+      "domain": "privacy",
+      "q": "A developer is tired of approving every safe tool request in Copilot CLI but doesn't want to grant blanket permissions. Which option fits?",
+      "options": [
+        "Use /permissions assisted so a model auto-approves requests it judges safe",
+        "Use /yolo so all tools, paths, and URLs are approved for the session",
+        "Start Copilot CLI with --allow-all-tools and review the log afterwards",
+        "Use /reset-allowed-tools so prior approvals are applied automatically"
+      ],
+      "answer": 0,
+      "explain": "Assisted permissions use a model to assess eligible requests and auto-approve those judged safe, while still prompting for others; existing permissions and enterprise rules still apply. /yolo and --allow-all-tools grant blanket permission, and /reset-allowed-tools clears approvals.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/configure-copilot-cli"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p1m4-c01",
+      "module": "p1m4",
+      "domain": "features",
+      "front": "Copilot Space",
+      "back": "A Copilot chat grounded in curated context you choose (repos, files, PRs, issues, notes, uploads, instructions). Gives more consistent answers on a tightly scoped topic than general chat.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/spaces"
+    },
+    {
+      "id": "p1m4-c02",
+      "module": "p1m4",
+      "domain": "features",
+      "front": "Two kinds of context in a Space",
+      "back": "Instructions (free text: focus, tasks, what to avoid) and Sources (files/folders/repos, linked PRs and issues, uploaded files, pasted text). The description doesn't affect responses.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/create-copilot-spaces"
+    },
+    {
+      "id": "p1m4-c03",
+      "module": "p1m4",
+      "domain": "data",
+      "front": "Space: attach a repository vs an individual file",
+      "back": "Repository: Copilot searches it and retrieves only the most relevant content (good for large docs sets). File: full contents loaded into context for every query (good for a must-use guide).",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/create-copilot-spaces"
+    },
+    {
+      "id": "p1m4-c04",
+      "module": "p1m4",
+      "domain": "features",
+      "front": "Organization-owned Space roles",
+      "back": "Viewer: ask questions and view content. Editor: also change sources, name, description, instructions. Admin: also change sharing and delete. 'No access' hides the Space from org members.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/collaborate-with-others"
+    },
+    {
+      "id": "p1m4-c05",
+      "module": "p1m4",
+      "domain": "privacy",
+      "front": "Spaces and permissions",
+      "back": "A Space never grants new access. Viewers only see sources they already have permission for. Public personal Spaces are view-only by default.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/collaborate-with-others"
+    },
+    {
+      "id": "p1m4-c06",
+      "module": "p1m4",
+      "domain": "features",
+      "front": "Using a Space from your IDE",
+      "back": "Through the remote GitHub MCP server with the copilot_spaces toolset enabled, in agent mode only. Repository context and uploaded files aren't supported there.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/use-copilot-spaces"
+    },
+    {
+      "id": "p1m4-c07",
+      "module": "p1m4",
+      "domain": "features",
+      "front": "Space freshness",
+      "back": "GitHub-based sources update automatically and reflect the latest code on the main branch. For a branch-specific or historical view, narrow the files or add a text snapshot of the exact content.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-spaces/3-share-discover-govern"
+    },
+    {
+      "id": "p1m4-c08",
+      "module": "p1m4",
+      "domain": "prompt",
+      "front": "Space governance best practices",
+      "back": "One job per Space, a clear purpose-driven name, a named owner, a 'How to use this Space' note, 1–3 canonical examples, and a regular review cadence. Split the Space when it sprawls.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-spaces/3-share-discover-govern"
+    },
+    {
+      "id": "p1m4-c09",
+      "module": "p1m4",
+      "domain": "features",
+      "front": "Who can use Copilot Spaces, and where",
+      "back": "Anyone with a Copilot license, including Free. Use them in Copilot Chat on GitHub, or in the IDE through the GitHub MCP server. Questions count as Copilot Chat requests.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/spaces"
+    },
+    {
+      "id": "p1m5-c01",
+      "module": "p1m5",
+      "domain": "features",
+      "front": "Ghost text",
+      "back": "Copilot's greyed-out inline suggestion. Press Tab to accept, Esc to dismiss, or keep typing to ignore it.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/advanced-github-copilot/2-advanced-github-copilot-features"
+    },
+    {
+      "id": "p1m5-c02",
+      "module": "p1m5",
+      "domain": "features",
+      "front": "Inline chat (VS Code)",
+      "back": "Ctrl+I (Cmd+I on macOS). Chat inside the editor, scoped to the active file or selection, with a diff you can Keep or Undo. Also works in the terminal for shell commands.",
+      "source": "https://code.visualstudio.com/docs/chat/inline-chat"
+    },
+    {
+      "id": "p1m5-c03",
+      "module": "p1m5",
+      "domain": "prompt",
+      "front": "Slash commands",
+      "back": "Shortcuts that tell Copilot your intent for common tasks, so you need shorter prompts. Type / to see the commands available in your environment.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-c04",
+      "module": "p1m5",
+      "domain": "productivity",
+      "front": "/explain, /fix, /tests",
+      "back": "/explain: explain how the selected or active code works. /fix: propose a fix for problems in the selection. /tests: generate unit tests for the selected code.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-c05",
+      "module": "p1m5",
+      "domain": "productivity",
+      "front": "/doc and /optimize (Visual Studio)",
+      "back": "/doc adds a documentation comment for the symbol. /optimize analyzes and improves the running time of the selected code.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-c06",
+      "module": "p1m5",
+      "domain": "features",
+      "front": "Chat participants (@)",
+      "back": "Domain experts invoked with @, such as @terminal (terminal shell), @vscode (VS Code features), @github (GitHub skills). Current VS Code docs mark them deprecated in the Copilot harness.",
+      "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
+    },
+    {
+      "id": "p1m5-c07",
+      "module": "p1m5",
+      "domain": "prompt",
+      "front": "Chat variables / #-mentions",
+      "back": "Type # to add explicit context: #file, #selection, #codebase, terminal output, or tools such as #fetch.",
+      "source": "https://code.visualstudio.com/docs/chat/copilot-chat-context"
+    },
+    {
+      "id": "p1m5-c08",
+      "module": "p1m5",
+      "domain": "prompt",
+      "front": "#codebase",
+      "back": "Requests a search of the workspace for relevant code. It does NOT load the whole codebase into the model context.",
+      "source": "https://code.visualstudio.com/docs/chat/copilot-chat-context"
+    },
+    {
+      "id": "p1m5-c09",
+      "module": "p1m5",
+      "domain": "features",
+      "front": "/plan in VS Code chat",
+      "back": "Researches the task and proposes a plan before implementation. Other current VS Code slash commands include /compact (summarize context) and /fork (copy the conversation).",
+      "source": "https://code.visualstudio.com/docs/agents/reference/ai-features-cheat-sheet"
+    },
+    {
+      "id": "p1m5-c10",
+      "module": "p1m5",
+      "domain": "prompt",
+      "front": "Implicit prompts",
+      "back": "Features like slash commands provide a precrafted prompt (for example, select code and use /fix in inline chat), so you get good results without writing a long prompt.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/advanced-github-copilot/4-applied-copilot-techniques"
+    },
+    {
+      "id": "p1m6-c01",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Alternative inline suggestions (VS Code)",
+      "back": "Alt+] next, Alt+[ previous (Option/Alt on macOS). Ctrl+Enter opens multiple suggestions in a new tab. Ctrl+Right Arrow accepts the next word.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/get-ide-code-suggestions"
+    },
+    {
+      "id": "p1m6-c02",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Installing Copilot CLI",
+      "back": "npm install -g @github/copilot (Node.js 22+), winget install GitHub.Copilot, brew install --cask copilot-cli, or the install script. Run with `copilot`; use /login on first launch.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli"
+    },
+    {
+      "id": "p1m6-c03",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Copilot CLI: interactive vs programmatic",
+      "back": "`copilot` starts an interactive session. `copilot -p \"PROMPT\"` runs one prompt and exits; add approval flags such as --allow-tool so it can modify or execute files unattended.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-c04",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Copilot CLI plan mode",
+      "back": "Press Shift+Tab (or start with --plan, or use /plan). Copilot asks clarifying questions and builds a structured plan before writing any code.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-c05",
+      "module": "p1m6",
+      "domain": "privacy",
+      "front": "Copilot CLI tool approval flags",
+      "back": "--allow-all-tools, --allow-tool='shell(CMD)' / 'write' / 'MCP_SERVER(tool)', and --deny-tool, which always takes precedence. --allow-all (alias --yolo) also allows all paths and URLs.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/configure-copilot-cli"
+    },
+    {
+      "id": "p1m6-c06",
+      "module": "p1m6",
+      "domain": "privacy",
+      "front": "Copilot CLI trusted directories",
+      "back": "On launch you confirm trust for the current folder and everything below it, for this session or permanently. Launch only from trusted project folders, typically not your home directory.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/configure-copilot-cli"
+    },
+    {
+      "id": "p1m6-c07",
+      "module": "p1m6",
+      "domain": "privacy",
+      "front": "Copilot CLI local vs cloud sandbox",
+      "back": "/sandbox enable restricts filesystem, network, and system access on your machine. copilot --cloud runs the whole session in an isolated GitHub-hosted environment you can steer from other clients.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    },
+    {
+      "id": "p1m6-c08",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "GitHub Copilot app",
+      "back": "A desktop app (macOS, Windows, Linux) built on Copilot CLI. It runs parallel agent sessions in their own worktrees and branches and handles the PR lifecycle. It has its own policy, separate from the CLI policy.",
+      "source": "https://docs.github.com/en/copilot/concepts/copilot-surfaces/github-copilot-app"
+    },
+    {
+      "id": "p1m6-c09",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Copilot app session modes",
+      "back": "Interactive: collaborates and waits for your input. Plan: plans first, then you approve. Autopilot: works fully autonomously. Tool permissions are separate: Ask every time, Assisted, or Approve all.",
+      "source": "https://docs.github.com/en/copilot/how-tos/github-copilot-app/agent-sessions"
+    },
+    {
+      "id": "p1m6-c10",
+      "module": "p1m6",
+      "domain": "productivity",
+      "front": "Explain error (GitHub Actions)",
+      "back": "On a failed check in the PR merge box or the workflow run page, click Explain error. Copilot Chat opens with the failure as context and suggests a fix.",
+      "source": "https://docs.github.com/en/actions/how-tos/troubleshoot-workflows"
+    },
+    {
+      "id": "p1m6-c11",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Copilot CLI context management",
+      "back": "Copilot CLI auto-compacts history as you near the token limit. /compact compresses manually, and /context shows a token usage breakdown.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+    }
+  ]
+}

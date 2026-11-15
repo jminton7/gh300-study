@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GH-300">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>GH-300 Study</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e;--ac:#2f81f7;--acbg:rgba(47,129,247,.16);--ok:#2ea043;--okbg:rgba(46,160,67,.15);--bad:#f85149;--badbg:rgba(248,81,73,.14);--warn:#d29922}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+body{padding:env(safe-area-inset-top) 0 calc(64px + env(safe-area-inset-bottom));min-height:100vh}
+body.insession{padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+body.insession .tabs{display:none}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 2px}
+h2{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.07em;margin:26px 0 10px}
+a{color:var(--ac)}
+.muted{color:var(--mut)}
+.btn{display:block;width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;text-align:left;cursor:pointer}
+.btn:active{transform:scale(.99)}
+.btn.primary{background:var(--ac);border-color:var(--ac);color:#fff;text-align:center;font-weight:600}
+.btn.ok{background:var(--okbg);border-color:var(--ok);text-align:center;font-weight:600}
+.btn.bad{background:var(--badbg);border-color:var(--bad);text-align:center;font-weight:600}
+.btn:disabled{opacity:.4}
+.mode{margin:10px 0}
+.mode b{display:block;font-size:17px;margin-bottom:2px}
+.mode small{color:var(--mut);font-size:14px}
+.seg{display:flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.seg button{flex:1;padding:10px;background:var(--card);color:var(--mut);border:0;font:inherit;cursor:pointer}
+.seg button+button{border-left:1px solid var(--bd)}
+.seg button.on{background:var(--ac);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.chip{padding:7px 12px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--mut);font:inherit;font-size:14px;cursor:pointer}
+.chip.on{background:var(--acbg);border-color:var(--ac);color:var(--tx)}
+.chip.link{border-style:dashed}
+.grp{font-size:13px;color:var(--mut);margin-top:6px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.top .x{background:none;border:0;color:var(--mut);font-size:28px;line-height:1;padding:0 6px 0 0;cursor:pointer}
+.top .grow{flex:1;color:var(--mut);font-size:14px}
+.bar{height:6px;background:var(--card);border-radius:3px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--ac);transition:width .2s}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}
+.tag{font-size:12px;padding:3px 8px;border-radius:6px;background:var(--card);border:1px solid var(--bd);color:var(--mut)}
+.q{font-size:18px;font-weight:600;margin:8px 0 16px;white-space:pre-wrap}
+.opt{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+.opt .l{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--bd);display:grid;place-items:center;font-size:13px;color:var(--mut)}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.opt.sel{border-color:var(--ac);background:var(--acbg)}
+.opt.dim{opacity:.5}
+.fb{border-radius:12px;padding:14px;margin:14px 0;border:1px solid var(--bd);background:var(--card)}
+.fb.ok{border-color:var(--ok)}
+.fb.bad{border-color:var(--bad)}
+.fb b{display:block;margin-bottom:6px}
+.src{display:inline-block;margin-top:8px;font-size:13px;word-break:break-all}
+.row{display:flex;gap:10px;margin-top:16px}
+.row .btn{text-align:center}
+.flash{min-height:280px;border-radius:16px;border:1px solid var(--bd);background:var(--card);padding:24px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;margin-top:14px}
+.flash .f{font-size:20px;font-weight:600;text-align:center}
+.flash .b{font-size:17px;margin-top:16px;border-top:1px solid var(--bd);padding-top:16px;white-space:pre-wrap}
+.flash .hint{color:var(--mut);font-size:13px;text-align:center;margin-top:20px}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(13,17,23,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom);z-index:5}
+.tabs button{flex:1;padding:15px 0;background:none;border:0;color:var(--mut);font:inherit;font-size:14px;cursor:pointer}
+.tabs button.on{color:var(--tx);font-weight:600}
+.stat{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:14px 0 5px;font-size:15px}
+.stat span{color:var(--mut);font-size:13px;white-space:nowrap}
+.bar.g>i{background:var(--ok)}.bar.w>i{background:var(--warn)}.bar.r>i{background:var(--bad)}.bar.n>i{background:var(--bd)}
+.big{font-size:52px;font-weight:700;text-align:center;margin:24px 0 0}
+.sub{text-align:center;color:var(--mut)}
+.rev{border-left:3px solid var(--bad);padding:10px 12px;margin:12px 0;background:var(--card);border-radius:0 10px 10px 0;font-size:15px}
+.rev .rq{font-weight:600;margin-bottom:6px}
+.rev .ra{color:var(--ok);margin:4px 0}
+.rev .ry{color:var(--bad);margin:4px 0}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;text-align:center}
+.kpi b{display:block;font-size:22px}
+.kpi span{font-size:12px;color:var(--mut)}
+p{margin:10px 0}
+ul{padding-left:20px}
+li{margin:4px 0}
+</style>
+</head>
+<body>
+<main id="view"></main>
+<nav class="tabs">
+  <button data-tab="home">Study</button>
+  <button data-tab="stats">Progress</button>
+  <button data-tab="about">About</button>
+</nav>
+<script>const BANK = /*BANK*/null;</script>
+<script>
+(() => {
+"use strict";
+
+const MODULES = {
+  p1m1: "Responsible AI",
+  p1m2: "Intro to Copilot",
+  p1m3: "Prompt engineering",
+  p1m4: "Copilot Spaces",
+  p1m5: "Advanced features",
+  p1m6: "Across environments",
+  p1m7: "Management & customization",
+  p1m8: "Developer use cases",
+  p1m9: "Unit tests",
+  p2m1: "Agent mode",
+  p2m2: "Copilot in the cloud",
+  p2m3: "MCP Server",
+  p2m4: "Code review & PRs",
+  p2m5: "JavaScript",
+  p2m6: "Python",
+  extra: "Exam-guide extras"
+};
+const PARTS = [
+  ["Part 1", ["p1m1","p1m2","p1m3","p1m4","p1m5","p1m6","p1m7","p1m8","p1m9"]],
+  ["Part 2", ["p2m1","p2m2","p2m3","p2m4","p2m5","p2m6"]],
+  ["Extras", ["extra"]]
+];
+const DOMAINS = {
+  responsible: { name: "Responsible AI", w: 17.5, label: "15–20%" },
+  features: { name: "Copilot features", w: 27.5, label: "25–30%" },
+  data: { name: "Data & architecture", w: 12.5, label: "10–15%" },
+  prompt: { name: "Prompt engineering", w: 12.5, label: "10–15%" },
+  productivity: { name: "Productivity", w: 12.5, label: "10–15%" },
+  privacy: { name: "Privacy & safeguards", w: 12.5, label: "10–15%" }
+};
+const MODE_NAMES = { quiz: "Quiz", cards: "Flashcards", weak: "Weak spots", mock: "Mock exam", retry: "Retry" };
+const MOCK_SIZE = 50;
+const MOCK_MS = 100 * 60 * 1000;
+const LETTERS = "ABCD";
+
+const ALL = [
+  ...BANK.questions.map(x => ({ ...x, type: "q" })),
+  ...BANK.cards.map(x => ({ ...x, type: "c" }))
+];
+const QUESTIONS = ALL.filter(x => x.type === "q");
+
+const KEY = "gh300-study-v1";
+const S = load();
+function load() {
+  const d = { items: {}, mods: null, len: 20, hist: [] };
+  try { return Object.assign(d, JSON.parse(localStorage.getItem(KEY)) || {}); } catch { return d; }
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} }
+
+function rec(id, ok) {
+  const r = S.items[id] || (S.items[id] = { s: 0, c: 0, w: 0, box: 0, last: 0 });
+  r.s++;
+  if (ok) { r.c++; r.box = Math.min(4, r.box + 1); } else { r.w++; r.box = 0; }
+  r.last = Date.now();
+  save();
+}
+function weight(x) {
+  const r = S.items[x.id];
+  if (!r) return 3;
+  const base = [6, 3, 1.5, 0.7, 0.3][r.box];
+  const days = (Date.now() - r.last) / 864e5;
+  return base * (1 + Math.min(days, 3) * 0.3);
+}
+
+function h(tag, props, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v === false || v == null) continue;
+    if (k === "class") el.className = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids.flat(Infinity)) {
+    if (k == null || k === false) continue;
+    el.append(k.nodeType ? k : document.createTextNode(String(k)));
+  }
+  return el;
+}
+function shuffle(a) {
+  a = a.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function pick(pool, n, wfn) {
+  return pool
+    .map(x => ({ x, k: Math.pow(Math.random(), 1 / Math.max(wfn(x), 1e-6)) }))
+    .sort((a, b) => b.k - a.k)
+    .slice(0, n)
+    .map(o => o.x);
+}
+const pct = (c, n) => (n ? Math.round((c / n) * 100) : 0);
+function srcLink(url) {
+  if (!url) return null;
+  let label = url;
+  try { const u = new URL(url); label = u.hostname.replace(/^www\./, "") + u.pathname.replace(/\/$/, ""); } catch {}
+  return h("a", { class: "src", href: url, target: "_blank", rel: "noopener" }, "Source: " + label);
+}
+function fmt(ms) {
+  const s = Math.ceil(ms / 1000);
+  return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+}
+
+function activeMods() { return S.mods && S.mods.length ? S.mods : Object.keys(MODULES); }
+function inScope(x) { return activeMods().includes(x.module); }
+function weakPool() {
+  return ALL
+    .filter(x => inScope(x) && S.items[x.id] && S.items[x.id].w > 0 && S.items[x.id].box < 3)
+    .sort((a, b) => weight(b) - weight(a));
+}
+function mockSet(n) {
+  const totalW = Object.values(DOMAINS).reduce((a, d) => a + d.w, 0);
+  const chosen = new Set();
+  for (const [key, d] of Object.entries(DOMAINS)) {
+    const want = Math.round((n * d.w) / totalW);
+    shuffle(QUESTIONS.filter(q => q.domain === key)).slice(0, want).forEach(q => chosen.add(q));
+  }
+  const rest = shuffle(QUESTIONS.filter(q => !chosen.has(q)));
+  while (chosen.size < n && rest.length) chosen.add(rest.pop());
+  return shuffle([...chosen].slice(0, n));
+}
+
+const view = document.getElementById("view");
+let TAB = "home";
+let SES = null;
+let timer = null;
+
+function render() {
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b.dataset.tab === TAB && !SES));
+  let v;
+  if (SES) v = SES.done ? summaryView() : sessionView();
+  else if (TAB === "stats") v = statsView();
+  else if (TAB === "about") v = aboutView();
+  else v = homeView();
+  view.replaceChildren(v);
+}
+function go(tab) {
+  TAB = tab;
+  SES = null;
+  stopTimer();
+  document.body.classList.remove("insession");
+  render();
+  window.scrollTo(0, 0);
+}
+
+function homeView() {
+  const seenQ = QUESTIONS.filter(x => S.items[x.id]).length;
+  let s = 0, c = 0;
+  for (const r of Object.values(S.items)) { s += r.s; c += r.c; }
+  const scopeQ = ALL.filter(x => x.type === "q" && inScope(x)).length;
+  const scopeC = ALL.filter(x => x.type === "c" && inScope(x)).length;
+  const weak = weakPool().length;
+  const mode = (title, desc, fn, disabled) =>
+    h("button", { class: "btn mode", onclick: fn, disabled }, h("b", {}, title), h("small", {}, desc));
+  return h("div", {},
+    h("h1", {}, "GH-300 Study"),
+    h("div", { class: "muted" }, `${seenQ}/${QUESTIONS.length} questions seen` + (s ? ` · ${pct(c, s)}% correct overall` : "")),
+    h("h2", {}, "Study"),
+    mode("Quiz", `${scopeQ} questions in scope · instant feedback · favours ones you miss`, () => start("quiz"), !scopeQ),
+    mode("Flashcards", `${scopeC} cards in scope · tap to flip, then rate yourself`, () => start("cards"), !scopeC),
+    mode("Weak spots", weak ? `${weak} items you've been missing` : "Nothing here yet. Miss a few questions first.", () => start("weak"), !weak),
+    mode("Mock exam", `${MOCK_SIZE} questions weighted like the real exam · 100 min · results at the end · all topics`, () => start("mock")),
+    h("h2", {}, "Session length"),
+    seg([10, 20, 40], S.len, v => { S.len = v; save(); render(); }),
+    h("h2", {}, "Topics"),
+    topicsPicker()
+  );
+}
+function seg(values, cur, fn) {
+  return h("div", { class: "seg" }, values.map(v => h("button", { class: v === cur ? "on" : "", onclick: () => fn(v) }, v)));
+}
+function topicsPicker() {
+  const on = new Set(activeMods());
+  const all = Object.keys(MODULES);
+  const setMods = arr => { S.mods = arr.length === all.length || !arr.length ? null : arr; save(); render(); };
+  const toggle = m => {
+    const next = new Set(on);
+    if (!S.mods) { setMods([m]); return; }
+    next.has(m) ? next.delete(m) : next.add(m);
+    setMods([...next]);
+  };
+  const out = [
+    h("div", { class: "chips" },
+      h("button", { class: "chip link" + (!S.mods ? " on" : ""), onclick: () => setMods(all) }, "All topics"),
+      PARTS.slice(0, 2).map(([name, mods]) =>
+        h("button", { class: "chip link", onclick: () => setMods(mods) }, "Only " + name))
+    )
+  ];
+  for (const [name, mods] of PARTS) {
+    out.push(h("div", { class: "grp" }, name));
+    out.push(h("div", { class: "chips" }, mods.map(m =>
+      h("button", { class: "chip" + (S.mods && on.has(m) ? " on" : ""), onclick: () => toggle(m) }, MODULES[m]))));
+  }
+  out.push(h("div", { class: "muted", style: "font-size:13px" }, S.mods ? "Tap topics to add or remove them." : "Studying everything. Tap a topic to focus on it."));
+  return h("div", {}, out);
+}
+
+function start(mode) {
+  let items = [];
+  if (mode === "quiz") items = pick(QUESTIONS.filter(inScope), S.len, weight);
+  else if (mode === "cards") items = pick(ALL.filter(x => x.type === "c" && inScope(x)), S.len, weight);
+  else if (mode === "weak") items = shuffle(weakPool().slice(0, S.len));
+  else if (mode === "mock") items = mockSet(MOCK_SIZE);
+  if (!items.length) return;
+  begin(mode, items);
+}
+function begin(mode, items) {
+  SES = {
+    mode, items, i: 0, t0: Date.now(), done: false,
+    st: items.map(x => ({ order: x.type === "q" ? shuffle([0, 1, 2, 3]) : null, picked: null, flipped: false, res: null }))
+  };
+  document.body.classList.add("insession");
+  history.pushState({ s: 1 }, "");
+  if (mode === "mock") startTimer();
+  render();
+  window.scrollTo(0, 0);
+}
+function startTimer() {
+  stopTimer();
+  timer = setInterval(() => {
+    if (!SES) return stopTimer();
+    const r = Math.max(0, SES.t0 + MOCK_MS - Date.now());
+    const el = document.getElementById("timer");
+    if (el) el.textContent = fmt(r);
+    if (r <= 0) finish();
+  }, 1000);
+}
+function stopTimer() { if (timer) clearInterval(timer); timer = null; }
+
+function sessionView() {
+  const s = SES, it = s.items[s.i], st = s.st[s.i];
+  const remaining = Math.max(0, s.t0 + MOCK_MS - Date.now());
+  return h("div", {},
+    h("div", { class: "top" },
+      h("button", { class: "x", onclick: () => quit(false), "aria-label": "End session" }, "×"),
+      h("div", { class: "grow" }, `${MODE_NAMES[s.mode]} · ${s.i + 1} of ${s.items.length}`),
+      s.mode === "mock" ? h("div", { id: "timer", class: "muted" }, fmt(remaining)) : null
+    ),
+    h("div", { class: "bar" }, h("i", { style: `width:${(s.i / s.items.length) * 100}%` })),
+    h("div", { class: "tags" },
+      h("span", { class: "tag" }, MODULES[it.module] || it.module),
+      h("span", { class: "tag" }, (DOMAINS[it.domain] || {}).name || it.domain)
+    ),
+    it.type === "q" ? questionBody(it, st) : cardBody(it, st)
+  );
+}
+function questionBody(it, st) {
+  const mock = SES.mode === "mock";
+  const answered = st.picked != null;
+  const opts = st.order.map((oi, k) => {
+    let cls = "btn opt";
+    if (answered) {
+      if (mock) { if (oi === st.picked) cls += " sel"; }
+      else if (oi === it.answer) cls += " right";
+      else if (oi === st.picked) cls += " wrong";
+      else cls += " dim";
+    }
+    return h("button", { class: cls, onclick: () => choose(oi) }, h("span", { class: "l" }, LETTERS[k]), h("span", {}, it.options[oi]));
+  });
+  const parts = [h("div", { class: "q" }, it.q), opts];
+  if (answered && !mock) {
+    const ok = st.picked === it.answer;
+    parts.push(h("div", { class: "fb " + (ok ? "ok" : "bad") },
+      h("b", {}, ok ? "✓ Correct" : `✗ Incorrect. The answer is ${LETTERS[st.order.indexOf(it.answer)]}.`),
+      h("div", {}, it.explain),
+      srcLink(it.source)));
+  }
+  const last = SES.i === SES.items.length - 1;
+  parts.push(h("div", { class: "row" },
+    mock && SES.i > 0 ? h("button", { class: "btn", onclick: () => move(-1) }, "Back") : null,
+    h("button", { class: "btn primary", disabled: !answered && !mock, onclick: () => move(1) },
+      last ? "Finish" : mock && !answered ? "Skip" : "Next")));
+  return h("div", {}, parts);
+}
+function choose(oi) {
+  const it = SES.items[SES.i], st = SES.st[SES.i];
+  if (SES.mode === "mock") { st.picked = oi; render(); return; }
+  if (st.picked != null) return;
+  st.picked = oi;
+  st.res = oi === it.answer;
+  rec(it.id, st.res);
+  render();
+  const fb = document.querySelector(".fb");
+  if (fb) fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+function cardBody(it, st) {
+  const parts = [h("div", { class: "flash", onclick: () => { if (!st.flipped) { st.flipped = true; render(); } } },
+    h("div", { class: "f" }, it.front),
+    st.flipped ? h("div", { class: "b" }, it.back) : h("div", { class: "hint" }, "Tap to reveal"))];
+  if (st.flipped) {
+    parts.push(srcLink(it.source));
+    parts.push(h("div", { class: "row" },
+      h("button", { class: "btn bad", onclick: () => grade(false) }, "Missed it"),
+      h("button", { class: "btn ok", onclick: () => grade(true) }, "Knew it")));
+  }
+  return h("div", {}, parts);
+}
+function grade(ok) {
+  const st = SES.st[SES.i];
+  st.res = ok;
+  rec(SES.items[SES.i].id, ok);
+  move(1);
+}
+function move(d) {
+  SES.i += d;
+  if (SES.i >= SES.items.length) return finish();
+  if (SES.i < 0) SES.i = 0;
+  render();
+  window.scrollTo(0, 0);
+}
+function quit(fromBack) {
+  const progress = SES.st.some(x => x.res != null || x.picked != null);
+  if (!progress) { go("home"); return; }
+  const msg = SES.mode === "mock" ? "End the mock exam now? Unanswered questions count as wrong." : "End this session and see your results?";
+  if (confirm(msg)) finish();
+  else if (fromBack) history.pushState({ s: 1 }, "");
+}
+function finish() {
+  stopTimer();
+  const s = SES;
+  if (s.mode === "mock") {
+    s.items.forEach((it, i) => {
+      const st = s.st[i];
+      st.res = st.picked === it.answer;
+      if (st.picked != null) rec(it.id, st.res);
+    });
+  }
+  const graded = s.mode === "mock" ? s.st : s.st.filter(x => x.res != null);
+  s.score = { correct: graded.filter(x => x.res).length, total: graded.length };
+  s.done = true;
+  S.hist.unshift({ t: Date.now(), m: s.mode, c: s.score.correct, n: s.score.total });
+  S.hist = S.hist.slice(0, 30);
+  save();
+  document.body.classList.remove("insession");
+  render();
+  window.scrollTo(0, 0);
+}
+
+function summaryView() {
+  const s = SES, { correct, total } = s.score, p = pct(correct, total);
+  const missed = s.items.map((it, i) => [it, s.st[i]]).filter(([, st]) => st.res === false);
+  let verdict = "";
+  if (s.mode === "mock") verdict = p >= 80 ? "Looking ready." : p >= 70 ? "Borderline. Aim for 80%+ before booking." : "Not there yet. Hit Weak spots.";
+  return h("div", {},
+    h("h1", {}, MODE_NAMES[s.mode] + " complete"),
+    h("div", { class: "big" }, p + "%"),
+    h("div", { class: "sub" }, `${correct} of ${total} correct` + (verdict ? ` · ${verdict}` : "")),
+    s.mode === "mock" ? sessionDomains(s) : null,
+    missed.length ? h("h2", {}, `Review what you missed (${missed.length})`) : total ? h("p", { class: "sub" }, "Clean sweep 🎉") : null,
+    missed.map(([it, st]) => reviewItem(it, st)),
+    h("div", { class: "row" },
+      missed.length ? h("button", { class: "btn", onclick: () => begin("retry", shuffle(missed.map(m => m[0]))) }, "Retry missed") : null,
+      h("button", { class: "btn primary", onclick: () => go("home") }, "Done"))
+  );
+}
+function reviewItem(it, st) {
+  if (it.type === "c") return h("div", { class: "rev" }, h("div", { class: "rq" }, it.front), h("div", {}, it.back), srcLink(it.source));
+  return h("div", { class: "rev" },
+    h("div", { class: "rq" }, it.q),
+    st.picked != null ? h("div", { class: "ry" }, "✗ " + it.options[st.picked]) : h("div", { class: "ry" }, "✗ Not answered"),
+    h("div", { class: "ra" }, "✓ " + it.options[it.answer]),
+    h("div", { class: "muted" }, it.explain),
+    srcLink(it.source));
+}
+function sessionDomains(s) {
+  const rows = [];
+  for (const [key, d] of Object.entries(DOMAINS)) {
+    const idx = s.items.map((it, i) => i).filter(i => s.items[i].domain === key);
+    if (!idx.length) continue;
+    const c = idx.filter(i => s.st[i].res).length;
+    rows.push(statRow(d.name, `${c}/${idx.length}`, pct(c, idx.length), true));
+  }
+  return h("div", {}, h("h2", {}, "By exam domain"), rows);
+}
+function statRow(label, right, p, hasData) {
+  const cls = !hasData ? "n" : p >= 80 ? "g" : p >= 60 ? "w" : "r";
+  return h("div", {},
+    h("div", { class: "stat" }, h("div", {}, label), h("span", {}, right)),
+    h("div", { class: "bar " + cls }, h("i", { style: `width:${hasData ? Math.max(p, 3) : 0}%` })));
+}
+
+function groupStats(items) {
+  let s = 0, c = 0, seen = 0, mastered = 0;
+  for (const x of items) {
+    const r = S.items[x.id];
+    if (!r) continue;
+    seen++; s += r.s; c += r.c;
+    if (r.box >= 2) mastered++;
+  }
+  return { s, c, seen, mastered, n: items.length };
+}
+function statsView() {
+  const all = groupStats(ALL);
+  const out = [
+    h("h1", {}, "Progress"),
+    h("div", { class: "kpis" },
+      h("div", { class: "kpi" }, h("b", {}, `${all.seen}/${all.n}`), h("span", {}, "items seen")),
+      h("div", { class: "kpi" }, h("b", {}, all.s ? pct(all.c, all.s) + "%" : "–"), h("span", {}, "accuracy")),
+      h("div", { class: "kpi" }, h("b", {}, all.mastered), h("span", {}, "mastered"))),
+    h("p", { class: "muted", style: "font-size:13px" }, "Mastered means you got it right twice in a row. Bars show accuracy."),
+    h("h2", {}, "By exam domain")
+  ];
+  for (const [key, d] of Object.entries(DOMAINS)) {
+    const g = groupStats(ALL.filter(x => x.domain === key));
+    out.push(statRow(`${d.name} (${d.label} of exam)`, g.s ? `${pct(g.c, g.s)}% · ${g.mastered}/${g.n} mastered` : `${g.n} items`, pct(g.c, g.s), g.s > 0));
+  }
+  out.push(h("h2", {}, "By module"));
+  for (const [name, mods] of PARTS) {
+    out.push(h("div", { class: "grp" }, name));
+    for (const m of mods) {
+      const g = groupStats(ALL.filter(x => x.module === m));
+      if (!g.n) continue;
+      out.push(statRow(MODULES[m], g.s ? `${pct(g.c, g.s)}% · ${g.mastered}/${g.n} mastered` : `${g.n} items`, pct(g.c, g.s), g.s > 0));
+    }
+  }
+  if (S.hist.length) {
+    out.push(h("h2", {}, "Recent sessions"));
+    for (const x of S.hist.slice(0, 10)) {
+      const d = new Date(x.t);
+      out.push(h("div", { class: "stat" }, h("div", {}, MODE_NAMES[x.m] || x.m), h("span", {}, `${x.c}/${x.n} (${pct(x.c, x.n)}%) · ${d.toLocaleDateString()} ${d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`)));
+    }
+  }
+  out.push(h("h2", {}, "Reset"));
+  out.push(h("button", { class: "btn", style: "text-align:center;color:var(--bad)", onclick: () => {
+    if (confirm("Erase all progress on this device?")) { S.items = {}; S.hist = []; save(); render(); }
+  } }, "Reset all progress"));
+  return h("div", {}, out);
+}
+
+function aboutView() {
+  const nq = QUESTIONS.length, nc = ALL.length - nq;
+  return h("div", {},
+    h("h1", {}, "About"),
+    h("p", {}, `${nq} questions and ${nc} flashcards covering all 15 Microsoft Learn modules, plus exam-guide topics the modules don't cover well.`),
+    h("p", {}, `Checked against GitHub Docs and Microsoft Learn on ${BANK.built}. Copilot changes fast, so every answer links to its source. If something looks off, trust the source.`),
+    h("h2", {}, "The exam"),
+    h("ul", {},
+      h("li", {}, "100 minutes. You need a scaled score of 700 out of 1000 to pass (it's not a percentage)."),
+      h("li", {}, "Mostly scenario questions. Skills outline last updated 7 August 2026."),
+      h("li", {}, "You can retake after 24 hours if you fail.")),
+    h("h2", {}, "How the app picks questions"),
+    h("ul", {},
+      h("li", {}, "Questions and answer order are shuffled every time."),
+      h("li", {}, "New items and ones you've missed come up more often. Items you keep getting right fade out."),
+      h("li", {}, "Mock exam draws questions from each domain in proportion to the real exam's weighting.")),
+    h("h2", {}, "Your data"),
+    h("p", {}, "Progress is saved only in this browser on this device. Nothing is sent anywhere."),
+    h("p", { class: "muted", style: "font-size:13px" }, "Unofficial study aid. Not affiliated with GitHub or Microsoft.")
+  );
+}
+
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => go(b.dataset.tab)));
+window.addEventListener("popstate", () => {
+  if (SES && !SES.done) quit(true);
+  else if (SES) go("home");
+});
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1301 @@
+{
+  "questions": [
+    {
+      "id": "p2m1-q01",
+      "module": "p2m1",
+      "domain": "features",
+      "q": "A developer wants Copilot in VS Code to add a REST endpoint, install the needed package, write tests, and keep fixing problems until the tests pass. Which Copilot capability fits this best?",
+      "options": [
+        "Agent mode in Copilot Chat",
+        "Inline code completions while typing",
+        "A Copilot-generated pull request summary",
+        "Copilot code review of uncommitted changes"
+      ],
+      "answer": 0,
+      "explain": "Agent mode takes a high-level task, picks the files to change, makes the edits, runs commands, and keeps going until the task is done. Inline completions only suggest code as you type. They don't run commands or work through a multi-step task.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q02",
+      "module": "p2m1",
+      "domain": "features",
+      "q": "Agent mode generates unit tests, but they fail because of a syntax error. What does agent mode typically do next?",
+      "options": [
+        "Stops and asks the developer to debug the failure manually",
+        "Finds the cause, applies a fix, and re-runs the tests until they pass",
+        "Deletes the failing tests so the task can be marked complete",
+        "Opens a GitHub issue describing the failure and assigns it to a human to fix"
+      ],
+      "answer": 1,
+      "explain": "Agent mode iterates on its own output. When something fails, it finds the cause, fixes it, and checks again by re-running the tests. It doesn't immediately hand the debugging back to you.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/3-explore-the-power"
+    },
+    {
+      "id": "p2m1-q03",
+      "module": "p2m1",
+      "domain": "responsible",
+      "q": "In agent mode, Copilot proposes running `npm install` and a database migration script in the terminal. What happens by default?",
+      "options": [
+        "The commands run automatically without being shown to you",
+        "The commands are sent to a GitHub Actions runner to execute",
+        "You confirm or reject each command before it runs",
+        "The commands are ignored unless you copy them into a terminal"
+      ],
+      "answer": 2,
+      "explain": "You stay in control in agent mode. By default you approve terminal commands before they run, but admin or editor settings can let some commands run automatically. Agent mode runs commands locally in your IDE session, not on Actions runners.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q04",
+      "module": "p2m1",
+      "domain": "prompt",
+      "q": "Agent mode keeps producing code that breaks pricing rules your team never wrote down anywhere. What is the best way to improve the results?",
+      "options": [
+        "Switch to inline suggestions, which handle business rules better",
+        "Document the business rules in project files Copilot can use as context",
+        "Close all project files so agent mode relies only on its general training data",
+        "Ask agent mode to retry the same prompt until the output looks right"
+      ],
+      "answer": 1,
+      "explain": "Agent mode can struggle with specialized domain logic or business rules that aren't documented. Giving it clear context, such as documentation in the project, improves accuracy. Retrying the same prompt doesn't give it the missing information.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/3-explore-the-power"
+    },
+    {
+      "id": "p2m1-q05",
+      "module": "p2m1",
+      "domain": "prompt",
+      "q": "In the Learn module, what role do project documentation files such as README.md play when you work with agent mode?",
+      "options": [
+        "They are only for human readers and agent mode ignores them",
+        "They lock agent mode out of the files they describe",
+        "They help agent mode understand the project's intended behavior",
+        "They replace the need to write a prompt in Copilot Chat"
+      ],
+      "answer": 2,
+      "explain": "The module teaches that documentation files guide agent mode by describing how the project is supposed to behave. That shapes how it carries out tasks. They don't restrict file access, and you still need to write a prompt.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/6-summary"
+    },
+    {
+      "id": "p2m1-q06",
+      "module": "p2m1",
+      "domain": "features",
+      "q": "According to GitHub docs, which scenario is agent mode best suited to?",
+      "options": [
+        "Getting ghost-text completions for the line you are typing",
+        "Generating a one-line commit message for staged changes",
+        "A multi-step task where Copilot should decide the steps and handle errors",
+        "Searching the GitHub Marketplace for an extension and installing it for you"
+      ],
+      "answer": 2,
+      "explain": "The docs recommend agent mode for complex tasks with multiple steps, iterations, and error handling, where Copilot works out the steps itself. It also suits tasks that need external tools such as MCP servers. Completing a single line is what inline suggestions are for.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q07",
+      "module": "p2m1",
+      "domain": "prompt",
+      "q": "A developer wants agent mode to take on a large, loosely defined feature. What do the docs recommend before letting the agent edit code?",
+      "options": [
+        "Draft an implementation plan first, for example with plan mode",
+        "Enable automatic approval for every terminal command the agent proposes",
+        "Split the work across several repositories at once",
+        "Switch to inline suggestions for the first half of the work"
+      ],
+      "answer": 0,
+      "explain": "For large or ambiguous tasks, the docs suggest drafting an implementation plan first, for example with plan mode. Approving every command automatically gives you less oversight, not a clearer task.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q08",
+      "module": "p2m1",
+      "domain": "features",
+      "q": "Partway through a task, a developer sees agent mode heading in the wrong direction. What can they do?",
+      "options": [
+        "Nothing until it finishes, then revert every change it made",
+        "Submit a follow-up prompt to redirect the agent before it finishes",
+        "Restart the IDE, because a running agent session can't be interrupted mid-task",
+        "Open a pull request so a reviewer can stop the agent session"
+      ],
+      "answer": 1,
+      "explain": "Agent mode is interactive. While it works, you can send a follow-up prompt to redirect it, approve or reject proposed commands, and undo edits you don't want.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q09",
+      "module": "p2m1",
+      "domain": "responsible",
+      "q": "Agent mode proposes extensive changes to authentication logic and says it has already reviewed its own draft. What should the developer do?",
+      "options": [
+        "Accept everything as is, since the agent has already reviewed its own work",
+        "Review the changes, request revisions, and undo anything that doesn't fit",
+        "Turn off the test suite so the changes can be committed faster",
+        "Merge now and wait to see whether production reports any problems"
+      ],
+      "answer": 1,
+      "explain": "Even though agent mode reviews its own output, the developer stays in control. You can review, adjust, or revert any change, and that matters most for sensitive code like authentication. The agent's self-review doesn't replace human judgment.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/3-explore-the-power"
+    },
+    {
+      "id": "p2m1-q10",
+      "module": "p2m1",
+      "domain": "features",
+      "q": "A team wants agent mode to look up tickets in its external issue tracker while it works. How do they give agent mode that ability?",
+      "options": [
+        "Paste an export of the tickets into a code comment",
+        "Add the tracker to the repository's content exclusions",
+        "Add an MCP server that provides tools for the issue tracker",
+        "Install a language server for the tracker's query language"
+      ],
+      "answer": 2,
+      "explain": "Much of agent mode's power comes from the tools it can call. MCP servers add tools for external systems and for GitHub itself. Pasting an export only gives a static snapshot, not live tool access.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q11",
+      "module": "p2m1",
+      "domain": "features",
+      "q": "A developer whose Copilot license comes from their company can't see the Agent option in VS Code's Copilot Chat mode selector. What is the most likely reason?",
+      "options": [
+        "Agent mode only works inside GitHub Codespaces",
+        "An enterprise or organization admin has disabled agent mode for the IDE",
+        "Agent mode requires Docker to be installed on the machine",
+        "Agent mode is only available in Copilot Chat on GitHub.com, not in any IDE"
+      ],
+      "answer": 1,
+      "explain": "The docs note that if Agent is missing from the mode selector, an enterprise or organization admin may have disabled agent mode for your IDE. Agent mode also runs in local VS Code, not only in Codespaces.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-q12",
+      "module": "p2m1",
+      "domain": "productivity",
+      "q": "You ask agent mode to migrate a legacy JavaScript app to a modern framework. What is it most likely to do on its own?",
+      "options": [
+        "Give inline completions for the current file only, leaving dependencies and project structure alone",
+        "Find the relevant files, update dependencies, refactor across files, and run tests to check",
+        "Write a document explaining why to migrate and leave all coding to you",
+        "Ask you for manual input at every step and never run any tests"
+      ],
+      "answer": 1,
+      "explain": "Agent mode looks at the whole project, finds the relevant files and dependencies, makes changes across several files, and runs commands such as tests to check its work. Migrating legacy code is one of the uses the module highlights.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/2-what-is-agent-mode"
+    },
+    {
+      "id": "p2m2-q01",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "A team wants to hand a well-scoped bug fix to Copilot so the work happens in the background on GitHub and ends with a pull request they review. What should they do?",
+      "options": [
+        "Use agent mode in a local IDE session",
+        "Request a Copilot code review on the default branch",
+        "Assign the GitHub issue to Copilot",
+        "Generate a pull request summary with Copilot"
+      ],
+      "answer": 2,
+      "explain": "When you assign an issue to Copilot, the cloud agent works in its own development environment, opens a pull request, and requests your review when it finishes. Agent mode makes edits locally in your IDE session instead.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-cloud-agent-on-github"
+    },
+    {
+      "id": "p2m2-q02",
+      "module": "p2m2",
+      "domain": "responsible",
+      "q": "Which task is the best one to assign to Copilot cloud agent?",
+      "options": [
+        "Responding to a live production incident",
+        "A small bug fix with clear acceptance criteria",
+        "An open-ended redesign with no defined outcome",
+        "A task a junior developer wants to do to learn the codebase"
+      ],
+      "answer": 1,
+      "explain": "Copilot does best with clear, well-scoped tasks that have acceptance criteria. GitHub suggests keeping production-critical work, ambiguous tasks, and tasks people want to learn from for humans.",
+      "source": "https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results"
+    },
+    {
+      "id": "p2m2-q03",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "After an issue is assigned to Copilot, the product manager adds a comment on that issue with a changed requirement. What happens?",
+      "options": [
+        "Copilot picks up the comment and restarts the task",
+        "Copilot reads the comment the next time it pushes a commit to its branch",
+        "Copilot opens a second pull request to cover the new requirement",
+        "Copilot doesn't see it; post the change on Copilot's PR instead"
+      ],
+      "answer": 3,
+      "explain": "Copilot gets the issue title, description, and the comments that exist when it's assigned. It won't see or react to later comments on the issue. Add new information as a comment on the pull request that Copilot opens.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/use-cloud-agent-on-github"
+    },
+    {
+      "id": "p2m2-q04",
+      "module": "p2m2",
+      "domain": "privacy",
+      "q": "When Copilot cloud agent starts work from an issue assignment, where can it push code?",
+      "options": [
+        "Only to a new branch it creates, whose name starts with copilot/",
+        "Directly to the default branch once required checks pass",
+        "To any branch in the repository that isn't protected",
+        "To the branch of any open pull request in the repository"
+      ],
+      "answer": 0,
+      "explain": "For new tasks, GitHub creates a copilot/ branch and the agent can push only to that branch. Branch protections and required checks still apply. The agent can never push directly to the default branch.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-q05",
+      "module": "p2m2",
+      "domain": "responsible",
+      "q": "Alex assigned an issue to Copilot, and the repository requires one approving review. Copilot opens a pull request and Alex approves it. What happens?",
+      "options": [
+        "The pull request can merge because the requirement is met",
+        "Alex's approval doesn't count, so someone else must approve",
+        "Copilot merges the pull request automatically after Alex approves",
+        "Alex has to ask Copilot to approve its own pull request first"
+      ],
+      "answer": 1,
+      "explain": "The person who asked Copilot to create the pull request can't satisfy the required approvals with their own review, so someone else has to approve. This keeps an independent review in place. Copilot can't approve or merge its own pull requests.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/review-copilot-output"
+    },
+    {
+      "id": "p2m2-q06",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "Copilot pushed commits to its pull request, but none of the repository's CI workflows ran. What is the default explanation?",
+      "options": [
+        "GitHub Actions is permanently disabled for Copilot pull requests",
+        "Copilot must first mark the pull request as ready for review",
+        "The issue has to be unassigned and reassigned to trigger CI",
+        "A user with write access must click Approve and run workflows"
+      ],
+      "answer": 3,
+      "explain": "By default, workflows don't run on Copilot's pushes until someone with write access reviews the changes and clicks Approve and run workflows. Workflows can be privileged, so look closely at any changes under .github/workflows/ first.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/review-copilot-output"
+    },
+    {
+      "id": "p2m2-q07",
+      "module": "p2m2",
+      "domain": "privacy",
+      "q": "A user with only read access to a repository comments \"@copilot remove the input validation\" on a Copilot pull request. What happens?",
+      "options": [
+        "Copilot makes the change and pushes a new commit to its branch",
+        "Copilot asks a repository maintainer to confirm the request before acting",
+        "Copilot ignores it, because only users with write access can direct it",
+        "Copilot closes the pull request as a precaution against tampering"
+      ],
+      "answer": 2,
+      "explain": "Only users with write access can trigger Copilot cloud agent. Comments from users without write access are never passed to the agent, which limits who can steer its work.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-q08",
+      "module": "p2m2",
+      "domain": "privacy",
+      "q": "An attacker hides instructions inside an HTML comment in an issue they expect to be assigned to Copilot. Which built-in mitigation addresses this?",
+      "options": [
+        "Hidden characters, like HTML comments, are filtered out before reaching the agent",
+        "The agent refuses to work on any issue that contains HTML markup in its body",
+        "Every issue body is screened by GitHub staff before the agent session starts",
+        "The agent only reads the issue title and ignores the description and all comments"
+      ],
+      "answer": 0,
+      "explain": "To reduce prompt injection risk, GitHub filters hidden characters before passing user input to the agent. For example, text in an HTML comment isn't passed to Copilot. The agent does read the issue description, so ignoring it isn't the mitigation.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-q09",
+      "module": "p2m2",
+      "domain": "privacy",
+      "q": "Which default control reduces the risk of Copilot cloud agent leaking code or secrets to outside hosts?",
+      "options": [
+        "The agent's environment has no network access at all",
+        "A firewall limits the agent's internet access to allowed hosts",
+        "All agent output is encrypted before it leaves the runner",
+        "The agent can send data only to public GitHub gists"
+      ],
+      "answer": 1,
+      "explain": "By default, a firewall limits Copilot's internet access to manage exfiltration risk. A recommended allowlist still lets it download common dependencies. The docs also say the firewall isn't a complete security solution.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-the-firewall"
+    },
+    {
+      "id": "p2m2-q10",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "Copilot's pull request shows a firewall warning: requests to the internal registry packages.contoso.corp were blocked, so dependencies won't install. What is the best fix?",
+      "options": [
+        "Turn off branch protection on the default branch",
+        "Paste a personal access token into the issue description",
+        "Add the host to the Copilot firewall's custom allowlist",
+        "Mention the registry URL in copilot-instructions.md"
+      ],
+      "answer": 2,
+      "explain": "Organization owners and repository admins can add domains or URLs to the Copilot firewall's custom allowlist, unless an organization setting blocks repository-level rules. Mentioning the host in an instructions file doesn't change the network rules.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-the-firewall"
+    },
+    {
+      "id": "p2m2-q11",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "In sessions that run on GitHub Actions, Copilot wastes time installing project dependencies by trial and error. How can the team install them reliably before Copilot starts?",
+      "options": [
+        "Add npm install commands to the README for Copilot to read and follow",
+        "Add copilot-setup-steps.yml with a single copilot-setup-steps job",
+        "List every dependency and version in each issue assigned to Copilot",
+        "Add a setup.yml workflow that runs on every pull request Copilot opens"
+      ],
+      "answer": 1,
+      "explain": "A .github/workflows/copilot-setup-steps.yml file with a single job named copilot-setup-steps runs before Copilot starts. It installs tools and dependencies in a predictable way. This only applies to sessions that run on GitHub Actions.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment"
+    },
+    {
+      "id": "p2m2-q12",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "A developer adds a correct copilot-setup-steps.yml on a feature branch, but Copilot sessions on GitHub Actions still don't run the setup steps. Why?",
+      "options": [
+        "The file must be named copilot-setup-steps.yaml",
+        "Setup steps only run on self-hosted runners",
+        "The workflow must be present on the default branch",
+        "The job must be named setup instead of copilot-setup-steps"
+      ],
+      "answer": 2,
+      "explain": "The copilot-setup-steps.yml workflow won't trigger unless it's on the repository's default branch. The job must also be named copilot-setup-steps.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment"
+    },
+    {
+      "id": "p2m2-q13",
+      "module": "p2m2",
+      "domain": "privacy",
+      "q": "Copilot cloud agent needs an API key to reach a private package registry. The key already exists as a GitHub Actions repository secret, but the agent can't use it. Why?",
+      "options": [
+        "Actions secrets only become available to the agent after the PR is merged",
+        "The secret has to be pasted into copilot-instructions.md",
+        "Secrets are only available to agents on self-hosted runners",
+        "The agent doesn't get Actions secrets, only its own dedicated secrets"
+      ],
+      "answer": 3,
+      "explain": "Copilot cloud agent doesn't get the repository's or organization's GitHub Actions secrets. Only secrets set up specifically for the agent are passed to it. Never put secrets in instruction files or issue text.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/configure-secrets-and-variables"
+    },
+    {
+      "id": "p2m2-q14",
+      "module": "p2m2",
+      "domain": "prompt",
+      "q": "Copilot cloud agent keeps pushing changes that fail the repository's lint and test checks. What is the recommended fix?",
+      "options": [
+        "Document build, test, and lint steps in .github/copilot-instructions.md",
+        "Disable the failing CI checks for pull requests opened by Copilot",
+        "Redo the task with inline suggestions so a human writes each line",
+        "Increase the agent session timeout in the repository's Copilot settings"
+      ],
+      "answer": 0,
+      "explain": "Copilot validates its work in its own environment most reliably when it has clear instructions. A .github/copilot-instructions.md file that explains how to build, test, and lint is the recommended way to provide them.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/troubleshoot-cloud-agent"
+    },
+    {
+      "id": "p2m2-q15",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "An auditor wants to know who started a piece of work that Copilot cloud agent committed. Where can they find out?",
+      "options": [
+        "Nowhere, because agent commits carry no information about who requested them",
+        "Only in the GitHub Actions billing report for that month",
+        "In the commit (requester listed as co-author) and in session and audit logs",
+        "Only in the requester's local IDE chat history, which admins can't access"
+      ],
+      "answer": 2,
+      "explain": "Agent commits are authored by Copilot, and the developer who started the task is listed as co-author. Commit messages link to the session logs, and admins can also see session logs and audit log events.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-q16",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "A reviewer has six separate comments for Copilot on its pull request. How should they submit them so Copilot works on all of them together?",
+      "options": [
+        "Post each one with Add single comment, one after another",
+        "Use Start a review, then submit all the comments at once",
+        "Add the comments to the original issue instead of the PR",
+        "Edit the pull request description to list all six changes"
+      ],
+      "answer": 1,
+      "explain": "Copilot starts acting on comments as soon as they're submitted. Batching them with Start a review means Copilot works on the whole review at once instead of handling each comment separately.",
+      "source": "https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results"
+    },
+    {
+      "id": "p2m2-q17",
+      "module": "p2m2",
+      "domain": "features",
+      "q": "A developer with an Enterprise Managed User account tries to assign an issue in their personal repository to Copilot, and it doesn't work. What should they do?",
+      "options": [
+        "Use a repository owned by their organization instead",
+        "Install Docker locally so Copilot can run the task",
+        "Enable the MCP servers in Copilot policy for their account",
+        "Switch the repository's visibility from private to public"
+      ],
+      "answer": 0,
+      "explain": "Copilot cloud agent isn't available in personal repositories owned by managed user accounts, because GitHub-hosted runners aren't available there. Use repositories owned by the organization instead.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/troubleshoot-cloud-agent"
+    },
+    {
+      "id": "p2m3-q01",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "A team wants Copilot's agent to query their internal ticketing system during tasks, and they don't want to build a separate integration for every editor. Which approach fits?",
+      "options": [
+        "Paste ticket exports into each chat session",
+        "Expose the ticketing system through an MCP server",
+        "Add the ticketing system to content exclusions",
+        "List open tickets in copilot-instructions.md"
+      ],
+      "answer": 1,
+      "explain": "MCP is an open standard for connecting AI models to tools and data, and it works across the major Copilot surfaces. Static exports or instruction files can't give the agent live access to the tickets.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q02",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "Developers on a Copilot Business plan configured an MCP server in their IDE, but Copilot can't use it. What should the organization admin check first?",
+      "options": [
+        "That Docker Desktop is installed on every developer machine",
+        "That each developer has also bought a Copilot Pro plan",
+        "That the MCP servers in Copilot policy is enabled",
+        "That the repository is public rather than private"
+      ],
+      "answer": 2,
+      "explain": "For Copilot Business and Copilot Enterprise users, the MCP servers in Copilot policy must be enabled before they can use MCP with Copilot, and it's disabled by default. Docker is only needed for some local server setups.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q03",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "Which users are governed by an organization's MCP servers in Copilot policy?",
+      "options": [
+        "Every Copilot user in the organization, including people on Copilot Free and Pro",
+        "Users with a Copilot Business or Enterprise license from that org or enterprise",
+        "Only enterprise owners who use MCP servers from the GitHub Copilot CLI",
+        "Only outside collaborators who access the organization's repositories"
+      ],
+      "answer": 1,
+      "explain": "The policy only applies to users who get Copilot Business or Copilot Enterprise from an organization or enterprise that configures it. MCP access on individual plans such as Free, Pro, Pro+, or Max isn't controlled by this policy.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q04",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "A developer on GitHub.com wants the fastest way to use the GitHub MCP server in VS Code, without installing Docker or managing a token. What should they use?",
+      "options": [
+        "The local server image from ghcr.io run in Docker",
+        "A GitHub MCP server binary built from source",
+        "The remote GitHub-hosted server with OAuth sign-in",
+        "Copilot code review's built-in MCP configuration"
+      ],
+      "answer": 2,
+      "explain": "The remote GitHub MCP server is hosted by GitHub and recommended for most users. You sign in with OAuth, so there's no PAT to create or software to install. The local server is better if you need to customize the setup or have specific security requirements.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/set-up-the-github-mcp-server"
+    },
+    {
+      "id": "p2m3-q05",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "A company runs GitHub Enterprise Server and wants developers to use the GitHub MCP server. Which option applies?",
+      "options": [
+        "Run the GitHub MCP server locally, configured for the GHES host",
+        "Point clients at the remote hosted server at api.githubcopilot.com",
+        "Use MCP only through Copilot code review on GitHub.com",
+        "MCP can't be used with GitHub Enterprise Server at all"
+      ],
+      "answer": 0,
+      "explain": "GitHub Enterprise Server doesn't support the remote hosted MCP server, so you run the local server and configure it for your GHES host. The remote endpoint is for GitHub.com and GitHub Enterprise Cloud.",
+      "source": "https://github.com/github/github-mcp-server"
+    },
+    {
+      "id": "p2m3-q06",
+      "module": "p2m3",
+      "domain": "privacy",
+      "q": "A developer is setting up the GitHub MCP server in VS Code with a personal access token. Which option is the most secure way to supply the token?",
+      "options": [
+        "Hardcode the token in the workspace mcp.json and commit it",
+        "Use an input variable that prompts for the token as a password",
+        "Store the token in a plain-text file in the repository root",
+        "Put the token in the server URL as a query parameter"
+      ],
+      "answer": 1,
+      "explain": "The module recommends a promptString input with password set to true, referenced as ${input:github_token}, so the token is entered securely and never committed. Hardcoding the token or keeping it in a plain-text file risks leaking it.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/mcp-server/3-configure-connect"
+    },
+    {
+      "id": "p2m3-q07",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "Why do the docs recommend enabling only the GitHub MCP server toolsets you actually need?",
+      "options": [
+        "Each toolset adds a separate monthly subscription fee",
+        "Fewer tools improve tool selection and security and save context tokens",
+        "Only one toolset can be active at a time per MCP client",
+        "Unused toolsets automatically get write access to every repository you own"
+      ],
+      "answer": 1,
+      "explain": "With fewer tools, the model picks the right tool more accurately and makes fewer errors, security improves, and less of the context window is used up. You can enable several toolsets at once.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q08",
+      "module": "p2m3",
+      "domain": "privacy",
+      "q": "Copilot cloud agent uses the default GitHub MCP server, but it can't read issues from a different repository. Why?",
+      "options": [
+        "The GitHub MCP server has no tools for reading issues",
+        "The Playwright MCP server intercepts and blocks calls to other repositories",
+        "By default its token is read-only and scoped to the current repository",
+        "The firewall blocks all traffic to github.com from the agent"
+      ],
+      "answer": 2,
+      "explain": "By default, the cloud agent's GitHub MCP server uses a specially scoped token with read-only access to the current repository. To reach other repositories, you have to configure credentials with broader access.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q09",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "A repository admin adds a remote MCP server that requires OAuth to the repository's MCP configuration for Copilot cloud agent. What should they expect?",
+      "options": [
+        "It works, and each user approves the OAuth prompt during the agent session",
+        "It works only after the agent is switched to agent mode",
+        "It isn't supported, so they need a server using a key or token in secrets",
+        "It's converted to a read-only Playwright server automatically"
+      ],
+      "answer": 2,
+      "explain": "For MCP servers configured in repository settings, Copilot cloud agent and Copilot code review don't currently support remote servers that use OAuth. Credentials are passed with COPILOT_MCP_-prefixed secrets instead. They also only support MCP tools, not resources or prompts.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q10",
+      "module": "p2m3",
+      "domain": "responsible",
+      "q": "When you assign an issue to Copilot cloud agent, it uses configured MCP tools without asking for approval. Which practice best manages this risk?",
+      "options": [
+        "Allow only the tools the task needs, preferably read-only ones",
+        "Turn on every tool so the agent never gets stuck",
+        "Share your personal credentials with every MCP server so tools always work",
+        "Rely on the firewall to block any harmful MCP tool calls"
+      ],
+      "answer": 0,
+      "explain": "Delegated agents call MCP tools on their own without asking, so review each server and allowlist only the tools the task needs, preferably read-only. The firewall doesn't apply directly to MCP servers you configure.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-q11",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "A developer set up the GitHub MCP server in VS Code, but its tools don't appear in Copilot Chat. What should they check?",
+      "options": [
+        "That Copilot Chat is set to Agent so MCP tools can be used",
+        "That inline completions are turned on in VS Code settings",
+        "That the repository has a copilot-setup-steps.yml workflow",
+        "That Copilot code review is enabled for the repository"
+      ],
+      "answer": 0,
+      "explain": "To use GitHub MCP server tools in VS Code, select Agent in Copilot Chat, then open Configure tools to see them. copilot-setup-steps.yml only configures the cloud agent's environment.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/use-the-github-mcp-server"
+    },
+    {
+      "id": "p2m3-q12",
+      "module": "p2m3",
+      "domain": "features",
+      "q": "GitHub MCP server tools suddenly stop working in VS Code. Which troubleshooting step do both the docs and the Learn module list?",
+      "options": [
+        "Delete your personal access token and run without one",
+        "Make sure you're signed in to your GitHub account in the IDE",
+        "Remove every MCP server configuration and start over",
+        "Reinstall the Copilot extension on every machine in the team"
+      ],
+      "answer": 1,
+      "explain": "Both sources say to check that you're signed in to GitHub in the IDE. If you use a PAT, check that it's valid and has the right scopes. Restarting the MCP server or IDE is another listed step.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/use-the-github-mcp-server"
+    },
+    {
+      "id": "p2m4-q01",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "By default, what type of review does Copilot code review submit on a pull request?",
+      "options": [
+        "An Approve review that counts toward required approvals",
+        "A Request changes review that blocks merging",
+        "A Comment review that doesn't count toward required approvals",
+        "An automatic merge once all of its suggestions are applied"
+      ],
+      "answer": 2,
+      "explain": "By default, Copilot leaves a Comment review, not Approve or Request changes. That means it doesn't count toward required approvals or block merging, and humans make the final call.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-q02",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "A repository admin wants Copilot to review every pull request that targets main, whether or not each author has turned on automatic review for themselves. What should they set up?",
+      "options": [
+        "A branch ruleset with the automatic Copilot code review rule",
+        "A CODEOWNERS file that lists Copilot as owner of every path",
+        "An Actions workflow that runs a chat prompt on each PR",
+        "A request to every developer to enable it in personal settings"
+      ],
+      "answer": 0,
+      "explain": "A branch ruleset that automatically requests Copilot code review covers every pull request to the targeted branches. Personal settings only cover the pull requests that user creates.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+    },
+    {
+      "id": "p2m4-q03",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "An organization owner wants automatic Copilot reviews in every repository whose name ends in \"service\", without configuring each repository. What should they do?",
+      "options": [
+        "Create a repository ruleset in each matching repository by hand",
+        "Create an organization ruleset that targets repositories by name pattern",
+        "Add the name pattern to the organization's custom instructions for Copilot",
+        "Enable automatic review in their own personal Copilot settings"
+      ],
+      "answer": 1,
+      "explain": "Organization owners can create branch rulesets that target repositories with include or exclude patterns, such as *service. Custom instructions change what Copilot looks for in a review, not which pull requests it reviews.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+    },
+    {
+      "id": "p2m4-q04",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "Copilot automatically reviewed a pull request. The author then pushed three more commits, and Copilot didn't review again. Why?",
+      "options": [
+        "Copilot only reviews pull requests that are still drafts",
+        "Each pull request can only be reviewed once by Copilot",
+        "Review new pushes isn't enabled, so re-request a review manually",
+        "The new commits must be squashed into one before Copilot can see them"
+      ],
+      "answer": 2,
+      "explain": "Unless Review new pushes is turned on, Copilot reviews a pull request only once. You can ask it to review again with the re-request button next to Copilot in the Reviewers menu.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-q05",
+      "module": "p2m4",
+      "domain": "prompt",
+      "q": "A team wants every Copilot review in a repository to check for unsafe string interpolation and missing docstrings. Where should they put this guidance?",
+      "options": [
+        "In each pull request description",
+        "In .github/copilot-instructions.md",
+        "In the repository's CONTRIBUTING.md",
+        "In each developer's IDE settings"
+      ],
+      "answer": 1,
+      "explain": ".github/copilot-instructions.md holds repository-wide custom instructions that Copilot code review applies to every review. Copilot doesn't treat CONTRIBUTING.md as a custom instructions file.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-q06",
+      "module": "p2m4",
+      "domain": "prompt",
+      "q": "A team wants extra review rules to apply only to Ruby model files under app/models. What is the right setup?",
+      "options": [
+        "A \"Ruby models\" section at the end of the repository's .github/copilot-instructions.md",
+        "A .github/instructions/models.instructions.md file with applyTo: \"app/models/**/*.rb\"",
+        "A README.md inside app/models that lists the review rules for those files",
+        "A branch ruleset that targets the app/models path for Copilot reviews"
+      ],
+      "answer": 1,
+      "explain": "Path-specific instructions go in .github/instructions/**/*.instructions.md files. The applyTo frontmatter uses a glob to set which files they apply to. Copilot applies them only when the changed files match that glob.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/code-reviews-pull-requests-github-copilot/4-issues-early-automated-reviews-copilot"
+    },
+    {
+      "id": "p2m4-q07",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "A developer replies to one of Copilot's review comments on GitHub.com, asking it to explain the suggestion further. What happens?",
+      "options": [
+        "Copilot replies in the thread with a more detailed explanation",
+        "Copilot re-runs the whole review using the reply as additional context",
+        "The reply is visible to humans, but Copilot doesn't see it or reply",
+        "The reply is hidden from everyone except the pull request author"
+      ],
+      "answer": 2,
+      "explain": "Copilot's review comments behave like human ones, so you can react, resolve, or reply. But comments you add to its review comments aren't visible to Copilot, and it won't reply.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-q08",
+      "module": "p2m4",
+      "domain": "productivity",
+      "q": "A developer wants Copilot to catch style and security issues before anything reaches a pull request. What should they do?",
+      "options": [
+        "Request a Copilot review of their uncommitted changes in the IDE",
+        "Open a draft pull request and wait for a human reviewer",
+        "Assign the related issue to Copilot cloud agent instead",
+        "Add Copilot to CODEOWNERS for the files they are editing"
+      ],
+      "answer": 0,
+      "explain": "Copilot code review also works in IDEs such as VS Code, Visual Studio, and JetBrains. In VS Code you can review a selection or all uncommitted changes, so issues get fixed before you push.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-q09",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "A pull request changes package.json and src/app.js. Copilot's review comments only on src/app.js. What is the most likely reason?",
+      "options": [
+        "Copilot only reviews files written in TypeScript",
+        "Dependency management files like package.json are excluded from review",
+        "package.json must be listed in copilot-instructions.md before it is reviewed",
+        "Copilot reviews only the first file in each pull request"
+      ],
+      "answer": 1,
+      "explain": "Some file types are excluded from Copilot code review, including dependency management files such as package.json and Gemfile.lock, log files, and SVG files.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-q10",
+      "module": "p2m4",
+      "domain": "prompt",
+      "q": "A pull request from my-feature-branch into main also edits .github/copilot-instructions.md. Which version of the instructions does Copilot code review use?",
+      "options": [
+        "The version on main, the base branch",
+        "The version on my-feature-branch, the head branch",
+        "Neither, because instructions only apply after merge",
+        "Whichever version was most recently edited"
+      ],
+      "answer": 1,
+      "explain": "Copilot reads custom instructions, agent instructions, and skills from the head branch, the one with your changes. That lets you test changes to them in the same pull request.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-q11",
+      "module": "p2m4",
+      "domain": "responsible",
+      "q": "How should a team position Copilot code review in its process?",
+      "options": [
+        "As a replacement for human reviewers on all pull requests",
+        "As an advisory reviewer that supports human review and sign-off",
+        "As the final authority on architecture and design trade-offs",
+        "As a substitute for CI tests and code scanning in the pipeline"
+      ],
+      "answer": 1,
+      "explain": "Copilot isn't guaranteed to catch every problem, and it can make mistakes. Use it to catch issues early, alongside human review, tests, and scanning. Leave architectural decisions and final sign-off to people.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-q12",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "An organization on Copilot Business wants members who have no Copilot license to be able to request Copilot code reviews on GitHub.com. Is this possible?",
+      "options": [
+        "No, only users with a Copilot license can ever use Copilot code review",
+        "Yes, once an admin enables paid usage and the policy for unlicensed members",
+        "Yes, but only for reviews requested from inside a supported IDE such as VS Code",
+        "Yes, because it's enabled for every organization member by default"
+      ],
+      "answer": 1,
+      "explain": "On Business and Enterprise, an admin can turn on AI credits paid usage and then the policy that lets members without a license use Copilot code review on GitHub.com. That policy is off by default, and the option isn't available in IDEs.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-q13",
+      "module": "p2m4",
+      "domain": "features",
+      "q": "Developers who get Copilot through their organization can't add Copilot as a reviewer on GitHub.com pull requests. What should the organization owner check?",
+      "options": [
+        "That the Copilot code review option is enabled in Copilot policies",
+        "That the MCP servers in Copilot policy is enabled",
+        "That every repository has a copilot-setup-steps.yml file",
+        "That the developers have also bought personal Pro plans"
+      ],
+      "answer": 0,
+      "explain": "If you get Copilot from an organization, the organization must enable the Copilot code review option in its Copilot policy settings. This applies to reviews on GitHub.com and GitHub Mobile. The MCP policy controls something else.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-q14",
+      "module": "p2m4",
+      "domain": "productivity",
+      "q": "Copilot code review left several useful suggestions on a pull request. Which is a supported way to act on them?",
+      "options": [
+        "Commit the suggestions, or use Fix with Copilot to have the cloud agent apply them",
+        "Reply @copilot under each review comment so Copilot code review edits the files",
+        "Close the pull request and open a new one so the suggestions apply automatically",
+        "Ask a reviewer to approve, after which the suggestions are committed automatically"
+      ],
+      "answer": 0,
+      "explain": "You can commit one suggestion or a group of suggestions in a single commit. With Fix with Copilot, the cloud agent implements the feedback as a commit or a new pull request. Replies to Copilot code review comments aren't seen by the reviewer.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m5-q01",
+      "module": "p2m5",
+      "domain": "prompt",
+      "q": "In a JavaScript file, the comment `// Create an API endpoint` produces a suggestion that uses an unfamiliar framework and an unexpected payload. Which rewrite is most likely to get the code you want?",
+      "options": [
+        "// Create an API endpoint quickly, and make sure it is really good and works well",
+        "// Create an endpoint like the other ones that are somewhere in this project",
+        "// Create an Express POST /products endpoint that accepts JSON with name and price",
+        "// API endpoint here please, use whatever framework and fields you think best"
+      ],
+      "answer": 2,
+      "explain": "Vague prompts give Copilot room to pick frameworks and data shapes you don't expect. A specific prompt that names the framework, method, route, and payload makes the goal and scope clear.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/4-use-copilot-with-javascript"
+    },
+    {
+      "id": "p2m5-q02",
+      "module": "p2m5",
+      "domain": "features",
+      "q": "Copilot shows an inline suggestion as gray ghost text while you type in a .js file. How do you accept the whole suggestion?",
+      "options": [
+        "Press Tab",
+        "Press Esc",
+        "Press F1",
+        "Press Shift+Delete"
+      ],
+      "answer": 0,
+      "explain": "Pressing Tab accepts the suggestion, and Esc dismisses it. The docs also describe accepting just the next word, or showing other suggestions with keyboard shortcuts or the hover control.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/copilot-for-common-tasks/get-ide-code-suggestions"
+    },
+    {
+      "id": "p2m5-q03",
+      "module": "p2m5",
+      "domain": "prompt",
+      "q": "Inline suggestions in a React component keep ignoring the project's shared utility functions. What simple change is most likely to help?",
+      "options": [
+        "Open the relevant utility files and close unrelated ones",
+        "Rename the component file to use a .txt extension",
+        "Turn off syntax highlighting for the workspace",
+        "Move all the utility code into one very long comment at the top of the file"
+      ],
+      "answer": 0,
+      "explain": "For code completions, Copilot uses your open files as extra context. Opening the relevant files and closing unrelated ones helps it understand what you want.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+    },
+    {
+      "id": "p2m5-q04",
+      "module": "p2m5",
+      "domain": "prompt",
+      "q": "You want Copilot to build an HTML form that POSTs to /generate and shows the response in a div. Which prompting approach does the module recommend?",
+      "options": [
+        "Write one very long prompt covering every edge case before writing any code at all",
+        "Start with a simple prompt for the form, then add specific prompts for behavior",
+        "Avoid prompts and rely only on Copilot guessing from the file name",
+        "Keep repeating the same short prompt until the output changes"
+      ],
+      "answer": 1,
+      "explain": "The module suggests starting simple, for example \"create an HTML form with a text field and button\". Then you add more specific prompts, such as one for the event listener and the POST request. This matches GitHub's advice to start general and then get specific.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/4-use-copilot-with-javascript"
+    },
+    {
+      "id": "p2m5-q05",
+      "module": "p2m5",
+      "domain": "prompt",
+      "q": "You're not getting the JavaScript output you want from Copilot. Which action does the module recommend?",
+      "options": [
+        "Uninstall and reinstall the Copilot extension to reset its suggestions",
+        "Reword the prompt, or start writing code for Copilot to complete",
+        "Switch the file's language mode to plain text so Copilot stops guessing",
+        "Accept the suggestion anyway and plan to fix it before release"
+      ],
+      "answer": 1,
+      "explain": "If you're stuck, reword the prompt or start writing code so Copilot has more to go on. Output quality depends a lot on how well you write the prompt.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/4-use-copilot-with-javascript"
+    },
+    {
+      "id": "p2m6-q01",
+      "module": "p2m6",
+      "domain": "prompt",
+      "q": "In a .py file, a developer types `# Create a web API using FastAPI with a route to products.` and pauses. What does Copilot do?",
+      "options": [
+        "Ignores it, because Copilot never uses code comments as prompts in .py files",
+        "Treats the comment as a prompt and suggests code you can accept or reject",
+        "Scaffolds a new FastAPI project in a separate repository on GitHub",
+        "Opens a pull request that contains the generated API and its tests"
+      ],
+      "answer": 1,
+      "explain": "Copilot treats a natural-language comment in a code file as a prompt. It suggests code, such as a FastAPI app with a /products route, which you can accept or reject.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-python/2-what-is-github-copilot"
+    },
+    {
+      "id": "p2m6-q02",
+      "module": "p2m6",
+      "domain": "prompt",
+      "q": "Which Python comment prompt is most likely to produce the endpoint a developer actually needs?",
+      "options": [
+        "# Create an API endpoint for the app that does what the frontend needs it to do",
+        "# Make a good endpoint here, using whichever framework and fields seem best",
+        "# FastAPI POST endpoint: accept JSON {\"text\": str}, return the text's checksum",
+        "# Endpoint please, handle the request and return something useful to the caller"
+      ],
+      "answer": 2,
+      "explain": "A clear, specific prompt that names the framework, HTTP method, input shape, and expected output tells Copilot the goal and scope. Vague prompts may produce an unfamiliar framework or unexpected data.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-python/4-use-copilot-with-python"
+    },
+    {
+      "id": "p2m6-q03",
+      "module": "p2m6",
+      "domain": "productivity",
+      "q": "A FastAPI endpoint generated by Copilot crashes on startup because the base64 and os modules aren't imported. What is an efficient fix that keeps the developer accountable?",
+      "options": [
+        "Ask Copilot Chat to add the missing imports, then review and test the change",
+        "Delete the endpoint, because generated code with errors can't be repaired",
+        "Ignore the crash, because Copilot will fix it in the next suggestion",
+        "Disable error reporting so the application starts and serves requests anyway"
+      ],
+      "answer": 0,
+      "explain": "In the module exercise, you ask Copilot Chat to add the missing imports, then confirm the endpoint works at /docs. Generated code still needs reviewing and testing.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-python/5-exercise-python-web-api"
+    },
+    {
+      "id": "p2m6-q04",
+      "module": "p2m6",
+      "domain": "prompt",
+      "q": "A developer wants a Python function that pulls dates in several formats out of a string. Which addition to the prompt will most improve the result?",
+      "options": [
+        "A request to make the function as short as possible",
+        "Example inputs and the exact output expected for each",
+        "A note that the code is going into production soon",
+        "A list of unrelated functions from elsewhere in the module"
+      ],
+      "answer": 1,
+      "explain": "Examples help Copilot understand what you want. That includes sample input data, expected outputs, or unit tests written first. A request for short code or a note about production doesn't clarify the expected behavior.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+    },
+    {
+      "id": "p2m6-q05",
+      "module": "p2m6",
+      "domain": "responsible",
+      "q": "Copilot generates a Python data-processing function that looks correct at first glance. What should the developer do before relying on it?",
+      "options": [
+        "Commit it as is, because Copilot output is already validated",
+        "Review and test it as they would a colleague's code",
+        "Ask Copilot whether it is correct and trust its answer",
+        "Only check that the file still passes the formatter"
+      ],
+      "answer": 1,
+      "explain": "Check AI-generated code the same way you'd check a colleague's work: assess it, test it, and confirm it's correct before relying on it. Asking Copilot to grade its own code isn't validation.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p2m1-c01",
+      "module": "p2m1",
+      "domain": "features",
+      "front": "Agent mode (IDE)",
+      "back": "Copilot takes a high-level task, decides which files to change, edits them, runs commands, and keeps iterating until the task is done. You review the edits and, by default, approve commands.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-c02",
+      "module": "p2m1",
+      "domain": "features",
+      "front": "Agent mode's iterative cycle",
+      "back": "Find the relevant files and dependencies, make the edits, run terminal commands (install, build, test), then check the output and fix problems, repeating as needed.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/2-what-is-agent-mode"
+    },
+    {
+      "id": "p2m1-c03",
+      "module": "p2m1",
+      "domain": "features",
+      "front": "Self-healing in agent mode",
+      "back": "When something fails, such as generated tests, agent mode finds the cause, applies a fix, and re-runs until the check passes.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/3-explore-the-power"
+    },
+    {
+      "id": "p2m1-c04",
+      "module": "p2m1",
+      "domain": "features",
+      "front": "When to choose agent mode",
+      "back": "Complex tasks with multiple steps, iterations, and error handling, where Copilot should decide the steps itself or needs external tools such as MCP servers.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-c05",
+      "module": "p2m1",
+      "domain": "prompt",
+      "front": "Large or ambiguous task in agent mode",
+      "back": "Draft an implementation plan first, for example with plan mode, then let the agent carry it out. You can also send follow-up prompts to redirect it while it works.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m1-c06",
+      "module": "p2m1",
+      "domain": "responsible",
+      "front": "Agent mode limitation",
+      "back": "It can struggle with specialized domain logic, subtle business rules, or missing project context, which leads to less accurate results and more manual review. Give it clear context.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/3-explore-the-power"
+    },
+    {
+      "id": "p2m1-c07",
+      "module": "p2m1",
+      "domain": "prompt",
+      "front": "Documentation files and agent mode",
+      "back": "Project docs such as README.md help agent mode understand how the project is meant to behave, which shapes how it carries out tasks.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-agent-mode/6-summary"
+    },
+    {
+      "id": "p2m1-c08",
+      "module": "p2m1",
+      "domain": "features",
+      "front": "Extending agent mode",
+      "back": "Add MCP servers to give the agent tools for external systems and GitHub. Much of agent mode's power comes from the tools it can call.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/use-copilot-agents/use-agent-mode"
+    },
+    {
+      "id": "p2m2-c01",
+      "module": "p2m2",
+      "domain": "features",
+      "front": "Cloud agent vs agent mode",
+      "back": "The cloud agent works in the background on GitHub in its own development environment and produces branches and pull requests. Agent mode makes edits locally in your IDE session.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/github-copilot-code-agent/1-understand-enable-github-copilot-code-agent"
+    },
+    {
+      "id": "p2m2-c02",
+      "module": "p2m2",
+      "domain": "features",
+      "front": "Assigning an issue to Copilot: what you see",
+      "back": "Copilot adds a 👀 reaction, opens a draft pull request linked to the issue, works in a session you can watch, then requests your review when it's done.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/troubleshoot-cloud-agent"
+    },
+    {
+      "id": "p2m2-c03",
+      "module": "p2m2",
+      "domain": "privacy",
+      "front": "copilot/ branches",
+      "back": "For new tasks, Copilot can push only to a copilot/ branch created for it, never directly to the default branch. Branch protections and required checks still apply.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-c04",
+      "module": "p2m2",
+      "domain": "privacy",
+      "front": "Approve and run workflows",
+      "back": "By default, Actions workflows don't run on Copilot's pushes until a user with write access reviews the changes and clicks Approve and run workflows.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/review-copilot-output"
+    },
+    {
+      "id": "p2m2-c05",
+      "module": "p2m2",
+      "domain": "responsible",
+      "front": "Who can approve a Copilot PR?",
+      "back": "Someone other than the person who asked Copilot to make it. The requester's approval doesn't count toward required approvals, and Copilot can't approve or merge its own pull requests.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-c06",
+      "module": "p2m2",
+      "domain": "privacy",
+      "front": "Who can steer the cloud agent?",
+      "back": "Only users with write access. Their @copilot mentions are acted on, and comments from users without write access are never passed to the agent.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m2-c07",
+      "module": "p2m2",
+      "domain": "features",
+      "front": "copilot-setup-steps.yml",
+      "back": "A workflow at .github/workflows/copilot-setup-steps.yml with a single copilot-setup-steps job. It must be on the default branch, runs before Copilot starts, and applies only to sessions on GitHub Actions.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment"
+    },
+    {
+      "id": "p2m2-c08",
+      "module": "p2m2",
+      "domain": "privacy",
+      "front": "Copilot firewall",
+      "back": "Limits the agent's internet access by default to reduce exfiltration risk. Admins can use the recommended allowlist and add custom allowlist entries at the organization or repository level.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-the-firewall"
+    },
+    {
+      "id": "p2m2-c09",
+      "module": "p2m2",
+      "domain": "prompt",
+      "front": "Well-scoped cloud agent task",
+      "back": "A clear description of the problem, complete acceptance criteria (for example, whether tests are needed), and pointers to the files to change. Treat the issue as a prompt.",
+      "source": "https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results"
+    },
+    {
+      "id": "p2m2-c10",
+      "module": "p2m2",
+      "domain": "privacy",
+      "front": "Prompt-injection mitigation (cloud agent)",
+      "back": "Hidden characters, such as text in HTML comments in issues or PR comments, are filtered out before the input reaches the agent.",
+      "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
+    },
+    {
+      "id": "p2m3-c01",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "Model Context Protocol (MCP)",
+      "back": "An open standard for connecting AI models and apps to tools and data sources, often described as \"USB-C for AI tools\". It works across Copilot in IDEs, the CLI, and agents on GitHub.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-c02",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "Remote GitHub MCP server",
+      "back": "Hosted by GitHub at https://api.githubcopilot.com/mcp/ and recommended for most users. One-click OAuth (or a PAT), with no Docker or local install.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/set-up-the-github-mcp-server"
+    },
+    {
+      "id": "p2m3-c03",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "Local GitHub MCP server",
+      "back": "Runs on your machine, for example as a Docker image. Use it when you need a customized setup, have specific security requirements, or use GitHub Enterprise Server, which can't use the remote server.",
+      "source": "https://github.com/github/github-mcp-server"
+    },
+    {
+      "id": "p2m3-c04",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "\"MCP servers in Copilot\" policy",
+      "back": "An organization or enterprise policy, disabled by default, that controls MCP use. It applies only to users who get Copilot Business or Enterprise from that organization or enterprise.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-c05",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "GitHub MCP server toolsets",
+      "back": "Groups of tools you can turn on or off. The defaults are repos, issues, and pull_requests. Enable only what you need for better accuracy and security and fewer context tokens.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/configure-toolsets"
+    },
+    {
+      "id": "p2m3-c06",
+      "module": "p2m3",
+      "domain": "privacy",
+      "front": "COPILOT_MCP_ prefix",
+      "back": "Agent secrets and variables whose names start with COPILOT_MCP_ are available only to MCP servers in the cloud agent's MCP configuration. Other agent secrets are exposed as environment variables.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/configure-secrets-and-variables"
+    },
+    {
+      "id": "p2m3-c07",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "MCP limits for cloud agent and code review",
+      "back": "Tools only (no MCP resources or prompts), and no remote servers that use OAuth in repository config. Delegated agents call configured tools without asking for approval.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m3-c08",
+      "module": "p2m3",
+      "domain": "features",
+      "front": "Default MCP servers for cloud agent",
+      "back": "GitHub (a read-only token scoped to the current repository) and Playwright (web pages on localhost in the agent's own environment).",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+    },
+    {
+      "id": "p2m4-c01",
+      "module": "p2m4",
+      "domain": "features",
+      "front": "Copilot code review: default review type",
+      "back": "A Comment review, not Approve or Request changes. By default it doesn't count toward required approvals or block merging.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-c02",
+      "module": "p2m4",
+      "domain": "features",
+      "front": "Automatic Copilot code review at scale",
+      "back": "Repository or organization branch rulesets with the automatic Copilot code review rule. Org rulesets can target repositories by name pattern. Users can also turn it on for their own PRs.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
+    },
+    {
+      "id": "p2m4-c03",
+      "module": "p2m4",
+      "domain": "features",
+      "front": "\"Review new pushes\" / \"Review draft pull requests\"",
+      "back": "Optional automatic review settings. Without Review new pushes, Copilot reviews a pull request only once, so re-request it manually after new commits.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-c04",
+      "module": "p2m4",
+      "domain": "prompt",
+      "front": "Custom instructions for code review",
+      "back": ".github/copilot-instructions.md for repository-wide rules. Files at .github/instructions/**/*.instructions.md with applyTo globs for path-specific rules. AGENTS.md for context shared across agents.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-c05",
+      "module": "p2m4",
+      "domain": "prompt",
+      "front": "Which branch's instructions does code review use?",
+      "back": "The head branch, the one with your changes, so you can test edits to instructions or skills in the same pull request.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-c06",
+      "module": "p2m4",
+      "domain": "features",
+      "front": "Files Copilot code review skips",
+      "back": "Dependency management files (such as package.json and Gemfile.lock), log files, and SVG files.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
+    },
+    {
+      "id": "p2m4-c07",
+      "module": "p2m4",
+      "domain": "features",
+      "front": "Replying to Copilot review comments",
+      "back": "You can react to, resolve, or reply to them like a human's comments, but Copilot doesn't see your replies and won't respond.",
+      "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
+    },
+    {
+      "id": "p2m4-c08",
+      "module": "p2m4",
+      "domain": "productivity",
+      "front": "Copilot pull request summary",
+      "back": "Copilot can draft a summary of your changes in the PR description or a comment. It helps reviewers but is separate from reviewing the code.",
+      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent"
+    },
+    {
+      "id": "p2m5-c01",
+      "module": "p2m5",
+      "domain": "prompt",
+      "front": "Comment as a prompt",
+      "back": "A natural-language comment in a code file, such as \"// Create a web API using express...\", acts as a prompt. Copilot suggests matching code that you can accept (Tab) or reject.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/2-what-is-github-copilot"
+    },
+    {
+      "id": "p2m5-c02",
+      "module": "p2m5",
+      "domain": "prompt",
+      "front": "What is a prompt?",
+      "back": "Your input: a set of instructions or guidelines that tell Copilot what to generate. Output quality depends heavily on how well you write it.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/4-use-copilot-with-javascript"
+    },
+    {
+      "id": "p2m5-c03",
+      "module": "p2m5",
+      "domain": "prompt",
+      "front": "Open files as context",
+      "back": "For code completions, Copilot uses your open editor files as extra context. Open relevant files and close irrelevant ones.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+    },
+    {
+      "id": "p2m6-c01",
+      "module": "p2m6",
+      "domain": "prompt",
+      "front": "Start general, then get specific",
+      "back": "Describe the overall goal first, then list specific requirements, putting the most important ones first. Copilot gives extra weight to the start and end of a prompt.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+    },
+    {
+      "id": "p2m6-c02",
+      "module": "p2m6",
+      "domain": "prompt",
+      "front": "Break complex tasks down",
+      "back": "Split a large request into small, simple steps and ask Copilot for them one at a time instead of all at once.",
+      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+    },
+    {
+      "id": "p2m6-c03",
+      "module": "p2m6",
+      "domain": "prompt",
+      "front": "Vague vs specific Python prompt",
+      "back": "\"# Create an API endpoint\" is ambiguous. \"# Create an API endpoint using the FastAPI framework that accepts a JSON payload in a POST request\" makes the goal and scope clear.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-python/4-use-copilot-with-python"
+    }
+  ]
+}
