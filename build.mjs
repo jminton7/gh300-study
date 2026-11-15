@@ -37,7 +37,7 @@ for (const file of readdirSync(dataDir).filter(f => /^part-.*\.json$/.test(f)).s
     if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3) errors.push(`${where}: bad answer index`);
     if (!nonEmpty(q.explain)) errors.push(`${where}: missing explanation`);
     if (!/^https:\/\//.test(q.source || "")) errors.push(`${where}: missing https source`);
-    questions.push({ id: q.id, module: q.module, domain: q.domain, q: q.q.trim(), options: q.options.map(o => o.trim()), answer: q.answer, explain: q.explain.trim(), source: q.source });
+    questions.push({ id: q.id, module: q.module, domain: q.domain, q: q.q.trim(), options: q.options.map(o => o.trim()), answer: q.answer, explain: q.explain.trim(), source: q.source, ...(q.recent ? { recent: true } : {}) });
   }
   for (const c of data.cards || []) {
     const where = `${file} ${c.id}`;
@@ -47,7 +47,7 @@ for (const file of readdirSync(dataDir).filter(f => /^part-.*\.json$/.test(f)).s
     if (!DOMAINS.includes(c.domain)) errors.push(`${where}: bad domain ${c.domain}`);
     if (!nonEmpty(c.front) || !nonEmpty(c.back)) errors.push(`${where}: missing front/back`);
     if (!/^https:\/\//.test(c.source || "")) errors.push(`${where}: missing https source`);
-    cards.push({ id: c.id, module: c.module, domain: c.domain, front: c.front.trim(), back: c.back.trim(), source: c.source });
+    cards.push({ id: c.id, module: c.module, domain: c.domain, front: c.front.trim(), back: c.back.trim(), source: c.source, ...(c.recent ? { recent: true } : {}) });
   }
 }
 

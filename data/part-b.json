@@ -87,7 +87,7 @@
         "It indexes only files that were changed in the most recent pull request"
       ],
       "answer": 0,
-      "explain": "Attaching a repository doesn't load the whole project into memory; Copilot searches it and retrieves the most relevant content, which suits large-scale use cases. Loading everything would exceed model context limits.",
+      "explain": "Attaching a repository doesn't load the whole project into memory; Copilot searches it and retrieves the most relevant content, which suits large-scale use cases such as questions across all documentation. Only individually attached files have their full contents loaded for every query.",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/copilot-spaces/create-copilot-spaces"
     },
     {
@@ -304,7 +304,7 @@
       "id": "p1m5-q08",
       "module": "p1m5",
       "domain": "features",
-      "q": "In Copilot Chat, which chat participant has context about the VS Code integrated terminal shell and its contents, and is used to create or debug terminal commands?",
+      "q": "In Copilot Chat in VS Code, which chat participant has context about the integrated terminal shell and its contents, and is used to create or debug terminal commands?",
       "options": [
         "@vscode",
         "@github",
@@ -312,7 +312,7 @@
         "@workspace"
       ],
       "answer": 2,
-      "explain": "@terminal has context about the terminal shell and its contents. @vscode answers questions about VS Code features and settings and @github gives GitHub-specific skills; neither, nor @workspace, is the terminal participant. Note: current VS Code docs mark @-participants as deprecated in the Copilot harness (they remain for the Local harness).",
+      "explain": "@terminal has context about the terminal shell and its contents. @vscode answers questions about VS Code features and settings and @github gives GitHub-specific skills; neither, nor @workspace, is the terminal participant. Current VS Code docs: @-participants are deprecated and unsupported in the Copilot harness (kept only for the deprecated Local harness). Older material (and possibly the exam): @terminal, @vscode, and @workspace are standard participants.",
       "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
     },
     {
@@ -327,7 +327,7 @@
         "@workspace"
       ],
       "answer": 1,
-      "explain": "@vscode has context about Visual Studio Code commands and features. @terminal focuses on the terminal shell, and @github on GitHub-specific skills.",
+      "explain": "@vscode has context about Visual Studio Code commands and features. @terminal focuses on the terminal shell, and @github on GitHub-specific skills. Current VS Code docs mark @-participants deprecated in the Copilot harness (you just ask directly); older material (and possibly the exam) still teaches @vscode for this.",
       "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
     },
     {
@@ -366,7 +366,7 @@
       "domain": "prompt",
       "q": "A developer wants Copilot Chat to explain only the logic in controller.js, even though several other files are open. How should they write the prompt?",
       "options": [
-        "Close all other editor tabs and then ask a general question",
+        "Ask a general question and rely on the open tabs for context",
         "Reference the file explicitly, for example #file:controller.js",
         "Start the prompt with @terminal so Copilot reads the file from disk",
         "Add the file name to the repository's README before asking"
@@ -552,7 +552,7 @@
         "gh copilot suggest \"Summarize this week's commits\" in the script"
       ],
       "answer": 1,
-      "explain": "The -p/--prompt option runs Copilot programmatically: it completes the task and exits. Pre-approving the needed tool (here shell(git)) avoids an approval prompt that nobody is there to answer.",
+      "explain": "The -p/--prompt option runs Copilot programmatically: it completes the task and exits. Pre-approving the needed tool (here shell(git)) avoids an approval prompt that nobody is there to answer. Note: the Learn module calls `copilot -i` 'one-shot mode', but per the CLI reference -i starts an interactive session with that prompt; -p is the option that exits when done.",
       "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
     },
     {
@@ -597,7 +597,7 @@
         "Run /context to see a breakdown of the planned steps"
       ],
       "answer": 1,
-      "explain": "Shift+Tab cycles the interactive interface into plan mode, where Copilot asks clarifying questions and builds a plan before coding (you can also start with --plan or use /plan). /compact and /context manage context, and -p is non-interactive.",
+      "explain": "Shift+Tab cycles the interactive interface's modes (the CLI reference lists standard, plan, and autopilot). In plan mode Copilot asks clarifying questions and builds a plan before coding (you can also start with --plan or use /plan). /compact and /context manage context, and -p is non-interactive.",
       "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
     },
     {
@@ -643,7 +643,8 @@
       ],
       "answer": 0,
       "explain": "copilot --cloud runs the session in an isolated GitHub-hosted sandbox, so it doesn't use your machine and can be followed and steered from other Copilot clients. /sandbox enable restricts a local session but still runs on your machine.",
-      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli",
+      "recent": true
     },
     {
       "id": "p1m6-q16",
@@ -880,7 +881,7 @@
       "module": "p1m6",
       "domain": "features",
       "front": "Copilot CLI: interactive vs programmatic",
-      "back": "`copilot` starts an interactive session. `copilot -p \"PROMPT\"` runs one prompt and exits; add approval flags such as --allow-tool so it can modify or execute files unattended.",
+      "back": "`copilot` starts an interactive session. `copilot -p \"PROMPT\"` runs one prompt and exits; add approval flags such as --allow-tool so it can modify or execute files unattended. (`copilot -i \"PROMPT\"` starts an interactive session with that prompt; it does not exit.)",
       "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
     },
     {
@@ -913,7 +914,8 @@
       "domain": "privacy",
       "front": "Copilot CLI local vs cloud sandbox",
       "back": "/sandbox enable restricts filesystem, network, and system access on your machine. copilot --cloud runs the whole session in an isolated GitHub-hosted environment you can steer from other clients.",
-      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli"
+      "source": "https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli",
+      "recent": true
     },
     {
       "id": "p1m6-c08",

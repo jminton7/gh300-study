@@ -4,7 +4,7 @@
       "id": "p1m1-q01",
       "module": "p1m1",
       "domain": "responsible",
-      "q": "A lender uses an AI model to pre-screen loan applications. An audit finds that applicants with near-identical financial situations get different recommendations depending on their postcode. Which responsible AI principle is most directly at stake?",
+      "q": "A lender uses an AI model to pre-screen loan applications. An audit finds that applicants with near-identical financial situations get different recommendations depending on their ethnicity. Which responsible AI principle is most directly at stake?",
       "options": [
         "Fairness",
         "Inclusiveness",
@@ -67,7 +67,7 @@
       "q": "A developer accepted a Copilot suggestion that later caused a security vulnerability in production. According to GitHub's responsible use guidance, who bears responsibility for that code?",
       "options": [
         "The developer and team who accepted and shipped the code",
-        "GitHub, because its service generated the suggestion",
+        "GitHub, because its own service generated the suggestion",
         "The provider of the model that produced the suggestion",
         "Nobody, since AI output is probabilistic by nature"
       ],
@@ -294,7 +294,7 @@
         "Copilot doesn't currently support proxy URLs that start with https://",
         "Copilot needs a VPN instead of an HTTP proxy to reach its servers",
         "Copilot supports proxy authentication only through OAuth tokens",
-        "Copilot always bypasses the proxy and connects to GitHub directly"
+        "Copilot always bypasses the proxy and connects to GitHub servers directly"
       ],
       "answer": 0,
       "explain": "Copilot connects to proxies with its own code, so a proxy setup your editor supports may not work for Copilot. GitHub specifically says proxy URLs starting with https:// aren't currently supported. Proxy authentication is supported with basic auth or Kerberos, not OAuth.",
@@ -443,12 +443,12 @@
       "options": [
         "Start a new conversation and give a short, focused summary of the context",
         "Keep the same thread so Copilot remembers everything discussed so far",
-        "Paste the full authentication code again in every new prompt for safety",
+        "Paste the full authentication code again in every new prompt to be safe",
         "Switch to inline suggestions only, since they don't use any context"
       ],
       "answer": 0,
-      "explain": "Long histories add irrelevant context and cost more to process. Both the module and GitHub's docs recommend starting a new conversation for a new task, summarizing what matters, and referring to earlier work briefly instead of repeating it.",
-      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+      "explain": "The module warns that long histories become inefficient and costly to process, and recommends resetting with focused context, summarizing what matters, and referring to earlier work briefly instead of repeating it. GitHub's docs likewise say to start a new conversation when you begin a new task.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/2-prompt-engineering-foundations-best-practices"
     },
     {
       "id": "p1m3-q07",
@@ -489,7 +489,7 @@
         "Break it into small steps: build the grid first, then find words in it",
         "Repeat the same prompt several times until a complete version appears",
         "Make the prompt shorter, for example 'make word search', to cut ambiguity",
-        "Switch to few-shot prompting by pasting several complete word-search programs"
+        "Resubmit it with 'be thorough and complete' added to the end of the prompt"
       ],
       "answer": 0,
       "explain": "GitHub uses this exact example: break a complex task into simple steps (generate a grid, find words in it, combine them, print results) and ask for them one at a time. Repeating the same prompt doesn't add any information.",
@@ -608,7 +608,7 @@
       "options": [
         "It adds small trainable parts to each layer and leaves the original model unchanged",
         "It retrains all of the model's parameters on the target dataset for best accuracy",
-        "It removes the need for any task-specific data by relying on prompts alone",
+        "It removes the need for any task-specific training data by relying on prompts alone",
         "It replaces the pretrained model with a smaller one built from scratch"
       ],
       "answer": 0,
@@ -686,7 +686,7 @@
       "module": "p1m2",
       "domain": "features",
       "front": "Who can use Copilot Free?",
-      "back": "Individual developers who don't have Copilot access through an organization or enterprise. It offers limited access to selected features and models (auto model selection only).",
+      "back": "Individual developers who don't have Copilot access through an organization or enterprise. It offers limited monthly use of a selection of Copilot features, such as inline suggestions and chat, at no cost.",
       "source": "https://docs.github.com/en/copilot/get-started/plans"
     },
     {
@@ -694,7 +694,7 @@
       "module": "p1m2",
       "domain": "features",
       "front": "Free Copilot access for students, teachers, and OSS maintainers",
-      "back": "Verified students can get Copilot Student at no cost. Verified teachers and maintainers of popular open source projects may be eligible for free Copilot Pro.",
+      "back": "Verified students can get Copilot Student at no cost (older material says students get free Copilot Pro). Verified teachers and maintainers of popular open source projects may be eligible for free Copilot Pro.",
       "source": "https://docs.github.com/en/copilot/get-started/plans"
     },
     {
@@ -702,7 +702,7 @@
       "module": "p1m2",
       "domain": "features",
       "front": "Copilot Business vs. Copilot Enterprise",
-      "back": "Business: for organizations and enterprises, with centralized management, policy control, and content exclusion. Enterprise: for enterprises on GitHub Enterprise Cloud, with all Business features plus a larger AI credit pool and extra enterprise capabilities.",
+      "back": "Business: for organizations and enterprises, with centralized management, policy control, and content exclusion. Enterprise: for enterprises on GitHub Enterprise Cloud, with all Business features plus a larger monthly usage allowance (AI credits; older material: premium requests) and extra enterprise capabilities.",
       "source": "https://docs.github.com/en/copilot/get-started/plans"
     },
     {
@@ -775,7 +775,7 @@
       "domain": "prompt",
       "front": "Managing chat history",
       "back": "Long histories add irrelevant context and cost more to process. Start a new conversation for a new task, summarize the relevant context, and refer to earlier work briefly instead of repeating it.",
-      "source": "https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering"
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/2-prompt-engineering-foundations-best-practices"
     },
     {
       "id": "p1m3-c05",

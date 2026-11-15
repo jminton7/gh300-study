@@ -213,11 +213,12 @@ function weakPool() {
 function mockSet(n) {
   const totalW = Object.values(DOMAINS).reduce((a, d) => a + d.w, 0);
   const chosen = new Set();
+  const pool = QUESTIONS.filter(q => !q.recent);
   for (const [key, d] of Object.entries(DOMAINS)) {
     const want = Math.round((n * d.w) / totalW);
-    shuffle(QUESTIONS.filter(q => q.domain === key)).slice(0, want).forEach(q => chosen.add(q));
+    shuffle(pool.filter(q => q.domain === key)).slice(0, want).forEach(q => chosen.add(q));
   }
-  const rest = shuffle(QUESTIONS.filter(q => !chosen.has(q)));
+  const rest = shuffle(pool.filter(q => !chosen.has(q)));
   while (chosen.size < n && rest.length) chosen.add(rest.pop());
   return shuffle([...chosen].slice(0, n));
 }
@@ -341,7 +342,8 @@ function sessionView() {
     h("div", { class: "bar" }, h("i", { style: `width:${(s.i / s.items.length) * 100}%` })),
     h("div", { class: "tags" },
       h("span", { class: "tag" }, MODULES[it.module] || it.module),
-      h("span", { class: "tag" }, (DOMAINS[it.domain] || {}).name || it.domain)
+      h("span", { class: "tag" }, (DOMAINS[it.domain] || {}).name || it.domain),
+      it.recent ? h("span", { class: "tag", style: "color:var(--warn);border-color:var(--warn)" }, "Newer than exam") : null
     ),
     it.type === "q" ? questionBody(it, st) : cardBody(it, st)
   );
@@ -534,7 +536,8 @@ function aboutView() {
   return h("div", {},
     h("h1", {}, "About"),
     h("p", {}, `${nq} questions and ${nc} flashcards covering all 15 Microsoft Learn modules, plus exam-guide topics the modules don't cover well.`),
-    h("p", {}, `Checked against GitHub Docs and Microsoft Learn on ${BANK.built}. Copilot changes fast, so every answer links to its source. If something looks off, trust the source.`),
+    h("p", {}, `Checked against GitHub Docs and Microsoft Learn on ${BANK.built}, then independently audited. Every answer links to its source.`),
+    h("p", {}, "Where Copilot changed after the exam outline (7 Aug 2026), questions test what's true either way, and the explanation says what changed. Items tagged \"Newer than exam\" cover features released later; they're left out of the mock exam."),
     h("h2", {}, "The exam"),
     h("ul", {},
       h("li", {}, "100 minutes. You need a scaled score of 700 out of 1000 to pass (it's not a percentage)."),

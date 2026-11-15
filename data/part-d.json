@@ -252,7 +252,7 @@
         "Alex has to ask Copilot to approve its own pull request first"
       ],
       "answer": 1,
-      "explain": "The person who asked Copilot to create the pull request can't satisfy the required approvals with their own review, so someone else has to approve. This keeps an independent review in place. Copilot can't approve or merge its own pull requests.",
+      "explain": "The person who asked Copilot to create the pull request can't satisfy the required approvals with their own review, so someone else has to approve. This keeps an independent review in place. Copilot cloud agent can't approve or merge its own pull requests. Current docs also add one extra required approval (on by default in rulesets) when the pull request is opened under Copilot's own app identity rather than attributed to a person.",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/review-copilot-output"
     },
     {
@@ -342,7 +342,7 @@
         "Add a setup.yml workflow that runs on every pull request Copilot opens"
       ],
       "answer": 1,
-      "explain": "A .github/workflows/copilot-setup-steps.yml file with a single job named copilot-setup-steps runs before Copilot starts. It installs tools and dependencies in a predictable way. This only applies to sessions that run on GitHub Actions.",
+      "explain": "A .github/workflows/copilot-setup-steps.yml file with a single job named copilot-setup-steps runs before Copilot starts. It installs tools and dependencies in a predictable way. Current docs: this only applies to sessions that run on GitHub Actions, not cloud sandbox sessions (now the default). Older material (and possibly the exam) assumes every cloud agent session runs on GitHub Actions.",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment"
     },
     {
@@ -372,7 +372,7 @@
         "The agent doesn't get Actions secrets, only its own dedicated secrets"
       ],
       "answer": 3,
-      "explain": "Copilot cloud agent doesn't get the repository's or organization's GitHub Actions secrets. Only secrets set up specifically for the agent are passed to it. Never put secrets in instruction files or issue text.",
+      "explain": "Copilot cloud agent doesn't get the repository's or organization's GitHub Actions secrets. Only secrets set up specifically for the agent are passed to it. Current docs call these Agents secrets (repository or organization level). Older material describes them as secrets in the repository's `copilot` Actions environment, which have since been migrated. Never put secrets in instruction files or issue text.",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/configure-secrets-and-variables"
     },
     {
@@ -507,8 +507,8 @@
         "MCP can't be used with GitHub Enterprise Server at all"
       ],
       "answer": 0,
-      "explain": "GitHub Enterprise Server doesn't support the remote hosted MCP server, so you run the local server and configure it for your GHES host. The remote endpoint is for GitHub.com and GitHub Enterprise Cloud.",
-      "source": "https://github.com/github/github-mcp-server"
+      "explain": "GitHub Enterprise Server doesn't support the remote hosted MCP server, so you run the local server and point it at your GHES host (for example with GITHUB_HOST). The remote server at api.githubcopilot.com is for GitHub.com; GitHub Enterprise Cloud with data residency uses its own remote URL.",
+      "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/enterprise-configuration"
     },
     {
       "id": "p2m3-q06",
@@ -627,7 +627,7 @@
         "An automatic merge once all of its suggestions are applied"
       ],
       "answer": 2,
-      "explain": "By default, Copilot leaves a Comment review, not Approve or Request changes. That means it doesn't count toward required approvals or block merging, and humans make the final call.",
+      "explain": "By default, Copilot leaves a Comment review, not Approve or Request changes, so it doesn't count toward required approvals or block merging. Current docs: admins can turn on Copilot approvals (off by default) at enterprise, organization, and repository level, and then Copilot's approving reviews can count. Older material (and possibly the exam) says Copilot never approves.",
       "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
     },
     {
@@ -642,7 +642,7 @@
         "A request to every developer to enable it in personal settings"
       ],
       "answer": 0,
-      "explain": "A branch ruleset that automatically requests Copilot code review covers every pull request to the targeted branches. Personal settings only cover the pull requests that user creates.",
+      "explain": "A branch ruleset that automatically requests Copilot code review covers pull requests to the targeted branches, whatever the author's personal settings (for authors with Copilot access, or all members if review for unlicensed members is enabled). Personal settings only cover the pull requests that user creates.",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review"
     },
     {
@@ -696,13 +696,13 @@
       "domain": "prompt",
       "q": "A team wants extra review rules to apply only to Ruby model files under app/models. What is the right setup?",
       "options": [
-        "A \"Ruby models\" section at the end of the repository's .github/copilot-instructions.md",
+        "An app/models/.github/copilot-instructions.md file holding the rules",
         "A .github/instructions/models.instructions.md file with applyTo: \"app/models/**/*.rb\"",
         "A README.md inside app/models that lists the review rules for those files",
         "A branch ruleset that targets the app/models path for Copilot reviews"
       ],
       "answer": 1,
-      "explain": "Path-specific instructions go in .github/instructions/**/*.instructions.md files. The applyTo frontmatter uses a glob to set which files they apply to. Copilot applies them only when the changed files match that glob.",
+      "explain": "Path-specific instructions go in .github/instructions/**/*.instructions.md files. The applyTo frontmatter uses a glob to set which files they apply to, and Copilot applies them only when the changed files match. Repository-wide instructions are read only from .github/copilot-instructions.md at the repository root, not from a copy in a subfolder.",
       "source": "https://learn.microsoft.com/en-us/training/modules/code-reviews-pull-requests-github-copilot/4-issues-early-automated-reviews-copilot"
     },
     {
@@ -792,7 +792,7 @@
         "Yes, because it's enabled for every organization member by default"
       ],
       "answer": 1,
-      "explain": "On Business and Enterprise, an admin can turn on AI credits paid usage and then the policy that lets members without a license use Copilot code review on GitHub.com. That policy is off by default, and the option isn't available in IDEs.",
+      "explain": "On Business and Enterprise, an admin can turn on AI credits paid usage and then the policy that lets members without a license use Copilot code review on GitHub.com. That policy is off by default, and the option isn't available in IDEs. (Older material calls the paid-usage setting premium requests paid usage.)",
       "source": "https://docs.github.com/en/copilot/concepts/agents/code-review"
     },
     {
@@ -817,12 +817,12 @@
       "q": "Copilot code review left several useful suggestions on a pull request. Which is a supported way to act on them?",
       "options": [
         "Commit the suggestions, or use Fix with Copilot to have the cloud agent apply them",
-        "Reply @copilot under each review comment so Copilot code review edits the files",
+        "Thumbs-up each comment so Copilot code review commits the change itself",
         "Close the pull request and open a new one so the suggestions apply automatically",
         "Ask a reviewer to approve, after which the suggestions are committed automatically"
       ],
       "answer": 0,
-      "explain": "You can commit one suggestion or a group of suggestions in a single commit. With Fix with Copilot, the cloud agent implements the feedback as a commit or a new pull request. Replies to Copilot code review comments aren't seen by the reviewer.",
+      "explain": "You can commit one suggestion or a group of suggestions in a single commit. With Fix with Copilot, the cloud agent implements the feedback as a commit or a new pull request. Thumbs up/down only gives feedback on the comment; Copilot code review never commits changes by itself.",
       "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
     },
     {
@@ -1078,7 +1078,7 @@
       "module": "p2m2",
       "domain": "responsible",
       "front": "Who can approve a Copilot PR?",
-      "back": "Someone other than the person who asked Copilot to make it. The requester's approval doesn't count toward required approvals, and Copilot can't approve or merge its own pull requests.",
+      "back": "Someone other than the person who asked Copilot to make it; the requester's approval doesn't count toward required approvals. Copilot can't approve or merge its own pull requests, and PRs under Copilot's own identity need one extra approval by default.",
       "source": "https://docs.github.com/en/copilot/concepts/security-governance-and-network-settings/risks-and-mitigations"
     },
     {
@@ -1094,7 +1094,7 @@
       "module": "p2m2",
       "domain": "features",
       "front": "copilot-setup-steps.yml",
-      "back": "A workflow at .github/workflows/copilot-setup-steps.yml with a single copilot-setup-steps job. It must be on the default branch, runs before Copilot starts, and applies only to sessions on GitHub Actions.",
+      "back": "A workflow at .github/workflows/copilot-setup-steps.yml with a single copilot-setup-steps job. It must be on the default branch, runs before Copilot starts, and applies only to sessions on GitHub Actions (not cloud sandboxes, the current default).",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/customize-the-agent-environment"
     },
     {
@@ -1126,8 +1126,8 @@
       "module": "p2m3",
       "domain": "features",
       "front": "Model Context Protocol (MCP)",
-      "back": "An open standard for connecting AI models and apps to tools and data sources, often described as \"USB-C for AI tools\". It works across Copilot in IDEs, the CLI, and agents on GitHub.",
-      "source": "https://docs.github.com/en/copilot/concepts/agents/cloud-agent/mcp-and-cloud-agent"
+      "back": "An open standard for connecting AI models to the tools and data sources they need. The Learn module likens it to a USB-C standard for AI tools.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/mcp-server/2-simplify-workflow"
     },
     {
       "id": "p2m3-c02",
@@ -1158,7 +1158,7 @@
       "module": "p2m3",
       "domain": "features",
       "front": "GitHub MCP server toolsets",
-      "back": "Groups of tools you can turn on or off. The defaults are repos, issues, and pull_requests. Enable only what you need for better accuracy and security and fewer context tokens.",
+      "back": "Groups of tools you can turn on or off. The defaults include repos, issues, and pull_requests. Enable only what you need for better accuracy and security and fewer context tokens.",
       "source": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/configure-toolsets"
     },
     {
@@ -1190,7 +1190,7 @@
       "module": "p2m4",
       "domain": "features",
       "front": "Copilot code review: default review type",
-      "back": "A Comment review, not Approve or Request changes. By default it doesn't count toward required approvals or block merging.",
+      "back": "A Comment review, not Approve or Request changes, so by default it doesn't count toward required approvals or block merging. Admins can opt in to Copilot approvals that count (off by default).",
       "source": "https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review"
     },
     {

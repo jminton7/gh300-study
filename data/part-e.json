@@ -21,13 +21,13 @@
       "domain": "features",
       "q": "A contractor holds Copilot licenses from two different enterprises. Enterprise X disables Copilot Chat on GitHub.com; Enterprise Y enables it. What is the result for the contractor?",
       "options": [
-        "Disabled, because across different enterprises the most restrictive policy almost always applies to the user",
+        "Disabled: across different enterprises the most restrictive policy almost always applies",
         "Enabled, because the least restrictive policy applies whenever a user holds more than one license",
         "The enterprise that assigned its license first takes precedence until that license is removed",
         "The contractor's personal Copilot settings decide, since the two enterprise policies cancel out"
       ],
       "answer": 0,
-      "explain": "When a user has licenses from multiple different enterprises, the most restrictive policy almost always applies; the docs use exactly this Copilot Chat example. 'Least restrictive' is the usual rule for organizations within one enterprise.",
+      "explain": "When a user has licenses from multiple different enterprises, the most restrictive policy almost always applies; the docs use exactly this Copilot Chat example. The listed exceptions are AI credit paid usage and GitHub Spark. 'Least restrictive' is the usual rule for organizations within one enterprise.",
       "source": "https://docs.github.com/en/copilot/concepts/policies"
     },
     {
@@ -141,7 +141,7 @@
       "domain": "features",
       "q": "A developer pays for a personal Copilot Pro plan and is then assigned a Copilot Business seat by their employer's organization. What happens to the personal plan?",
       "options": [
-        "It's cancelled automatically with a prorated refund, and the user then follows the organization's policies",
+        "It's cancelled automatically with a prorated refund; the organization's policies then apply",
         "It stays active, and the user switches between personal and organization policies per repository",
         "It stays active, and its personal policies override the organization's wherever the two conflict",
         "It's paused until the Business seat is removed, then resumes automatically, with no refund issued"
@@ -252,7 +252,7 @@
         "Enable Copilot Memory, which stores audit events alongside repository facts"
       ],
       "answer": 0,
-      "explain": "The audit log keeps events for the last 180 days. GitHub recommends streaming it to a SIEM for long-term history and alerts. There is no setting to extend built-in retention to years.",
+      "explain": "The audit log keeps events for the last 180 days. For long-term history and alerts, GitHub recommends streaming the audit log to a SIEM platform rather than relying on built-in retention. Copilot Memory has nothing to do with audit events.",
       "source": "https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/review-activity/review-audit-logs"
     },
     {
@@ -289,15 +289,15 @@
       "id": "extra-q20",
       "module": "extra",
       "domain": "features",
-      "q": "An admin calls DELETE /orgs/{org}/copilot/billing/selected_users for a user who also belongs to a team with Copilot access. What happens?",
+      "q": "An org owner calls DELETE /orgs/{org}/copilot/billing/selected_users for a user whose Copilot seat was assigned to them directly, not through a team. What happens?",
       "options": [
-        "The seat goes to pending cancellation; access ends at the end of the cycle unless the user keeps team access",
+        "The seat is set to pending cancellation; the user keeps access until the billing cycle ends",
         "The user loses Copilot access immediately, and the unused days are refunded to the organization",
-        "Access ends immediately, and the user's team-based assignment is also removed by the same call",
-        "The request fails, because users with team-based access can only be removed by deleting the team"
+        "The seat is deleted at once, and the same call also removes the user from the organization",
+        "The request fails, because seats can only be removed on the organization's Copilot settings page"
       ],
       "answer": 0,
-      "explain": "Removing users sets their seats to 'pending cancellation'. They lose access at the end of the current billing cycle unless they keep access through team membership.",
+      "explain": "Removing users sets their seats to 'pending cancellation', and they lose access at the end of the current billing cycle (unless they keep access through team membership). If a user's seat was assigned via a team, this call returns a 422 error instead; remove the team with DELETE .../selected_teams.",
       "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
     },
     {
@@ -327,7 +327,7 @@
         "The \"Suggestions matching public code\" policy must be set to Allowed"
       ],
       "answer": 0,
-      "explain": "The usage metrics endpoints require the enterprise's \"Copilot usage metrics\" policy to be set to Enabled everywhere. The other policies control feature availability or privacy, not metrics API access.",
+      "explain": "The usage metrics endpoints require the enterprise's \"Copilot usage metrics\" policy to be set to Enabled everywhere. The other policies control feature availability or privacy, not metrics API access. Older material refers to a \"Copilot Metrics API\" access policy for the legacy metrics endpoints; either way it's the metrics policy, not a feature or privacy policy.",
       "source": "https://docs.github.com/en/rest/copilot/copilot-metrics"
     },
     {
@@ -351,7 +351,7 @@
       "domain": "prompt",
       "q": "A team wants Copilot to always follow their repository's coding conventions automatically, and separately wants a reusable \"generate a React form\" task that developers run only when needed. What is the best combination?",
       "options": [
-        "Conventions in .github/copilot-instructions.md; the reusable task as a .prompt.md in .github/prompts",
+        "Conventions in .github/copilot-instructions.md; the task as a .prompt.md in .github/prompts",
         "Put both in .github/copilot-instructions.md so they are automatically available in every chat",
         "Conventions in a .prompt.md file; the task in .github/copilot-instructions.md, run on demand",
         "Put both in AGENTS.md, since that file is only loaded when a developer invokes it manually"
@@ -477,7 +477,7 @@
         "Autopilot, which works autonomously but skips file edits while it researches"
       ],
       "answer": 0,
-      "explain": "Ask answers questions and researches the codebase with read-only tools only. Telling Agent not to change files guides the model but doesn't change its tools or permissions.",
+      "explain": "Ask answers questions and researches the codebase with read-only tools only. Telling Agent not to change files guides the model but doesn't change its tools or permissions. Older material describes Ask, Edit and Agent modes; Ask is the read-only choice in both.",
       "source": "https://code.visualstudio.com/docs/agents/run/agent-harnesses"
     },
     {
@@ -635,7 +635,7 @@
       "module": "extra",
       "domain": "features",
       "front": "Key Copilot audit log events",
-      "back": "cfb_seat_added / cfb_seat_cancelled (seats), cfb_org_settings_changed / cfb_enterprise_settings_changed (settings), cfb_seat_management_changed (who gets access), content_exclusion_changed (excluded paths).",
+      "back": "cfb_seat_added / cfb_seat_cancelled (seats), cfb_org_settings_changed / cfb_enterprise_settings_changed (feature settings), cfb_seat_management_changed (org access setting: all members, selected, or disabled), content_exclusion_changed (excluded paths).",
       "source": "https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/audit-log-events-for-your-enterprise"
     },
     {
@@ -651,7 +651,7 @@
       "module": "extra",
       "domain": "features",
       "front": "REST: removing Copilot users or teams",
-      "back": "DELETE on selected_users or selected_teams marks seats 'pending cancellation'. Access ends at the end of the billing cycle unless kept through another team. Only org owners can do this.",
+      "back": "DELETE on selected_users or selected_teams marks seats 'pending cancellation'; access ends at the end of the billing cycle unless kept through a team. A team-assigned seat can't be removed via selected_users (422). Org owners only.",
       "source": "https://docs.github.com/en/rest/copilot/copilot-user-management"
     },
     {
@@ -659,7 +659,7 @@
       "module": "extra",
       "domain": "features",
       "front": "REST: Copilot usage metrics",
-      "back": "Report endpoints (e.g. .../copilot/metrics/reports/organization-28-day/latest) return signed download links to daily or 28-day reports. They require the 'Copilot usage metrics' policy to be enabled.",
+      "back": "Report endpoints (e.g. .../copilot/metrics/reports/organization-28-day/latest) return signed download links to daily or 28-day reports. They require the enterprise's 'Copilot usage metrics' policy to be set to Enabled everywhere.",
       "source": "https://docs.github.com/en/rest/copilot/copilot-metrics"
     },
     {
@@ -723,7 +723,7 @@
       "module": "extra",
       "domain": "features",
       "front": "GitHub Spark status",
-      "back": "GitHub Spark on github.com has been deprecated and retired. It no longer accepts new users or new apps, but apps already deployed keep working.",
+      "back": "Spark on github.com stopped accepting new users and new apps on 4 Aug 2026 (export window to 31 Aug); deployed apps keep working. Older material (and possibly the exam) still presents Spark as a current feature.",
       "source": "https://github.blog/changelog/2026-08-04-upcoming-deprecation-of-github-spark-on-github-com/"
     }
   ]

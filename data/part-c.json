@@ -27,7 +27,7 @@
         "Organization owners and billing managers, but not repository administrators"
       ],
       "answer": 0,
-      "explain": "Current docs list repository administrators, organization owners, and enterprise owners. Exclusions are set in GitHub settings, not by individual developers or billing managers.",
+      "explain": "Current docs list repository administrators, organization owners, and enterprise owners. Exclusions are set in GitHub settings, not by individual developers or billing managers. The Learn module only mentions repository administrators and organization owners, so expect either wording on the exam.",
       "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
     },
     {
@@ -94,16 +94,16 @@
       "id": "p1m7-q07",
       "module": "p1m7",
       "domain": "privacy",
-      "q": "A developer uses Copilot agent mode in the IDE in a repository with content exclusions. Which statement about how exclusions apply to the agent is correct?",
+      "q": "A security team wants to rely on content exclusions alone to stop Copilot agents (IDE agent mode, Copilot CLI) from ever reading a secrets/ directory. What is the right guidance?",
       "options": [
-        "Agents ignore content exclusions entirely, so excluded files must be removed from the workspace before starting a session",
-        "It can't read excluded files via Copilot tools and paths in commands are checked, but indirect access may be missed",
-        "The agent can read excluded files for context but is blocked from editing or deleting them during the session",
-        "Exclusions apply to agents only when the session runs in the cloud, not in local IDE agent sessions"
+        "Don't rely on exclusions alone; also use OS permissions or keep secrets out of the repo",
+        "Exclusions fully block every Copilot agent, so no further controls are needed here",
+        "Set the public code filter to Block, which also hides sensitive files from agents",
+        "Add a rule to copilot-instructions.md, since agents are required to obey those rules"
       ],
-      "answer": 1,
-      "explain": "For agents in an IDE, Copilot CLI, or the Copilot app, exclusion blocks access through Copilot tools and checks identifiable file paths in commands and scripts, but might not detect indirect file access.",
-      "source": "https://docs.github.com/en/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot"
+      "answer": 0,
+      "explain": "This is the safe answer under both older and current material. Exam-era docs (through Aug 2026) said content exclusion was not supported in IDE agent/edit mode, Copilot CLI, or the coding agent. Since Sept 2026 the Copilot app and CLI honor exclusions, but the docs say exclusion is not a security boundary and may miss indirect file access. Either way, use real access controls. Instructions guide the model but aren't enforced.",
+      "source": "https://docs.github.com/en/copilot/concepts/context/content-exclusion"
     },
     {
       "id": "p1m7-q08",
@@ -237,7 +237,7 @@
         "It automatically rewrites any matching code until no match remains, then opens the pull request"
       ],
       "answer": 2,
-      "explain": "Docs say the cloud agent may generate code that matches public code even when the policy is Block. If that happens, Copilot shows the matches in the agent session logs with a link to details.",
+      "explain": "Docs say the cloud agent (formerly called Copilot coding agent) may generate code that matches public code even when the policy is Block. If that happens, Copilot shows the matches in the agent session logs with a link to details.",
       "source": "https://docs.github.com/en/copilot/responsible-use/agents"
     },
     {
@@ -352,7 +352,7 @@
       "q": "An admin wants to test that a new exclusion also works for Copilot Chat in the IDE. Which test is recommended?",
       "options": [
         "Ask Chat to list every file in the repository and confirm that the excluded file is missing from its answer list",
-        "Open only the excluded file, attach it, prompt \"explain this file\", and confirm it isn't used or listed as a reference",
+        "Open only the excluded file, attach it, prompt \"explain this file\", and check it isn't listed as a reference",
         "Commit a change to the excluded file and check whether Copilot code review leaves comments on it",
         "Rename the excluded file to a new path and confirm that Chat can then explain its full contents"
       ],
@@ -491,7 +491,7 @@
         "No; usage metrics track activity, not licenses. Use the Copilot user management API",
         "No, seat assignment data is only available by opening a ticket with GitHub Support"
       ],
-      "answer": 1,
+      "answer": 2,
       "explain": "Usage metrics measure activity, not license assignments. Docs point to the Copilot user management API for seat and license information.",
       "source": "https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
     },
@@ -567,7 +567,7 @@
         "/explain"
       ],
       "answer": 0,
-      "explain": "/tests generates unit tests for the selected code. /setupTests helps configure a test framework, and /fix proposes fixes for problems.",
+      "explain": "/tests generates unit tests for the selected code. /setupTests helps configure a test framework, and /fix proposes fixes for problems. These commands are what GitHub docs and the Learn module teach; VS Code's newer Copilot harness lists fewer built-in slash commands (such as /plan), so type / to see what your setup offers.",
       "source": "https://docs.github.com/en/copilot/reference/cheat-sheet"
     },
     {
@@ -952,6 +952,14 @@
       "front": "Consistent test conventions with Copilot",
       "back": "Put framework, naming, and Arrange-Act-Assert rules in custom instructions, such as a *.instructions.md file with applyTo scoped to test paths, committed to the repo.",
       "source": "https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions"
+    },
+    {
+      "id": "p1m7-c14",
+      "module": "p1m7",
+      "domain": "privacy",
+      "front": "Exam gotcha: content exclusion and agents",
+      "back": "Exam-era material (through Aug 2026): content exclusion is NOT supported in IDE agent/edit mode, Copilot CLI, or the Copilot coding agent. If the exam asks which features ignore exclusions, pick those. Since 2 Sep 2026 the Copilot app and CLI honor exclusions, with caveats.",
+      "source": "https://github.blog/changelog/2026-09-02-content-exclusions-generally-available-in-copilot-app-and-cli/"
     }
   ]
 }
