@@ -1,0 +1,76 @@
+{
+  "questions": [
+    {
+      "id": "p1m2-q60",
+      "module": "p1m2",
+      "domain": "features",
+      "q": "A friend asks whether they'd have to pay to use GitHub Copilot as an individual developer. Which statement matches what the GH-300 material expects?",
+      "options": [
+        "It's a paid subscription (Copilot Pro, $10/month), free for verified students, teachers, and OSS maintainers",
+        "It's completely free for everyone, with the same features and limits as the paid plans",
+        "It's only sold to organizations on GitHub Enterprise Cloud, so individuals can't buy it",
+        "It's free for anyone with a public GitHub profile and paid only for private repositories"
+      ],
+      "answer": 0,
+      "explain": "Microsoft's official practice assessment (checked Nov 2026) marks \"free for everyone\" as wrong and expects: paid ($10/month), free for verified students, teachers, and maintainers of popular open-source projects. A limited Copilot Free plan does exist today, but it isn't the same as the paid plans, so \"free for everyone\" with no caveat is still wrong. Copilot Pro is listed at $10 USD per month on the plans page.",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m6-q60",
+      "module": "p1m6",
+      "domain": "features",
+      "q": "A developer new to Copilot asks how to get inline code completions while editing a file. Which two approaches produce them? (Choose two.)",
+      "options": [
+        "Write a comment that describes the code you want, then start a new line",
+        "Start typing a line of code and let Copilot complete the line or block",
+        "Save the file so Copilot can scan it and insert suggested code",
+        "Open the Chat view from the sidebar and ask for a completion there",
+        "Commit the file so Copilot can index it before it suggests code"
+      ],
+      "answer": [0, 1],
+      "explain": "Inline completions come from what you write in the editor: a comment describing intent (Copilot suggests code on the next line), or partially typed code (Copilot completes the line or block). Accept with Tab, dismiss with Esc. The Chat view is a separate chat experience, not inline completion, and saving or committing doesn't trigger suggestions.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/2-what-is-github-copilot"
+    },
+    {
+      "id": "p1m5-q60",
+      "module": "p1m5",
+      "domain": "features",
+      "q": "In VS Code on Windows, a developer has the cursor inside a function and wants to ask Copilot for a change right there in the editor. Which shortcut opens inline chat?",
+      "options": [
+        "Ctrl+I",
+        "Ctrl+Alt+I",
+        "Ctrl+Shift+Alt+L",
+        "Ctrl+Shift+P"
+      ],
+      "answer": 0,
+      "explain": "Ctrl+I (Cmd+I on macOS) opens inline chat at the cursor. Ctrl+Alt+I opens the Chat view, Ctrl+Shift+Alt+L opens Quick Chat, and Ctrl+Shift+P is the Command Palette. Clicking the chat icon in the sidebar also opens the Chat view, not inline chat.",
+      "source": "https://code.visualstudio.com/docs/copilot/reference/copilot-vscode-features"
+    }
+  ],
+  "cards": [
+    {
+      "id": "p1m2-c60",
+      "module": "p1m2",
+      "domain": "features",
+      "front": "Exam gotcha: \"Is GitHub Copilot free?\"",
+      "back": "Expected answer: No. It's a paid service ($10/month for Copilot Pro), free for verified students, teachers, and popular open-source maintainers. \"Free for everyone\" is marked wrong, even though a limited Copilot Free plan exists (confirmed on Microsoft's practice assessment, Nov 2026).",
+      "source": "https://docs.github.com/en/copilot/get-started/plans"
+    },
+    {
+      "id": "p1m6-c60",
+      "module": "p1m6",
+      "domain": "features",
+      "front": "Two ways to get inline code completions",
+      "back": "1) From a comment describing what you want (start a new line after it). 2) From code you're typing (Copilot completes the line or block). Tab accepts, Esc dismisses.",
+      "source": "https://learn.microsoft.com/en-us/training/modules/introduction-copilot-javascript/2-what-is-github-copilot"
+    },
+    {
+      "id": "p1m5-c60",
+      "module": "p1m5",
+      "domain": "features",
+      "front": "VS Code: inline chat vs Chat view vs Quick Chat",
+      "back": "Inline chat: Ctrl+I / Cmd+I, in the editor at your cursor. Chat view: Ctrl+Alt+I / Ctrl+Cmd+I, or the chat icon. Quick Chat: Ctrl+Shift+Alt+L / Shift+Opt+Cmd+L. The chat icon opens the Chat view, not inline chat.",
+      "source": "https://code.visualstudio.com/docs/copilot/reference/copilot-vscode-features"
+    }
+  ]
+}

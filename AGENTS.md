@@ -18,7 +18,7 @@ A phone study app (offline-capable PWA) for **GH-300, the GitHub Copilot certifi
 ## Layout
 
 ```
-data/part-a..h.json   question bank (questions + flashcards), see "Bank" below
+data/part-a..i.json   question bank (questions + flashcards), see "Bank" below. part-i = practice-assessment follow-ups
 data/BRIEF.md         writing rules for questions, incl. the "Exam alignment" section (read this first)
 data/AUDIT.md         rules used for independent accuracy audits
 data/audit-*.md       audit logs (what was changed and why, per file)
@@ -45,7 +45,7 @@ go to `%TEMP%\gh300-shots`. Expected output: `summary: 95%` and `errors: none`.
 
 ## Bank
 
-322 questions and 184 flashcards over all 15 Microsoft Learn modules (Part 1 + Part 2 learning paths) plus `extra`
+325 questions and 187 flashcards over all 15 Microsoft Learn modules (Part 1 + Part 2 learning paths) plus `extra`
 (study-guide topics the modules don't cover). Domains and exam weights are in `DOMAINS` in `src/index.html`.
 
 - Question: `{id, module, domain, q, options[4], answer, explain, source}`.
@@ -107,6 +107,15 @@ go to `%TEMP%\gh300-shots`. Expected output: `summary: 95%` and `errors: none`.
   exclusion, cloud agent, code review), then app quizzes and mock exams until 80%+, then Microsoft's free official
   practice assessment (needs Microsoft sign-in, so James must take it himself):
   https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/practice/assessment?assessment-type=practice&assessmentId=218035372&practice-assessment-type=certification
+- **19 Nov 2026: official practice assessment, 94% (47/50) on the first attempt, in 10 minutes.** All sections at or
+  near 100% except "Section 2" (~80%; sections are unnamed, probably "Use GitHub Copilot features"). Misses:
+  "Is Copilot free?", the two ways to get line completions (comment / code line), and the inline chat shortcut
+  (Ctrl+I vs the Chat view icon). New items for these are in `data/part-i.json`.
+- **Evidence of exam lag:** the practice assessment marks "Yes, it's free for everyone" wrong and expects "paid,
+  $10/month, free for students" even though Copilot Free exists and the current Learn module describes it. This
+  confirms the alignment rule: teach the answer the exam expects, and note the newer reality.
+- Next: retake the practice assessment once or twice (Microsoft: 80%+ across multiple attempts), run app mock
+  exams, then book the real exam.
 
 ## Likely next steps
 
